@@ -1,0 +1,19 @@
+#Users_placedbets_mainDiv {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #F9F9F9;
+}
+
+#placedbets_wrapperDiv {
+    padding: 5.5rem 7.5rem;
+}
+#headerText{
+    color: #0E093C;
+    font-size: 1.5rem;  
+    height: 4rem;
+    line-height: 4rem;
+}
+#Users_placedbets_mapDiv{
+    display: flex;
+    column-gap: 2rem;
+}
