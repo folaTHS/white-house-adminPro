@@ -140,11 +140,11 @@ const Game_History = () => {
         }
     ]
     return (
-        <div id={Style.Game_History_mainDiv}>
+        <div id={Style.Game_History_mainDiv} >
             <Header
                 headerText={"Game History"}
                 headerInfo={"Here’s all information on John Doe"}
-                image3 ={game_pad}
+                image3 ={ window.innerWidth < 480 ?  null : game_pad}
             />
             <div id={Style.Game_History_wrapperDiv}>
                 {/* <div id={Style.gamePad_inputFieldDiv}> */}
@@ -159,7 +159,7 @@ const Game_History = () => {
                         </div>
                         <div id={Style.imgDiv}>
                             <img src={filter} alt="" />
-                            <img src={download} alt="" />
+                            <img src={download} id={Style.DownloadBtn} alt="" />
                         </div>
                     {/* </div> */}
                 </div>

@@ -159,7 +159,7 @@
       position: absolute;
       left: 0%;
       margin-top: -25px;
-      width: 100vw;
+      /* width: 100vw; */
       margin-bottom: 1rem;
       padding-top: 10px;
     }
@@ -204,17 +204,25 @@
     }
   
     #table_wrapperDiv {
-      width: 100%;
+      width: 100vw;
       height: 70vh;
       padding-top: 10px;
       overflow-x: scroll;
       overflow-y: scroll;
     }
-  
-    #table {
-      position: relative;
-      top: -10%;
+
+    #BetPlacedTableDiv{
+      /* border: 2px solid red; */
+      width: 100vw;
+      height: 70vh;
+      overflow-x: scroll;
+      overflow-y: scroll;
     }
     
+    table {
+      position: relative;
+      top: -30px;
+    } 
+
   }
   

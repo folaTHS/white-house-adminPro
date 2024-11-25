@@ -135,16 +135,18 @@ const Reports = () => {
                             stats_card4.map((obj, index) => {
                                 let isBlack = index == toggleIndex ? true : false;
                                 return (
-
-                                    <Total_Card
-                                        key={index}
-                                        text={obj.text}
-                                        image1={obj.image1}
-                                        divText={obj.divText}
-                                        price={obj.price}
-                                        isBlack={isBlack}
-                                        onClick={() => toggle(index)}
-                                    />
+                                        <div id={window.innerWidth < 480 ? Style.Cards : null }>
+                                            <Total_Card
+                                                key={index}
+                                                text={obj.text}
+                                                image1={obj.image1}
+                                                divText={obj.divText}
+                                                price={obj.price}
+                                                isBlack={isBlack}
+                                                onClick={() => toggle(index)}
+                                            />
+                                        </div>
+                                    
                                 )
                             })
                         }
