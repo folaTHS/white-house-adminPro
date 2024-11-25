@@ -179,3 +179,99 @@ td {
     margin-right: 19rem;
     z-index: 1000;
 }
+
+
+@media (max-width : 480px){
+    #Transaction_mainDiv{
+        width: 100vw;
+        /* display: none; */
+    }
+    #Transaction_wrapperDiv{
+        width: 100vw;
+    }
+    #Transaction_mapDiv{
+        width: 100vw;
+        display: grid;
+        position: relative;
+        top: -20px;
+        right: 31%;
+        /* border: 1px solid black; */
+    }
+    #Cards{
+        justify-self: left ;
+        width: 100vw;
+        margin-bottom: 15px;
+    }
+    #betPlaceContainerDiv{
+        overflow:  scroll;
+        width: 100vw;
+       height: 65vh;
+    }
+
+
+    /* This is the transaction List section */
+
+    
+    #CalenderDropDown{
+        position: relative;
+        width: 30vw;
+        text-align: center;
+        position: relative;
+        left: 152px;
+        top: 38px;
+    }
+    #selectedDateText{
+        width: 30vw;
+        text-align: center;
+        position: relative;
+        left: 152px;
+        top: 38px;
+    }
+    #calendar_popup{
+        width: 90vw;
+        position: absolute;
+        left:3%;
+        /* top: 5%; */
+    }
+    #searchDiv{
+        margin-top: 70px;
+        position: relative;
+        left: 140px;
+    }
+    #imgDiv{
+        display: flex;
+        margin-top: -30px;
+    }
+    #Amount_Paid_input_FilterDiv{
+        margin-top: -76px;  
+    }
+    #transactionListTable{
+        position: absolute;
+        width: 100vw;
+        padding: 10px;
+        left: 0%;
+        overflow: scroll;
+    }
+    #transaction_header_inputfield_Div{
+        margin-top: -20%;
+        margin-left: -30%;
+        width: 97vw;
+    }
+    #paginationDiv{
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        margin-top: 30%;
+        width: 97vw;
+        justify-self: center;
+
+
+    }
+    #CoinPurchaseTableContainer{
+        /* border:  2px solid red; */
+    }
+
+    #CoinPurchasedTable{
+        /* border: 1px solid red; */
+    }
+}

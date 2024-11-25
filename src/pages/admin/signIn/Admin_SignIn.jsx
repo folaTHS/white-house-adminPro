@@ -137,9 +137,13 @@ const Admin_SignIn = () => {
           </div>
 
           {/* <Link to={"/dashboard"}> */}
-            <div id={Style.btnDiv}>
+          {
+            window.innerWidth < 480 ? <div id={Style.btnDiv}>
+             <button type="submit" id={Style.SigninBtn}> Sign In </button> </ div>: <div id={Style.btnDiv}>
               <Button type={"submit"} text={"Sign In"} />
             </div>
+          }
+            
           {/* </Link> */}
 
         </form>

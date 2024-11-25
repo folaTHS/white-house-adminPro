@@ -166,21 +166,22 @@ const Customer_Support = () => {
                         stats_card5.map((obj, index) => {
 
                             return (
-
-                                <Total_Card
-                                    key={index}
-                                    text={obj.text}
-                                    image1={obj.image1}
-                                    divText={obj.divText}
-                                    price={obj.price}
-                                    to={obj.to}
-                                    price2={obj.price2}
-                                    price3={obj.price3}
-                                    price4={obj.price4}
-                                    image2={obj.image2}
-                                    image3={obj.image3}
-                                    image4={obj.image4}
-                                    all={obj.all} />
+                                <div id={ window.innerWidth < 480 ? Style.statCards : null }> 
+                                    <Total_Card
+                                        key={index}
+                                        text={obj.text}
+                                        image1={obj.image1}
+                                        divText={obj.divText}
+                                        price={obj.price}
+                                        to={obj.to}
+                                        price2={obj.price2}
+                                        price3={obj.price3}
+                                        price4={obj.price4}
+                                        image2={obj.image2}
+                                        image3={obj.image3}
+                                        image4={obj.image4}
+                                        all={obj.all} />
+                                </div>
                             )
                         })
                     }

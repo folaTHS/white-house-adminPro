@@ -12,9 +12,6 @@ import { dashboardProvider } from '../api_detaills/provider/user_provider'
 import { PopupContextHook } from '../../../WhiteHouse_PopupContext'
 
 
-
-
-
 const Dashboard = () => {
 
     const { updateErrorText, updateErrorPopup } = PopupContextHook()
@@ -215,7 +212,6 @@ const Dashboard = () => {
                                 )
                             })
                         }
-
                     </div>
                     <div id={Style.Dashboard_lineChart}>
                         <p id={Style.Dashboard_RevenueText}>Revenue</p>

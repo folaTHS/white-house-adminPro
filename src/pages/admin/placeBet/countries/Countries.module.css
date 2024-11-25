@@ -93,3 +93,35 @@ td {
 #Winner_loser_tableDiv #lastline {
     border-bottom: none;
 }
+
+@media (max-width : 480px){
+    #Winner_loser_mainDiv{
+        width:  100vw;
+    }
+    #Winner_loser_wrapperDiv{
+        width:  100vw;
+        /* border:  2px solid red; */
+        /* display: none; */
+    }
+    #searchDiv{
+        /* border:  2px solid red; */
+        position: absolute;
+        /* width: 99vw; */
+        left: 5%;
+    }
+    #Winner_loser_wrapper{
+        margin-top: 80px;
+        position: absolute;
+        width: 100vw;
+        left: 0%;
+    }
+    #Winner_loser_tableDiv{
+        position: relative;
+        width: 100vw;
+        left: 0%;
+        overflow: scroll;
+    }
+    #statCards{
+        margin-top: 10px;
+    }
+}

@@ -152,3 +152,38 @@ td {
     font-size: 1rem;
     font-weight: bold;
 }
+
+
+
+@media(max-width : 480px){
+    #Reports_mainDiv{
+        width: 100vw;
+        /* overflow-y: scroll; */
+    }
+    #Reports_WrapperDiv{
+        display: grid;
+        /* border: 1px solid red; */
+        padding-left: 0%;
+        /* width: 80vw; */
+        display: grid;
+    }
+    #Total_Stats_CardWrapper{
+        display: grid;
+    }
+    #Reports_mapDiv{
+        display: grid;
+        width: 99vw;
+    }
+    #Cards{
+        margin-bottom: 10px;
+    }
+    #Query_Stats_MapCard{
+        margin-top:  10px;
+        width: 100vw;
+    }
+    #Reports_Table_WrapperDiv{
+        overflow-x: scroll;
+        overflow-y: scroll;
+    }
+    
+}

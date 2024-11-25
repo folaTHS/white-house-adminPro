@@ -288,3 +288,58 @@ padding: 0.4rem;
         z-index: 999;
     
 }
+
+@media(max-width : 480px){
+    #Customer_Support_mainDiv{
+        width: 100vw;
+    }
+    #Customer_Support_wrapperDiv{
+        width: 100vw;
+    }
+    #Customer_SupportText{
+        /* border : 1px solid black; */
+        margin-left: -100px;
+        width: 100vw;
+    }
+    #Customer_Support_mapDiv{
+        width: 98vw;
+        display: grid;
+        position: absolute ;
+        left: 0%;
+    }
+    #statCards{
+        margin-top: 10px;
+    }
+    #Customer_Support_rating_wrapperDiv{
+        margin-top: 550px;
+        width: 100vw;
+        display: grid;
+        position: relative;
+        left: -120px;
+        overflow: scroll;
+    }
+    .Customer_Support_ratingDiv {
+        margin: 5px; 
+        width: 95vw;
+        justify-self: center;
+    }
+    #Customer_Support_performance_satisfactionDiv{
+        width: 100vw;
+        position: relative;
+        left: -120px;
+        display:  grid;
+    }
+    #Customer_Support_performanceDiv{
+        overflow-x: scroll;
+        width: 100vw;
+    }
+    #Report_GraphDiv{
+        /* border: 2px solid red; */
+        position: relative;
+        left: -120px;
+        display: grid;
+    }
+    #Customer_Support_BarChartDiv{
+        margin-top: 5px;
+    }
+}
