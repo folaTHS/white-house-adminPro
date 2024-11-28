@@ -9,10 +9,6 @@ import black from "../../assets/svg/black.svg"
 import empty_user from "../../assets/svg/empty_user.svg"
 
 
-
-
-
-
 const AllUsers_com = (props) => {
 
     const { arr } = props
@@ -25,18 +21,10 @@ const AllUsers_com = (props) => {
 
 
     const transactionToggle = (index) => {
-
         setToggleIndex(index)
-
     }
 
-
-
-
-
-
     return (
-
         <div>
 
             <div id={Style.All_Users_toggle_dateDiv}>
@@ -51,7 +39,6 @@ const AllUsers_com = (props) => {
             </div>
 
             <div id={Style.All_Users_Card}>
-
                 {
                     toggleIndex === 0 &&
 

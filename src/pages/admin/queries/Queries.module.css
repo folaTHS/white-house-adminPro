@@ -182,6 +182,7 @@ td {
         width: 100vw;
     }
     #Reports_Table_WrapperDiv{
+        padding-top: 15px;
         overflow-x: scroll;
         overflow-y: scroll;
     }
