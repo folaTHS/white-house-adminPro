@@ -78,3 +78,29 @@ td {
     color: #FFFFFF;
     font-size: 0.75rem;
 }
+
+@media(max-width: 480px){
+    #Pending_Request_mainDiv{
+        width: 100vw;
+    }
+    #Pending_Request_wrapperDiv{
+        
+    }
+    #Pending_Request_headerDiv{
+        /* border: 2px solid red; */
+        width: 90vw;
+        position: absolute;
+        left: 0%;
+        margin: 5px;
+        /* padding-right: 15px; */
+    }
+    #Pending_Request_table_wrapperDiv{
+        width: 100vw;
+        position: relative;
+        top: 120px;
+        left: -120px;
+        width: 100vw;
+        overflow: scroll;
+        padding-top: 20px;
+    }
+}

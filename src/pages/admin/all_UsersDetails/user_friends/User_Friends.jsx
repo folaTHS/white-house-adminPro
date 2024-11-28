@@ -217,8 +217,10 @@ const User_Friends = () => {
 
                 {
                     !isGridView ?
-
-                        <List_viewTable listView_arr={user_friends_arr} /> : ""
+                        <div id={window.innerWidth < 480 ? Style.TableList : null }>
+                            <List_viewTable listView_arr={user_friends_arr} /> 
+                            </div> : ""
+                        
                 }
             </div>
         </div>

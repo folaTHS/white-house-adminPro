@@ -54,12 +54,9 @@ const All_Users = () => {
             <div id={Style.All_Users_wrapperDiv}>
 
                 <div id={Style.button_Div}>
-
                     <Link to={"/suspendedAccounts"}>
                         <button id={Style.accounts_btn}>Suspended Accounts</button>
-
                     </Link>
-
                 </div>
 
                 {/* component AllUsers*/}

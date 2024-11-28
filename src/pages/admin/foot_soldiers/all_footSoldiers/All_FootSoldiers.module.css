@@ -99,4 +99,11 @@
         left: -120px;
         width: 100vw;
     }
+    #SoldiersListView{
+        /* border: 2px solid red; */
+        position:  relative;
+        width: 100vw;
+        left: -120px;
+        overflow: scroll;
+    }
 }

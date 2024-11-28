@@ -66,3 +66,29 @@
     justify-content: center;
     gap: 2.2rem;
 }
+
+@media(max-width: 480px){
+    #All_Users_mainDiv{
+        width: 100vw;
+    }
+    #All_Users_wrapperDiv{
+        width: 100vw;
+        /* border: 2px solid red; */
+    }
+    #input_FilterDiv{
+        width:  100vw;
+        /* border: 2px solid red; */
+        position:  absolute;
+        left: 0%;
+    }
+    #TableList{
+        width:  100vw;
+        position:  absolute;
+        left: 0%;
+        top: 190px;
+        height: 65vh;   
+        overflow: scroll;     
+    }
+
+    
+}
