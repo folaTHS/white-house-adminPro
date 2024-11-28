@@ -1,419 +1,381 @@
-import { dashboard_Service, getAllUsersService, getprofileService, getRegCountriesService, getSuspendedUsersService, getUserDetailsService, suspendUserService, TransactionSummaryService, updatePicture_Service,
-     updateProfile_Service } from "../services/user_services";
+import {
+  dashboard_Service,
+  getAllUsersService,
+  getprofileService,
+  getRegCountriesService,
+  getSuspendedUsersService,
+  getUserDetailsService,
+  suspendUserService,
+  TransactionSummaryService,
+  updatePicture_Service,
+  updateProfile_Service,
+} from "../services/user_services";
 
+export const getAllUsersProvider = async ({
+  updateUsers,
+  updateErrorPopup,
+  updateErrorText,
+}) => {
+  try {
+    let response = await getAllUsersService();
 
+    if (response.status == 200 || response.status == 201) {
+      updateUsers(response.data["responseBody"]);
+    } else {
+      updateErrorText(response.data["responseMessage"]);
 
+      updateErrorPopup(true);
 
-
-export const getAllUsersProvider = async ({ updateUsers, updateErrorPopup, updateErrorText }) => {
-
-    try {
-
-        let response = await getAllUsersService()
-
-        if (response.status == 200 || response.status == 201) {
-
-            updateUsers(response.data["responseBody"]);
-
-        } else {
-
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-
-                updateErrorPopup(false)
-            }, 2000)
-
-        }
-
-    } catch (err) {
-
-        updateErrorText(err.response ? err.response.data.responseMessage : 'Failed to fetch Users');
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateErrorText(
+      err.response ? err.response.data.responseMessage : "Failed to fetch Users"
+    );
 
-}
+    updateErrorPopup(true);
 
-export const getUserDetailsProvider = async ({ updateUserDetails, phone, updateErrorText, updateErrorPopup }) => {
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
+export const getUserDetailsProvider = async ({
+  updateUserDetails,
+  phone,
+  updateErrorText,
+  updateErrorPopup,
+}) => {
+  try {
+    let response = await getUserDetailsService(phone);
 
-    try {
+    if (response.status == 200 || response.status == 201) {
+      updateUserDetails(response.data["responseBody"]);
+    } else {
+      updateErrorText(response.data["responseMessage"]);
 
-        let response = await getUserDetailsService(phone)
+      updateErrorPopup(true);
 
-        if (response.status == 200 || response.status == 201) {
-
-            updateUserDetails(response.data["responseBody"])
-
-        } else {
-
-
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-
-                updateErrorPopup(false)
-
-            }, 2000)
-        }
-
-    } catch (error) {
-
-        updateErrorText(error.response ? error.response.data.responseMessage : 'Failed to load user details')
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
-
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (error) {
+    updateErrorText(
+      error.response
+        ? error.response.data.responseMessage
+        : "Failed to load user details"
+    );
 
-}
+    updateErrorPopup(true);
 
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
+export const getSuspendedUsersProvider = async ({
+  updateSuspended,
+  updateErrorText,
+  updateErrorPopup,
+}) => {
+  try {
+    let response = await getSuspendedUsersService();
 
-export const getSuspendedUsersProvider = async ({ updateSuspended, updateErrorText, updateErrorPopup }) => {
+    if (response.status == 200 || response.status == 201) {
+      updateSuspended(response.data["responseBody"]);
+    } else {
+      updateErrorText(response.data["responseMessage"]);
 
-    try {
+      updateErrorPopup(true);
 
-        let response = await getSuspendedUsersService()
-
-        if (response.status == 200 || response.status == 201) {
-
-            updateSuspended(response.data["responseBody"]);
-
-        } else {
-
-
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-
-                updateErrorPopup(false)
-
-            }, 2000)
-        }
-
-
-
-    } catch (err) {
-
-        updateErrorText(err.response ? err.response.data.responseMessage : 'Failed to fetch Suspended Users');
-        console.log("Error :", err);
-        updateErrorPopup(true)
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateErrorText(
+      err.response
+        ? err.response.data.responseMessage
+        : "Failed to fetch Suspended Users"
+    );
+    console.log("Error :", err);
+    updateErrorPopup(true);
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
-}
+export const postSuspendProvider = async (
+  body,
+  updateLoadingPopup,
+  updateSuspendUserSuccess,
+  updateSuspendUserPopup,
+  updateErrorPopup,
+  updateErrorText
+) => {
+  try {
+    updateLoadingPopup(true);
 
+    const response = await suspendUserService(body);
 
-export const postSuspendProvider = async (body, updateLoadingPopup, updateSuspendUserSuccess, updateSuspendUserPopup, updateErrorPopup, updateErrorText) => {
+    if (response.status == 200 || response.status == 201) {
+      updateLoadingPopup(false);
 
-    try {
+      updateSuspendUserPopup(false);
 
-        updateLoadingPopup(true);
+      updateSuspendUserSuccess(true);
+    } else {
+      updateLoadingPopup(false);
 
-        const response = await suspendUserService(body);
+      updateErrorText(response.data["responseMessage"]);
 
+      updateErrorPopup(true);
 
-        if (response.status == 200 || response.status == 201) {
-
-            updateLoadingPopup(false);
-
-            updateSuspendUserPopup(false)
-
-            updateSuspendUserSuccess(true)
-
-        } else {
-
-            updateLoadingPopup(false);
-
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-                updateErrorPopup(false)
-            }, 2000)
-
-        }
-
-    } catch (err) {
-
-        updateLoadingPopup(false)
-
-        updateErrorText(err.response ? err.response.data.responseMessage : 'An error occurred');
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-
-            updateErrorPopup(false)
-
-        }, 2000)
-
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateLoadingPopup(false);
 
-}
+    updateErrorText(
+      err.response ? err.response.data.responseMessage : "An error occurred"
+    );
 
+    updateErrorPopup(true);
 
-export const getRegCountriesProvider = async ({ updateCountries, updateErrorText, updateErrorPopup }) => {
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
-    try {
+export const getRegCountriesProvider = async ({
+  updateCountries,
+  updateErrorText,
+  updateErrorPopup,
+}) => {
+  try {
+    let response = await getRegCountriesService();
 
-        let response = await getRegCountriesService()
+    if (response.status == 200 || response.status == 201) {
+      updateCountries(response.data["responseBody"]);
+      console.log(response);
+    } else {
+      updateLoadingPopup(false);
 
-        if (response.status == 200 || response.status == 201) {
+      updateErrorText(response.data["responseMessage"]);
 
-            updateCountries(response.data["responseBody"]);
+      updateErrorPopup(true);
 
-        } else {
-
-            updateLoadingPopup(false);
-            
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-                updateErrorPopup(false)
-            }, 2000)
-        }
-
-
-
-    } catch (err) {
-
-        updateErrorText(err.response ? err.response.data.responseMessage : 'Failed to fetch registered countries');
-
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateErrorText(
+      err.response
+        ? err.response.data.responseMessage
+        : "Failed to fetch registered countries"
+    );
 
-}
+    updateErrorPopup(true);
 
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
-export const getprofileProvider = async ({ email, updateProfile, updateErrorPopup, updateErrorText }) => {
+export const getprofileProvider = async ({
+  email,
+  updateProfile,
+  updateErrorPopup,
+  updateErrorText,
+}) => {
+  try {
+    let response = await getprofileService(email);
 
+    if (response.status == 200 || response.status == 201) {
+      updateProfile(response.data["responseBody"]);
+    } else {
+      updateErrorText(response.data["responseMessage"]);
 
-    try {
+      updateErrorPopup(true);
 
-        let response = await getprofileService(email)
-
-        if (response.status == 200 || response.status == 201) {
-
-            updateProfile(response.data["responseBody"]);
-
-
-        } else {
-            updateErrorText(response.data["responseMessage"]);
-            
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-
-                updateErrorPopup(false)
-            }, 2000)
-        }
-
-    } catch (error) {
-
-        updateErrorText(error.response ? error.response.data.responseMessage : 'failed to fetch profile data')
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
-
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (error) {
+    updateErrorText(
+      error.response
+        ? error.response.data.responseMessage
+        : "failed to fetch profile data"
+    );
 
-}
+    updateErrorPopup(true);
 
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
-export const updateProfile_Provider = async (email, body, updateLoadingPopup, updateErrorPopup, updateErrorText, updateProfilePopup) => {
+export const updateProfile_Provider = async (
+  email,
+  body,
+  updateLoadingPopup,
+  updateErrorPopup,
+  updateErrorText,
+  updateProfilePopup
+) => {
+  console.log("Email being passed:", email); // Check the value of email
+  try {
+    updateLoadingPopup(true);
 
-    console.log("Email being passed:", email); // Check the value of email
-    try {
+    const response = await updateProfile_Service(email, body);
 
-        updateLoadingPopup(true);
+    if (response.status == 200 || response.status == 201) {
+      updateLoadingPopup(false);
 
-        const response = await updateProfile_Service(email, body);
+      updateProfilePopup(true);
+    } else {
+      updateLoadingPopup(false);
+      updateErrorText(response.data["responseMessage"]);
 
+      console.log("Error :", err);
 
-        if (response.status == 200 || response.status == 201) {
-
-            updateLoadingPopup(false);
-
-            updateProfilePopup(true)
-
-        } else {
-            updateLoadingPopup(false);
-            updateErrorText(response.data["responseMessage"]);
-
-            console.log("Error :", err);
-
-            updateErrorPopup(true)
-            setTimeout(() => {
-                updateErrorPopup(false)
-            }, 2000)
-
-        }
-
-    } catch (err) {
-
-        updateLoadingPopup(false)
-
-        updateErrorText(err.response.data["responseMessage"]);
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-
-            updateErrorPopup(false)
-        }, 2000)
-
+      updateErrorPopup(true);
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateLoadingPopup(false);
 
-}
+    updateErrorText(err.response.data["responseMessage"]);
 
-export const dashboardProvider = async ({ updateDashboard, updateErrorText, updateErrorPopup }) => {
+    updateErrorPopup(true);
 
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
-    try {
+export const dashboardProvider = async ({
+  updateDashboard,
+  updateErrorText,
+  updateErrorPopup,
+}) => {
+  try {
+    let response = await dashboard_Service();
 
-        let response = await dashboard_Service()
+    if (response.status == 200 || response.status == 201) {
+      updateDashboard(response.data["responseBody"]);
+    } else {
+      updateLoadingPopup(false);
 
-        if (response.status == 200 || response.status == 201) {
+      updateErrorText(response.data["responseMessage"]);
 
-            updateDashboard(response.data["responseBody"]);
-
-        } else {
-
-            updateLoadingPopup(false);
-
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-            setTimeout(() => {
-                updateErrorPopup(false)
-            }, 2000)
-        }
-
-
-    } catch (error) {
-
-        updateLoadingPopup(false);
-
-        updateErrorText(error.responseMessage)
-
-        updateErrorPopup(true)
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
-
-        console.log("Error :", error);
-
+      updateErrorPopup(true);
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (error) {
+    updateLoadingPopup(false);
 
-}
+    updateErrorText(error.responseMessage);
 
+    updateErrorPopup(true);
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
 
-export const updatePicture_Provider = async (email, body, updateLoadingPopup, updateErrorPopup, updateErrorText, updateProfilePopup) => {
+    console.log("Error :", error);
+  }
+};
 
-    console.log("Email being passed:", email); // Check the value of email
+export const updatePicture_Provider = async (
+  email,
+  body,
+  updateLoadingPopup,
+  updateErrorPopup,
+  updateErrorText,
+  updateProfilePopup
+) => {
+  console.log("Email being passed:", email); // Check the value of email
 
-    try {
+  try {
+    updateLoadingPopup(true);
 
-        updateLoadingPopup(true);
+    const response = await updatePicture_Service(email, body);
 
-        const response = await updatePicture_Service(email, body);
+    if (response.status == 200 || response.status == 201) {
+      updateLoadingPopup(false);
+    } else {
+      updateLoadingPopup(false);
+      updateErrorText(response.data["responseMessage"]);
 
-        if (response.status == 200 || response.status == 201) {
+      console.log("Error :", err);
 
-            updateLoadingPopup(false);
-
-        } else {
-            updateLoadingPopup(false);
-            updateErrorText(response.data["responseMessage"]);
-
-            console.log("Error :", err);
-
-            updateErrorPopup(true)
-            setTimeout(() => {
-                updateErrorPopup(false)
-            }, 2000)
-
-        }
-
-    } catch (err) {
-        updateLoadingPopup(false)
-
-
-        console.log("Error :", err);
-        updateErrorText(err.response ? err.response.data["responseMessage"] : "An unexpected error occurred");
-        updateErrorPopup(true)
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
-
+      updateErrorPopup(true);
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateLoadingPopup(false);
 
-}
+    console.log("Error :", err);
+    updateErrorText(
+      err.response
+        ? err.response.data["responseMessage"]
+        : "An unexpected error occurred"
+    );
+    updateErrorPopup(true);
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};
 
+export const transactionSummaryProvider = async ({
+  updateTransaction,
+  updateErrorText,
+  updateErrorPopup,
+}) => {
+  try {
+    let response = await TransactionSummaryService();
 
-export const transactionSummaryProvider = async ({ updateTransaction, updateErrorText, updateErrorPopup }) => {
+    if (response.status == 200 || response.status == 201) {
+      updateTransaction(response.data["responseBody"]);
+    } else {
+      updateErrorText(response.data["responseMessage"]);
 
+      updateErrorPopup(true);
 
-    try {
-
-        let response = await TransactionSummaryService()
-
-
-        if (response.status == 200 || response.status == 201) {
-
-            updateTransaction(response.data["responseBody"]);
-
-        } else {
-
-            updateErrorText(response.data["responseMessage"]);
-
-            updateErrorPopup(true)
-
-            setTimeout(() => {
-                updateErrorPopup(false)
-            }, 2000)
-        }
-
-
-    } catch (err) {
-
-        updateErrorText(err.response ? err.response.data.responseMessage : 'An error occurred')
-
-        updateErrorPopup(true)
-
-        setTimeout(() => {
-            updateErrorPopup(false)
-        }, 2000)
-
+      setTimeout(() => {
+        updateErrorPopup(false);
+      }, 2000);
     }
+  } catch (err) {
+    updateErrorText(
+      err.response ? err.response.data.responseMessage : "An error occurred"
+    );
 
-}
+    updateErrorPopup(true);
+
+    setTimeout(() => {
+      updateErrorPopup(false);
+    }, 2000);
+  }
+};

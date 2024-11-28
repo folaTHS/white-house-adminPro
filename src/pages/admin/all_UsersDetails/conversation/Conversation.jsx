@@ -44,8 +44,9 @@ const Conversation = () => {
       <div id={Style.Conversation_WrapperDiv}>
         
         <div id={Style.Conversation_input_FilterDiv}>
-
-          <span>{selectedDate.toDateString()} <img onClick={toggleCalendar} src={arrow_down} alt="" /></span>
+          <div id={window.innerWidth < 480 ? Style.dateTextDiv: null} >
+            <span>{selectedDate.toDateString()} <img onClick={toggleCalendar} src={arrow_down} alt="" /></span>
+          </div>
 
           {
             isCalendarOpen && (
@@ -72,7 +73,7 @@ const Conversation = () => {
 
 
         <div id={Style.Conversation_tableDiv}>
-          <table>
+          <table >
             <tr id={Style.headerTable}>
               <th>S/N</th>
               <th>Date</th>
@@ -85,7 +86,35 @@ const Conversation = () => {
               <th>Action</th>
 
             </tr>
-            <tr>
+            <tr id={Style.headerTable}>
+                <td>1</td>
+                <td>8/7/2024</td>
+                <td>13:50</td>
+                <td>Dice</td>
+                <td>Nigeria</td>
+                <td>
+                  <div id={Style.playerImg_Div}>
+
+                    <img src={person} alt="" />
+                    <img src={person2} alt="" />
+                    <img src={person} alt="" />
+                    <img src={person2} alt="" />
+                    <img src={person} alt="" />
+
+                  </div>
+                </td>
+                <td>
+                  <div className={Style.WinnerText}> <img src={person} alt="" />John Doe</div>
+                </td>
+                <td>50000</td>
+                <td>
+                  <Link to={"/chatHistory"}>
+                    <button style={{ backgroundColor: "#075070", border: "none", width: "4.5rem", height: "1.37rem", color: "#FFFFFF", fontSize: "0.7rem", borderRadius: "8px" }}>View Chat</button>
+                  </Link>
+                </td>
+            </tr>
+
+            <tr id={Style.headerTable}>
               <td>1</td>
               <td>8/7/2024</td>
               <td>13:50</td>
@@ -103,17 +132,13 @@ const Conversation = () => {
                 </div>
               </td>
               <td>
-                <div className={Style.WinnerText}> <img src={person} alt="" />John Doe</div>
+                <div className={Style.WinnerText}><img src={person} alt="" /> John Doe</div>
               </td>
               <td>50000</td>
-              <td>
-                <Link to={"/chatHistory"}>
-                  <button style={{ backgroundColor: "#075070", border: "none", width: "4.5rem", height: "1.37rem", color: "#FFFFFF", fontSize: "0.7rem", borderRadius: "8px" }}>View Chat</button>
-                </Link>
-              </td>
+              <td><button style={{ backgroundColor: "#075070", border: "none", width: "4.5rem", height: "1.37rem", color: "#FFFFFF", fontSize: "0.7rem", borderRadius: "8px" }}>View Chat</button></td>
             </tr>
-
-            <tr>
+            
+            <tr id={Style.headerTable}>
               <td>1</td>
               <td>8/7/2024</td>
               <td>13:50</td>
@@ -137,7 +162,7 @@ const Conversation = () => {
               <td><button style={{ backgroundColor: "#075070", border: "none", width: "4.5rem", height: "1.37rem", color: "#FFFFFF", fontSize: "0.7rem", borderRadius: "8px" }}>View Chat</button></td>
             </tr>
 
-            <tr>
+            <tr id={Style.headerTable}>
               <td>2</td>
               <td>SA 123476689</td>
               <td>13:50</td>
@@ -162,7 +187,6 @@ const Conversation = () => {
               <td>50000</td>
               <td><button style={{ backgroundColor: "#075070", width: "4.5rem", height: "1.37rem", border: "none", color: "#FFFFFF", fontSize: "0.7rem", borderRadius: "8px" }}>View Chat</button></td>
             </tr>
-
           </table>
         </div>
       </div>

@@ -150,3 +150,45 @@ td {
     margin-right: 19rem;
     z-index: 1000;
 }
+
+@media(max-width : 480px){
+    #Conversation_mainDiv{
+        width: 100vw;
+        overflow: scroll;    
+    }
+    #Conversation_WrapperDiv{
+        width: 100vw;
+        position: absolute;
+        left: 0%;    
+    }
+    #Conversation_input_FilterDiv{
+        width: 100vw;
+        height: 110px;
+        /* border:  1px solid red; */
+        position: absolute;
+        top: 40px;
+        left: 0%;
+    }
+    #dateTextDiv{
+        position: absolute;
+        left: 0;
+    }
+    #InputField_images{
+        /* border:  1px solid red; */
+        margin-top: -90px;
+        display: flex;
+        margin-left: -20px;
+    }
+    #searchDiv{
+        position: relative;
+        right: -130px;
+    }
+    #Conversation_tableDiv{
+        width: 100vw;
+        position: relative;
+        top: 50px;
+        left: -130px;
+        padding: 20px;
+        overflow:scroll;
+    }
+}

@@ -127,3 +127,31 @@
   margin-top: 27rem;
   z-index: 1000;
 }
+
+@media(max-width: 480px){
+    #Logged_sessions_mainDiv{
+       width: 100vw;
+    }
+    #Logged_sessions_WrapperDiv{
+        width: 100vw;
+        display: grid;
+    }
+    #Logged_sessions_input_FilterDiv{
+        /* border: 2px solid red; */
+        position: absolute;
+        top: 150px;
+        right: 0px;
+        width: 95vw;
+        padding-right: 16px;
+    }
+    #InputField_images{
+        margin-left: -10px;
+    }
+    #Logged_sessions_tableDiv{
+        overflow:  scroll;
+        width: 100vw;
+        margin-top: 90px;
+        padding-top: 20px;
+    }
+   
+}

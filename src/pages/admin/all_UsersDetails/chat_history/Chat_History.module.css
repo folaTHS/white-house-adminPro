@@ -119,3 +119,27 @@
     color: #1A1A1A;
     font-weight: bold;
 }
+
+@media(max-width : 480px){
+    #Chat_History_mainDiv{
+        width: 100vw;
+    }
+    #Chat_History_wrapperDiv{
+        width: 100vw;
+    }
+    #Chat_History_headerDateDiv{
+        width: 95vw;
+        padding-right: 20px;
+        padding-left: 20px ;
+    }
+    #Chat_HistoryDiv{
+        width: 100vw;
+    }
+    #ChatsDiv{
+        width: 90vw;
+        padding-right: 30px;
+    }
+    #Chat_History_user_details{
+        width: 90vw;
+    }
+}
