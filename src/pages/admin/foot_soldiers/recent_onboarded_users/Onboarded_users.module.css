@@ -94,3 +94,44 @@
     color: #31C364;
     font-size: 0.81rem;
 }
+
+@media(max-width: 480px){
+    #Onboarded_users_mainDiv{
+        width: 100vw;
+    }
+    #Onboarded_users_wrapperDiv{
+        width: 100vw;
+        /* border: 2px solid red; */
+    }
+    #Onboarded_users_input_FilterDiv{
+        width: 100vw;
+        /* border: 2px solid red; */
+        position: relative;
+        left: -120px;
+        top: -30px;
+    }
+    #dateText{
+        margin-right:  -145px; 
+    }
+    #searchDiv{
+        position: relative;
+        right:  -130px;
+    }
+    #imgDiv{
+       display: flex;
+       position: relative;
+        top:  -50px;
+    }
+    #Onboarded_users_tableWrapperDiv{
+        /* border: 2px solid red; */
+        position: relative;
+        right:  120px;
+        top: -50px;
+        overflow: scroll;
+    }    
+    #table{
+        margin-top: 40px; 
+        margin-left: -15px; 
+    }
+    
+}

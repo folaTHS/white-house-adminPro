@@ -17,3 +17,35 @@
     display: flex;
     column-gap: 2rem;
 }
+
+
+@media(max-width: 480px){
+    #Users_placedbets_mainDiv{
+        width: 100vw;
+    }
+    #placedbets_wrapperDiv{
+        width: 100vw;
+    }
+    #Users_placedbets_mapDiv{
+        padding: 10px 0px;
+        overflow: scroll;
+        height: 310px;
+        display:  grid;
+        position: relative;
+        left: -120px;
+    }
+    #headerText{
+        text-align: center;
+        position: relative;
+        left: -120px;
+    }
+    #betPlacedComponent{
+        width: 100vw;
+        height: 600px;
+        position: relative;
+        left: -120px;  
+        overflow: scroll;
+        padding: 10px 0px;
+    }
+    
+}

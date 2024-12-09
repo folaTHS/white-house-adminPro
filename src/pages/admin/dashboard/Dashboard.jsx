@@ -51,6 +51,7 @@ const Dashboard = () => {
     }, [])
    
     const {totalBetPlaced, totalUsers, totalCountries, totalFootSoldiers} = dashboardCount
+    // console.log(totalBetPlaced);
     
 
     const line_data = [

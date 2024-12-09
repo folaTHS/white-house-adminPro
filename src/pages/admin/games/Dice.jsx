@@ -14,15 +14,43 @@ import winner from '../../../assets/svg/winner.svg'
 import loosers from '../../../assets/svg/loosers.svg'
 import Activity from '../../../assets/svg/Activity.svg'
 import three_users from '../../../assets/svg/three_users.svg'
-
-
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDiceSummary } from "../api_detaills/GlobalStates/diceSummarySlice";
+import { useEffect } from 'react';
 
 const DiceGame = () => {
+  //Bets summary data from redus-tool-kit starts here
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+        dispatch(fetchDiceSummary());
+      }, [dispatch]);
+
+  const { data, loading, error } = useSelector((state) => state.diceSummary);
+
+  console.log(data);
+ 
+  // dispatch( fetchDiceSummary());
+
+  // console.log(data);
+  // const totalBet = data.totalBetPlaced;
+  // const totalPlayer = data.totalPlayers;
+  // const totalLosers = data.totalLosers;
+  // const totalWinners = data.totalWinners;
+  // const arrayedData = {totalBet, totalPlayer, totalLosers,totalWinners}
+ //Bets summary data from redus-tool-kit ends here
+
+  const navigate = useNavigate()
 
   const customTickFormatter = (tick) => {
     return `${tick}k`;
+  }
+ 
+  const handleTotalBetsClick =()=>{
+    navigate(`/totalBetPlaced/${0}`, {
+      state: { source:"Dice Games", extraData: ["Dice02233", "Dice71233", "Dice02232","Dice02232"]}
+    }) 
   }
 
   const total_Card2 = [
@@ -30,37 +58,35 @@ const DiceGame = () => {
       image1: Activity,
       text: "Total Bet Placed",
       divText: "View all",
-      price: "$25,052,985",
-      to: `/totalBetPlaced/${0}`
+      price: data.totalBetPlaced,
+      // to : `/totalBetPlaced/${0}`
+      // to: `/totalBetPlaced/${0}`
     },
+
     {
       image1: three_users,
       text: "Total Players",
       divText: "View all",
-      price: "2m",
+      price: data.totalPlayers,
       view_div: false
     },
     {
       image1: winner,
       text: "Winners",
       divText: "View all",
-      price: "345,000",
+      price: data.totalWinners,
       to: `/totalBetPlaced/${1}`
     },
     {
       image1: loosers,
       text: "Loosers",
       divText: "View all",
-      price: "23,000",
+      price: data.totalLosers,
       to: `/totalBetPlaced/${2}`
     },
   ]
 
-
-
-  const data = [
-
-
+  const datas = [
     {
       name: "Mon",
       month: "Jan",
@@ -153,7 +179,8 @@ const DiceGame = () => {
                   text={object.text}
                   divText={object.divText}
                   price={object.price}
-                  to = {object.to}
+                  // to = {object.to}
+                  onClick ={handleTotalBetsClick}
                   view_div ={object.view_div}
                 />
               )
@@ -219,7 +246,7 @@ const DiceGame = () => {
               <AreaChart
                 width={500}
                 height={300}
-                data={data}
+                data={datas}
                 margin={{
                   top: 0,
                   right: 0,
@@ -246,7 +273,7 @@ const DiceGame = () => {
                 <BarChart
                   width={300}
                   height={100}
-                  data={data}
+                  data={datas}
                   margin={{
                     top: 5,
                     right: 30,

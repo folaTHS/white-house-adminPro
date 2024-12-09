@@ -26,6 +26,7 @@ export const getAllUsersProvider = async ({
 
       updateErrorPopup(true);
 
+    
       setTimeout(() => {
         updateErrorPopup(false);
       }, 2000);

@@ -11,4 +11,7 @@ export const transactionSummary = `${base_url}all-transactions`
 export const profile = `${base_url}profile`
 export const updateProfile = `${base_url}update-profile`
 export const updatePicture = `${base_url}update-picture`
-export const dashboard = `${base_url}dashboard-revenue`  
+export const dashboard = `${base_url}dashboard-revenue` 
+export const DiceSummaries = `${base_url}dice-summary`
+export const NigerianUsers = `${base_url}users/country/nigeria`
+

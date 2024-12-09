@@ -7,10 +7,13 @@ import filter_img from '../../assets/svg/Complete_filter_img.svg'
 import download from '../../assets/svg/download_img.svg'
 import InputField from '../../components/input/InputField'
 import Date_Picker from '../date_picker/Date_Picker'
-
+import {useLocation} from 'react-router-dom'
 const BetPlaced_com = (props) => {
+    
+  const location = useLocation();
+  const { source, extraData } = location.state || {}; // Destructuring the state
 
-    const { arr, initialIndex } = props
+    const { arr, initialIndex , GameTypeColumn, isDiceGame} = props
 
     let array = [...arr]
 
@@ -52,7 +55,7 @@ const BetPlaced_com = (props) => {
     const toggleCalendar = () => {
         setIsCalendarOpen(true)
     }
-
+    let idDiceGame
 
 
     return (
@@ -109,10 +112,12 @@ const BetPlaced_com = (props) => {
                                 <th>S/N</th>
                                 <th>User ID</th>
                                 <th>Bet ID</th>
-                                <th>Game</th>
+                                <th> {source} </th>
+                                {/* <th> {GameTypeColumn} </th> */}
                                 <th>Amount Staked</th>
                                 <th>Players</th>
                                 <th>Status</th>
+                                <th> Winners </th>
                                 <th>Amount Won</th>
                                 <th>Action</th>
                             </tr>
@@ -132,25 +137,27 @@ const BetPlaced_com = (props) => {
                                                 <tr key={index}>
 
                                                     <td>{index + 1}</td>
-                                                    <td>{user.userID}</td>
-                                                    <td>{user.BetID}</td>
+                                                    <td>{user.user_id}</td>
+                                                    <td>{user.bet_id}</td>
                                                     <td>{user.game}</td>
-                                                    <td>{user.amount}</td>
+                                                    <td>{user.amount_staked}</td>
                                                     <td>
                                                         <div id={Style.players_imgDiv}>
+                                                            {/* <img src={user.players} alt="" />
                                                             <img src={user.players} alt="" />
                                                             <img src={user.players} alt="" />
-                                                            <img src={user.players} alt="" />
-                                                            <img src={user.players} alt="" />
+                                                            <img src={user.players} alt="" /> */}
+                                                            {user.players_in_game}
                                                         </div>
                                                     </td>
                                                     <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td>
+                                                    <td>{user.Winners}</td>
                                                     <td>{user.win}</td>
                                                     <td>
                                                         <div id={Style.action_field}>
-                                                            <img src={user.action.eye} alt="" />
+                                                            {/* <img src={user.action.eye} alt="" />
                                                             <img src={user.action.warning} alt="" />
-                                                            <img src={user.action.delete} alt="" />
+                                                            <img src={user.action.delete} alt="" /> */}
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -188,7 +195,7 @@ const BetPlaced_com = (props) => {
                                                                 <img src={user.players} alt="" />
                                                             </div>
                                                         </td>
-                                                        <td><div id={Style.statusText}>{user.status}</div></td>
+                                                        {/* <td><div id={Style.statusText}>{user.status}</div></td> */}
                                                         <td>{user.win}</td>
                                                         <td>
                                                             <div id={Style.action_field}>
@@ -229,7 +236,7 @@ const BetPlaced_com = (props) => {
                                                                     <img src={user.players} alt="" />
                                                                 </div>
                                                             </td>
-                                                            <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td>
+                                                            {/* <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td> */}
                                                             <td>{user.win}</td>
                                                             <td>
                                                                 <div id={Style.action_field}>

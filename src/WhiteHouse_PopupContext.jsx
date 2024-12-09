@@ -19,6 +19,7 @@ const WhiteHouse_PopupContext = ({ children }) => {
     }
     const [filterPopup, setFilterPopup] = useState(false)
     const [revenuePopup, setRevenuePopup] = useState(false)
+    // const [betsPopup, setBetsPopup] = useState(false)
     const [passwordPopup, setPasswordPopup] = useState(false)
     const [PerformancePopup, setPerformancePopup] = useState(false)
     const [onlineCountPopup, setOnlineCountPopup] = useState(false)
@@ -46,6 +47,10 @@ const WhiteHouse_PopupContext = ({ children }) => {
     const updateRevenuePopup = (data) => {
         setRevenuePopup(data)
     }
+
+    // const updateSetBetsPopup = (data) => {
+    //     setBetsPopup(data)
+    // }
 
     const updatePasswordPopup = (data) => {
         setPasswordPopup(data)
@@ -109,6 +114,7 @@ const WhiteHouse_PopupContext = ({ children }) => {
             filterPopup,
             updateFilterPopup,
             revenuePopup,
+            // updateSetBetsPopup,
             updateRevenuePopup,
             passwordPopup,
             updatePasswordPopup,
@@ -143,7 +149,8 @@ const WhiteHouse_PopupContext = ({ children }) => {
             suspendSuccess,
             updateSuspendSuccess,
             signInSuccess,
-            updateSignInSuccess
+            updateSignInSuccess,
+            // betsPopup
         }}>
             {children}
         </myContext.Provider>

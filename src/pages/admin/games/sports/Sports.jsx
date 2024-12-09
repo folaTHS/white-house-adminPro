@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Style from '../Dice.module.css'
 import { AreaChart, Area, XAxis, YAxis, Bar, BarChart, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import Header from '../../../../components/header/Header'
@@ -14,6 +14,7 @@ import loosers from '../../../../assets/svg/loosers.svg'
 import Activity from '../../../../assets/svg/Activity.svg'
 import three_users from '../../../../assets/svg/three_users.svg'
 import sports from '../../../../assets/svg/sport.svg'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,15 +26,20 @@ const Sports = () => {
     return `${tick}k`;
   }
 
+  const navigate = useNavigate()
+  let Sports = '';
 
-
+// useEffect( ()=>{
   const total_Card2 = [
     {
       image1: Activity,
       text: "Total Bet Placed",
       divText: "View all",
       price: "$25,052,985",
-      to: `/totalBetPlaced/${0}`
+      // to: `/totalBetPlaced/${0}, {state: {source: 'sports'}}`
+      to : navigate(`/totalBetPlaced/${0}`, {
+        state: { source : "Sports", extraData: ["BasketBAll", "Football", "Tennis",]}
+      })       
 
     },
     {
@@ -58,6 +64,7 @@ const Sports = () => {
     },
   ]
 
+// },[])
   const data = [
     {
       name: "Mon",
@@ -206,13 +213,13 @@ const Sports = () => {
 
 
 
-
   return (
     <div id={Style.DiceGame_mainDiv}>
       <Header
         headerText={"Sports"}
         headerInfo={"Here’s an information on Sports"}
-        image2={sports} />
+        image2={sports} 
+        />
 
       <div id={Style.DiceGame_wrapperDiv}>
 
