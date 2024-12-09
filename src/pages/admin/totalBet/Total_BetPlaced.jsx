@@ -69,145 +69,145 @@ const Total_BetPlaced = () => {
 
   console.log(data);
   
-  const arr = [
+  // const arr = [
 
-    data
-      // action: {
-      //   eye: green_eyes,
-      //   warning: warning,
-      //   delete: delete_list
-      // }
+  //   data
+  //     // action: {
+  //     //   eye: green_eyes,
+  //     //   warning: warning,
+  //     //   delete: delete_list
+  //     // }
 
-    // {
-    //   SN: "1",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[2],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Won",
-    //   Winners: '',
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
+  //   // {
+  //   //   SN: "1",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[2],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Won",
+  //   //   Winners: '',
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
 
-    // },
-    // {
-    //   SN: "2",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[2],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Lost",
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
+  //   // },
+  //   // {
+  //   //   SN: "2",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[2],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Lost",
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
 
-    // },
-    // {
-    //   SN: "2",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[0],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Lost",
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
+  //   // },
+  //   // {
+  //   //   SN: "2",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[0],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Lost",
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
 
-    // },
-    // {
-    //   SN: "2",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[1],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Lost",
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
+  //   // },
+  //   // {
+  //   //   SN: "2",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[1],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Lost",
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
 
-    // },
-    // {
-    //   SN: "3",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[1],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Won",
-    //   Winners: '',
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
-    // },
-    // {
-    //   SN: "4",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[1],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Lost",
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
+  //   // },
+  //   // {
+  //   //   SN: "3",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[1],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Won",
+  //   //   Winners: '',
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
+  //   // },
+  //   // {
+  //   //   SN: "4",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[1],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Lost",
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
 
-    // },
-    // {
-    //   SN: "3",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[1],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Won",
-    //   Winners: '',
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
-    // },
-    // {
-    //   SN: "3",
-    //   userID: "5466FH",
-    //   BetID: "6458575RFG",
-    //   game: extraData[1],
-    //   amount: "1000",
-    //   players: person,
-    //   status: "Won",
-    //   Winners: '',
-    //   win: "5000",
-    //   action: {
-    //     eye: green_eyes,
-    //     warning: warning,
-    //     delete: delete_list
-    //   }
-    // }
-  ]
+  //   // },
+  //   // {
+  //   //   SN: "3",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[1],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Won",
+  //   //   Winners: '',
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
+  //   // },
+  //   // {
+  //   //   SN: "3",
+  //   //   userID: "5466FH",
+  //   //   BetID: "6458575RFG",
+  //   //   game: extraData[1],
+  //   //   amount: "1000",
+  //   //   players: person,
+  //   //   status: "Won",
+  //   //   Winners: '',
+  //   //   win: "5000",
+  //   //   action: {
+  //   //     eye: green_eyes,
+  //   //     warning: warning,
+  //   //     delete: delete_list
+  //   //   }
+  //   // }
+  // ]
 
   return (
     <div id={Style.Total_BetPlaced_mainDiv}>
