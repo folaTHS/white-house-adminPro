@@ -76,7 +76,7 @@ const Onboarded_users = () => {
             <div id={Style.Onboarded_users_wrapperDiv}>
 
                 <div id={Style.Onboarded_users_input_FilterDiv}>
-                    <p>3rd October, 2024 <img src={arrow_down} alt="" /></p>
+                    <p  id={window.innerWidth <480 ? Style.dateText : null }> 3rd October, 2024 <img src={arrow_down} alt="" /></p>
 
                     <div id={Style.searchDiv}>
                         <img src={search} alt="" />
@@ -92,7 +92,7 @@ const Onboarded_users = () => {
 
                     <p id={Style.HeaderText}>Recently Onboarded Users</p>
 
-                    <table>
+                    <table id={window.innerWidth < 480? Style.table: null }>
                             <thead>
                                 <tr id={Style.headerTable}>
                                     <th>S/N</th>

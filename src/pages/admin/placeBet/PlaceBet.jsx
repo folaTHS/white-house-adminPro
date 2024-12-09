@@ -8,23 +8,35 @@ import total_users from '../../../assets/svg/total_users.svg'
 import winner from '../../../assets/svg/winner.svg'
 import loosers from '../../../assets/svg/loosers.svg'
 import { Link } from 'react-router-dom';
-
+import { useDispatch, useSelector } from "react-redux";
+import fetchOnlineUsers from "../api_detaills/GlobalStates/onlineUsers";
 
 
 
 const PlaceBet = () => {
-    const [data, setData] = useState()
+    
+  const dispatch = useDispatch();
 
-    useEffect(() => {
+//   useEffect(() => {
+//     dispatch(fetchOnlineUsers());
+//   }, [dispatch]);
 
-        const FetchData = async () => {
-            const response = await fetch("https://api.coincap.io/v2/assets/?limit=10")
-            const data = await response.json()
-            console.log(data);
-            setData(data.data)
-        }
-        FetchData()
-    }, [])
+  const { data, loading, error } = useSelector((state) => state.OnlineUser);
+
+//   console.log(data);
+
+    // const [data, setData] = useState()
+
+    // useEffect(() => {
+
+    //     const FetchData = async () => {
+    //         const response = await fetch("https://api.coincap.io/v2/assets/?limit=10")
+    //         const data = await response.json()
+    //         // console.log(data);
+    //         setData(data.data)
+    //     }
+    //     FetchData()
+    // }, [])
     
     const line_data = [
         {
@@ -113,7 +125,7 @@ const PlaceBet = () => {
             image1: total_users,
             text: "Total Online Players",
             divText: "View all",
-            price: "2 million",
+            price: data,
             to: "/totalOnlinePlayers"
         },
         {
@@ -215,3 +227,4 @@ const PlaceBet = () => {
 }
 
 export default PlaceBet
+

@@ -168,3 +168,56 @@
     align-items: center;
     justify-content: center;
 }
+
+@media(max-width : 480px){
+    #Amount_Paid_wrapperDiv{
+        width: 100vw;
+    }
+    #Revenue_wrapperDiv{
+        width:100vw;
+    }
+    #Amount_Paid_wrapperDiv{
+        width: 100vw;
+    }
+    #Revenue_wrapperDiv{
+        width: 100vw;
+        /* border: 2px solid red; */
+        display: flex;
+        position: relative;
+        left: -140px;
+        overflow: scroll;
+        padding: 20px 20px;
+    }
+    #Amount_Paid_headerDiv{
+        position: relative;
+        left: -110px;
+        display: grid;
+    }
+    #Amount_Paid_input_FilterDiv {
+        width:  100vw;
+        position: relative;
+        top: -20px;
+    }
+    #dateText{
+        margin-right:  -135px; 
+    }
+    #imgDiv{
+        display: flex;
+        position: relative;
+        top: -50px;
+        right: 20px;
+    }
+    #searchDiv{
+        position: relative;
+        right: -120px;
+    }
+    #Amount_Paid_mainDiv{
+        width: 100vw;
+    }
+    #Amount_Paid_table_WrapperDiv{
+        position: relative;
+        left: -120px;
+        padding: 20px 10px;
+        overflow: scroll;
+    }
+}

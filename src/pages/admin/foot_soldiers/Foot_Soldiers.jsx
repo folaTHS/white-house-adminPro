@@ -142,7 +142,7 @@ const Foot_Soldiers = () => {
                             <Link to={"/recentOnboarderUsers"}> <p>See All</p></Link>
                         </div>
 
-                        <table>
+                        <table id={window.innerWidth < 480? Style.table: null }>
                             <thead>
                                 <tr id={Style.headerTable}>
                                     <th>S/N</th>

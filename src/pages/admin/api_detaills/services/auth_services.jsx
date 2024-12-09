@@ -6,8 +6,6 @@ import { setToken, setEmail, getToken} from '../constant/local_storage';
 
 
 
-
-
 export const login_service = async (body) => {
     console.log("Login Initiated")
 

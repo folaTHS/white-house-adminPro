@@ -18,8 +18,6 @@ const Amount_Paid = () => {
                 headerText={"Amount Paid for Foot Soldiers"}
                 headerInfo={"Here’s an information on all amounts paid to Foot Soldiers"} />
 
-
-
             <div id={Style.Amount_Paid_wrapperDiv}>
                 <div id={Style.Revenue_wrapperDiv}>
                     <div className={Style.Revenue_earningDiv}>
@@ -81,7 +79,7 @@ const Amount_Paid = () => {
                 <div id={Style.Amount_Paid_headerDiv}>
                     <p id={Style.Amount_Paid_headerText}>Payments</p>
                     <div id={Style.Amount_Paid_input_FilterDiv}>
-                        <p>3rd October, 2024 <img src={arrow_down} alt="" /></p>
+                        <p id={ window.innerWidth < 480 ? Style.dateText : null}>3rd October, 2024 <img src={arrow_down} alt="" /></p>
 
                         <div id={Style.searchDiv}>
                             <img src={search} alt="" />
