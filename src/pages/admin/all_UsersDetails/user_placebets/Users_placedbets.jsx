@@ -216,8 +216,9 @@ const Users_placedbets = () => {
 
 
                 {/* betplaced components */}
-
-                <BetPlaced_com arr= {arr} initialIndex= {0}/>
+                <div id={window.innerWidth < 480 ? Style.betPlacedComponent : null}>
+                  <BetPlaced_com arr= {arr} initialIndex= {0}/>
+                </div>
             
             </div>
         </div >
