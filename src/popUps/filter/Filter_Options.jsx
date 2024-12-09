@@ -13,7 +13,8 @@ const Filter_options = () => {
         <div id={Style.Filter_options_wrapperDiv}>
           <div><input type="radio" name="" id="" /> By Users ID</div>
           <div><input type="radio" name="" id="" /> By Ticket ID</div>
-
+          <div><input type="radio" name="" id="" /> By Countries</div>
+          <div><input type="radio" name="" id="" /> By Amount</div>
         </div>
        
       {/* </div> */}

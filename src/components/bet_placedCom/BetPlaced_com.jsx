@@ -13,9 +13,10 @@ const BetPlaced_com = (props) => {
   const location = useLocation();
   const { source, extraData } = location.state || {}; // Destructuring the state
 
-    const { arr, initialIndex , GameTypeColumn, isDiceGame} = props
-
+    const { arr, initialIndex , losingdata, winningdata} = props
+    
     let array = [...arr]
+
 
 
 
@@ -55,9 +56,6 @@ const BetPlaced_com = (props) => {
     const toggleCalendar = () => {
         setIsCalendarOpen(true)
     }
-    let idDiceGame
-
-
     return (
         <div>
 
@@ -110,13 +108,14 @@ const BetPlaced_com = (props) => {
                         <thead>
                             <tr id={Style.headerTable}>
                                 <th>S/N</th>
-                                <th>User ID</th>
+                                {/* <th>User ID</th> */}
                                 <th>Bet ID</th>
                                 <th> {source} </th>
                                 {/* <th> {GameTypeColumn} </th> */}
+                                <th>  Bet Type </th>
                                 <th>Amount Staked</th>
                                 <th>Players</th>
-                                <th>Status</th>
+                                {toggleIndex == 0 ? null : <th>Status</th>}
                                 <th> Winners </th>
                                 <th>Amount Won</th>
                                 <th>Action</th>
@@ -126,7 +125,6 @@ const BetPlaced_com = (props) => {
 
                         {
                             toggleIndex == 0 ?
-
                                 <tbody>
                                     {
                                         array.map((user, index) => {
@@ -137,9 +135,10 @@ const BetPlaced_com = (props) => {
                                                 <tr key={index}>
 
                                                     <td>{index + 1}</td>
-                                                    <td>{user.user_id}</td>
+                                                    {/* <td>{user.user_id}</td> */}
                                                     <td>{user.bet_id}</td>
                                                     <td>{user.game}</td>
+                                                    <td>{user.bet_Type}</td>
                                                     <td>{user.amount_staked}</td>
                                                     <td>
                                                         <div id={Style.players_imgDiv}>
@@ -150,109 +149,130 @@ const BetPlaced_com = (props) => {
                                                             {user.players_in_game}
                                                         </div>
                                                     </td>
-                                                    <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td>
+                                                    {/* <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td> */}
                                                     <td>{user.Winners}</td>
                                                     <td>{user.win}</td>
                                                     <td>
                                                         <div id={Style.action_field}>
-                                                            {/* <img src={user.action.eye} alt="" />
-                                                            <img src={user.action.warning} alt="" />
-                                                            <img src={user.action.delete} alt="" /> */}
+                                                            <button  style={{ backgroundColor:"#eb575733", borderRadius:10, border:"none" }}>View more...</button>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             )
                                         })
                                     }
-
                                 </tbody> :
                                 
                                 toggleIndex == 1 ?
-
-
-
                                     //winner Bet
-
                                     <tbody>
                                         {
-                                            array.filter((p) => p.status === "Won").map((user, index) => {
+                                            winningdata.map((user, index) => {
                                                 // let lost = user.status == "Lost" ? true : false
                                                 
                                                 return (
 
-                                                    <tr key={index}>
+                                                    // <tr key={index}>
 
-                                                        <td>{index + 1}</td>
-                                                        <td>{user.userID}</td>
-                                                        <td>{user.BetID}</td>
-                                                        <td>{user.game}</td>
-                                                        <td>{user.amount}</td>
-                                                        <td>
-                                                            <div id={Style.players_imgDiv}>
-                                                                <img src={user.players} alt="" />
-                                                                <img src={user.players} alt="" />
-                                                                <img src={user.players} alt="" />
-                                                                <img src={user.players} alt="" />
-                                                            </div>
-                                                        </td>
-                                                        {/* <td><div id={Style.statusText}>{user.status}</div></td> */}
-                                                        <td>{user.win}</td>
-                                                        <td>
-                                                            <div id={Style.action_field}>
-                                                                <img src={user.action.eye} alt="" />
-                                                                <img src={user.action.warning} alt="" />
-                                                                <img src={user.action.delete} alt="" />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    //     <td>{index + 1}</td>
+                                                    //     <td>{user.userID}</td>
+                                                    //     <td>{user.BetID}</td>
+                                                    //     <td>{user.game}</td>
+                                                    //     <td>{user.amount}</td>
+                                                    //     <td>
+                                                    //         <div id={Style.players_imgDiv}>
+                                                    //             <img src={user.players} alt="" />
+                                                    //             <img src={user.players} alt="" />
+                                                    //             <img src={user.players} alt="" />
+                                                    //             <img src={user.players} alt="" />
+                                                    //         </div>
+                                                    //     </td>
+                                                    //     {/* <td><div id={Style.statusText}>{user.status}</div></td> */}
+                                                    //     <td>{user.win}</td>
+                                                    //     <td>
+                                                    //         <div id={Style.action_field}>
+                                                    //             <img src={user.action.eye} alt="" />
+                                                    //             <img src={user.action.warning} alt="" />
+                                                    //             <img src={user.action.delete} alt="" />
+                                                    //         </div>
+                                                    //     </td>
+                                                    // </tr>
+                                                     <tr key={index}>
+
+                                                     <td>{index + 1}</td>
+                                                     {/* <td>{user.user_id}</td> */}
+                                                     <td>{user.bet_id}</td>
+                                                     <td>{user.game}</td>
+                                                     <td>{user.bet_Type}</td>
+                                                     <td>{user.amount_staked}</td>
+                                                     <td>
+                                                         <div id={Style.players_imgDiv}>
+                                                             {/* <img src={user.players} alt="" />
+                                                             <img src={user.players} alt="" />
+                                                             <img src={user.players} alt="" />
+                                                             <img src={user.players} alt="" /> */}
+                                                             {user.players_in_game}
+                                                         </div>
+                                                     </td>
+                                                     {/* <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757>{user.status}</div></td> */}
+                                                     <td>{user.Winners}</td>
+                                                     <td>{user.win}</td>
+                                                     <td>
+                                                         <div id={Style.action_field}>
+                                                             {/* <img src={user.action.eye} alt="" />
+                                                             <img src={user.action.warning} alt="" />
+                                                             <img src={user.action.delete} alt="" /> */}
+                                                         </div>
+                                                     </td>
+                                                 </tr>
+                                                 
                                                 )
                                             })
                                         }
 
                                     </tbody> :
 
-                                    toggleIndex == 2 ?
-                                        //Dice_Bet_Placed Lost screen
+                                toggleIndex == 2 ?
+                                    //Dice_Bet_Placed Lost screen
+                                    <tbody>
+                                        {
+                                            losingdata.map((user, index) => {
+                                                let lost = user.status == "Lost" ? true : false
+                                            
+                                                return (
 
-                                        <tbody>
-                                            {
-                                                array.filter((p) => p.status === "Lost").map((user, index) => {
-                                                    let lost = user.status == "Lost" ? true : false
-                                                
-                                                    return (
+                                                    <tr key={index}>
 
-                                                        <tr key={index}>
-
-                                                            <td>{index + 1}</td>
-                                                            <td>{user.userID}</td>
-                                                            <td>{user.BetID}</td>
-                                                            <td>{user.game}</td>
-                                                            <td>{user.amount}</td>
-                                                            <td>
-                                                                <div id={Style.players_imgDiv}>
-                                                                    <img src={user.players} alt="" />
-                                                                    <img src={user.players} alt="" />
-                                                                    <img src={user.players} alt="" />
-                                                                    <img src={user.players} alt="" />
-                                                                </div>
-                                                            </td>
-                                                            {/* <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td> */}
-                                                            <td>{user.win}</td>
-                                                            <td>
-                                                                <div id={Style.action_field}>
-                                                                    <img src={user.action.eye} alt="" />
-                                                                    <img src={user.action.warning} alt="" />
-                                                                    <img src={user.action.delete} alt="" />
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </tbody> : ""
-
+                                                        <td>{index + 1}</td>
+                                                        <td>{user.user_id}</td>
+                                                        <td>{user.BetID}</td>
+                                                        <td>{user.game}</td>
+                                                        <td>{user.bet_Type}</td>
+                                                        <td>{user.amount_staked}</td>
+                                                        <td>
+                                                            <div id={Style.players_imgDiv}>
+                                                                {/* <img src={user.players} alt="" />
+                                                                <img src={user.players} alt="" />
+                                                                <img src={user.players} alt="" />
+                                                                <img src={user.players} alt="" /> */}
+                                                                {user.players_in_game}
+                                                            </div>
+                                                        </td>
+                                                        {/* <td><div id={Style.statusText} style={{ backgroundColor: lost ? "#eb575733" : "#31c36433", color: lost ? "#EB5757" : "#31C364" }}>{user.status}</div></td> */}
+                                                        <td>{user.win}</td>
+                                                        <td>
+                                                            <div id={Style.action_field}>
+                                                                {/* <img src={user.action.eye} alt="" />
+                                                                <img src={user.action.warning} alt="" />
+                                                                <img src={user.action.delete} alt="" /> */}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                    </tbody> : ""
                         }
-
                     </table>                    
                 </div>
             </div>

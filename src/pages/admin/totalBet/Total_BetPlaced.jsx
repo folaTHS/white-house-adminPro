@@ -29,7 +29,14 @@ const Total_BetPlaced = () => {
 
       
   const { data, loading, error } = useSelector((state) => state.DiceBetsList);
-    
+
+  const { winningdata, winningLoading, winningError } = useSelector((state) => state.WinningDiceBetsList);
+  const { losingdata, losingLoading, losingError } = useSelector((state) => state.LoosingDiceBetsList);
+
+  // console.log(LosingData);
+  // console.log(winningdata);
+  
+
   // useEffect(() => {
 
   //   TotalDiceBetProvider({
@@ -68,10 +75,10 @@ const Total_BetPlaced = () => {
   let Sports = true;
 
   console.log(data);
-  
+
   // const arr = [
 
-  //   data
+  //   data,
   //     // action: {
   //     //   eye: green_eyes,
   //     //   warning: warning,
@@ -216,10 +223,18 @@ const Total_BetPlaced = () => {
         headerInfo={"Here’s an information on all placed bets"} />
 
       <div id={Style.TotalBet_wrapperDiv}>
-        <BetPlaced_com arr={data} initialIndex = {paramIndex} GameTypeColumn={Sports} isDiceGame={true} />
+        <BetPlaced_com arr={data}
+         winningdata={winningdata}
+         losingdata={losingdata} 
+         initialIndex = {paramIndex}
+          GameTypeColumn={Sports} 
+          isDiceGame={true} />
       </div> 
     </div>
   )
 }
+
+
+
 
 export default Total_BetPlaced
