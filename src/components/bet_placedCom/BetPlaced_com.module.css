@@ -154,6 +154,14 @@
     margin-top: 25rem;
     z-index: 1000;
   }
+
+  #BetTables{
+    width: 200px;
+    width: 1040px;
+    height: 400px;
+    overflow:  scroll;
+  }
+
   @media (max-width: 480px) {
     #Total_BetPlaced_TableWrapperDiv {
       position: absolute;

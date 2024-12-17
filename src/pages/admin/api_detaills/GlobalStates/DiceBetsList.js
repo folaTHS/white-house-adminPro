@@ -1,24 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import NigerianUsers from "../constant/url_path"
-const API_URL = "https://white-house-api.onrender.com/api/v1/admin/dice-bet-list";
+// const API_URL = "http://white-house-api.onrender.com/api/v1/admin/dice-bet-list";
 
 // Async thunk for fetching dice summary data
 export const fetchDiceBetList = createAsyncThunk(
   "DiceBetsList/fetch",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch('https://white-house-api.onrender.com/api/v1/admin/dice-bet-list');
       // console.log(response)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+      const DiceBetsdata = await response.json();
       // console.log(data);
      
       // console.log(data.responseBody);
-      return data.responseBody; // Extract the relevant data
+      return DiceBetsdata.responseBody; // Extract the relevant data
 
     } catch (error) {
+      console.log(error.message);      
       return rejectWithValue(error.message);
     }
   }
@@ -28,7 +29,7 @@ export const fetchDiceBetList = createAsyncThunk(
 const DiceBetsSlice = createSlice({
   name: "DiceBetsList",
   initialState: {
-    data: [
+    DiceBetsdata: [
       {
       id: '',
       bet_id: '',
@@ -36,33 +37,48 @@ const DiceBetsSlice = createSlice({
       game: "",
       bet_Type:"",
       amount_staked: "",
-      players_in_game: '',
+      players_in_game: '55',
       status:"",
       Winners: "",
       timestamp: "",
       action: "",
       createdAt: "2024-12-05T14:16:52.000Z",
       updatedAt: "2024-12-05T14:16:52.000Z",
-    }
+    },
+    {
+      id: '',
+      bet_id: '',
+      user_id: '',
+      game: "",
+      bet_Type:"",
+      amount_staked: "",
+      players_in_game: '55',
+      status:"",
+      Winners: "",
+      timestamp: "",
+      action: "",
+      createdAt: "2024-12-05T14:16:52.000Z",
+      updatedAt: "2024-12-05T14:16:52.000Z",
+    },
   ],
 
-    loading: false,
-    error: null,
+  DiceBetsloading: false,
+  DiceBetserror: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchDiceBetList.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.DiceBetsloading = true;
+        state.DiceBetserror = null;
       })
       .addCase(fetchDiceBetList.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
+        state.DiceBetsloading = false;
+        state.DiceBetsdata = action.payload;
       })
       .addCase(fetchDiceBetList.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+        state.DiceBetsloading = false;
+        state.DiceBetserror = action.payload;
       });
   },
 });
