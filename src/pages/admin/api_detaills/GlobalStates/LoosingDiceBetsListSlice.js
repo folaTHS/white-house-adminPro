@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import NigerianUsers from "../constant/url_path"
-const API_URL = "http://white-house-api.onrender.com/api/v1/admin/dice-loosing-bets";
+const API_URL = "https://white-house-api.onrender.com/api/v1/admin/dice-loosing-bets";
 
 // Async thunk for fetching dice summary data
 export const fetchLoosingDiceBetList = createAsyncThunk(

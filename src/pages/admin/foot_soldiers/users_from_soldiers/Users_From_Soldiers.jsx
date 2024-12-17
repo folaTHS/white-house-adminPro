@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "../all_footSoldiers/All_FootSoldiers.module.css";
 import Header from "../../../../components/header/Header";
 import person from "../../../../assets/images/Person1.png";
@@ -10,166 +10,179 @@ import nig_flag from "../../../../assets/svg/nig_flag.svg";
 import Category_Grid from "../../../../assets/svg/Category_Grid.svg";
 import List_viewTable from "../../../../components/listView/List_viewTable";
 import UsersCard from "./component/UsersCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFootSolidersOnboardedUsers } from "../../api_detaills/GlobalStates/UserFromFootSoldier";
 
 const All_FootSoldiers = () => {
   const [isGridView, setIsGridView] = useState(true);
+  
+  const dispatch = useDispatch();
 
-  const all_soldiers_arr = [
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    {
-      name: {
-        img: person,
-        name: "John Doe",
-      },
-      countries: "Nigeria",
-      flag: nig_flag,
-      email: "Johndoe@gmail.com",
-      onboardedBy: "Onboarded by John Doe",
-      action: "View Users",
-      status: "Online",
-    },
-    // {
-    //     name: {
-    //         img: person,
-    //         name: "John Doe"
-    //     },
-    //     countries: "Nigeria",
-    //     flag: country_flag,
-    //     action: "View Users",
-    //     status: "Online"
-    // },
-  ];
+  useEffect(() => {
+    dispatch(fetchFootSolidersOnboardedUsers());
+  }, []);
+
+  const { footSolidersOnboardedUsersData, footSolidersOnboardedUsersloading, footSolidersOnboardedUserserror } = useSelector((state) => state.UserFromFootSoldier);
+
+
+  const all_soldiers_arr = footSolidersOnboardedUsersData;
+
+  //  [
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   {
+  //     name: {
+  //       img: person,
+  //       name: "John Doe",
+  //     },
+  //     countries: "Nigeria",
+  //     flag: nig_flag,
+  //     email: "Johndoe@gmail.com",
+  //     onboardedBy: "Onboarded by John Doe",
+  //     action: "View Users",
+  //     status: "Online",
+  //   },
+  //   // {
+  //   //     name: {
+  //   //         img: person,
+  //   //         name: "John Doe"
+  //   //     },
+  //   //     countries: "Nigeria",
+  //   //     flag: country_flag,
+  //   //     action: "View Users",
+  //   //     status: "Online"
+  //   // },
+  // ];
 
   return (
     <div id={Style.All_FootSoldiers_mainDiv}>
@@ -214,9 +227,9 @@ const All_FootSoldiers = () => {
             {all_soldiers_arr.map((object) => {
               return (
                 <UsersCard
-                  img={object.name.img}
+                  // img={object.name.img}
                   status={object.status}
-                  name={object.name.name}
+                  name={object.username}
                   country={object.countries}
                   email={object.email}
                   onboardedBy={object.onboardedBy}

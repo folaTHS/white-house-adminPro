@@ -31,7 +31,7 @@ const Total_BetPlaced = () => {
   const { data, loading, error } = useSelector((state) => state.DiceBetsList);
 
   const { winningdata, winningLoading, winningError } = useSelector((state) => state.WinningDiceBetsList);
-  const { losingdata, losingLoading, losingError } = useSelector((state) => state.LoosingDiceBetsList);
+  // const { losingdata, losingLoading, losingError } = useSelector((state) => state.LoosingDiceBetsList);
 
   // console.log(LosingData);
   // console.log(winningdata);
@@ -76,144 +76,146 @@ const Total_BetPlaced = () => {
 
   console.log(data);
 
-  // const arr = [
+  // const arr = extraData
+  const arr = extraData
+  console.log(extraData);
+  //  [
+    // data,
+      // action: {
+      //   eye: green_eyes,
+      //   warning: warning,
+      //   delete: delete_list
+      // }
 
-  //   data,
-  //     // action: {
-  //     //   eye: green_eyes,
-  //     //   warning: warning,
-  //     //   delete: delete_list
-  //     // }
+    // {
+    //   SN: "1",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[2],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Won",
+    //   Winners: '',
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
 
-  //   // {
-  //   //   SN: "1",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[2],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Won",
-  //   //   Winners: '',
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
+    // },
+    // {
+    //   SN: "2",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[2],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Lost",
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
 
-  //   // },
-  //   // {
-  //   //   SN: "2",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[2],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Lost",
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
+    // },
+    // {
+    //   SN: "2",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[0],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Lost",
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
 
-  //   // },
-  //   // {
-  //   //   SN: "2",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[0],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Lost",
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
+    // },
+    // {
+    //   SN: "2",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[1],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Lost",
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
 
-  //   // },
-  //   // {
-  //   //   SN: "2",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[1],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Lost",
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
+    // },
+    // {
+    //   SN: "3",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[1],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Won",
+    //   Winners: '',
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
+    // },
+    // {
+    //   SN: "4",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[1],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Lost",
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
 
-  //   // },
-  //   // {
-  //   //   SN: "3",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[1],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Won",
-  //   //   Winners: '',
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
-  //   // },
-  //   // {
-  //   //   SN: "4",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[1],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Lost",
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
-
-  //   // },
-  //   // {
-  //   //   SN: "3",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[1],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Won",
-  //   //   Winners: '',
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
-  //   // },
-  //   // {
-  //   //   SN: "3",
-  //   //   userID: "5466FH",
-  //   //   BetID: "6458575RFG",
-  //   //   game: extraData[1],
-  //   //   amount: "1000",
-  //   //   players: person,
-  //   //   status: "Won",
-  //   //   Winners: '',
-  //   //   win: "5000",
-  //   //   action: {
-  //   //     eye: green_eyes,
-  //   //     warning: warning,
-  //   //     delete: delete_list
-  //   //   }
-  //   // }
+    // },
+    // {
+    //   SN: "3",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[1],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Won",
+    //   Winners: '',
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
+    // },
+    // {
+    //   SN: "3",
+    //   userID: "5466FH",
+    //   BetID: "6458575RFG",
+    //   game: extraData[1],
+    //   amount: "1000",
+    //   players: person,
+    //   status: "Won",
+    //   Winners: '',
+    //   win: "5000",
+    //   action: {
+    //     eye: green_eyes,
+    //     warning: warning,
+    //     delete: delete_list
+    //   }
+    // }
   // ]
 
   return (
@@ -223,9 +225,9 @@ const Total_BetPlaced = () => {
         headerInfo={"Here’s an information on all placed bets"} />
 
       <div id={Style.TotalBet_wrapperDiv}>
-        <BetPlaced_com arr={data}
+        <BetPlaced_com arr={arr}
          winningdata={winningdata}
-         losingdata={losingdata} 
+        //  losingdata={losingdata} 
          initialIndex = {paramIndex}
           GameTypeColumn={Sports} 
           isDiceGame={true} />

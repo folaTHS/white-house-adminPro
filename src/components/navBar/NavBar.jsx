@@ -55,7 +55,8 @@ const NavBar = () => {
               }`}
               onClick={() => {handleNavClick("dashboard") ; toggleMenu();}}
             >
-              <p>Dashboard</p>
+            
+            <p>Dashboard</p>
             </NavLink>
             <NavLink
               to={"/placebet"}
@@ -64,9 +65,8 @@ const NavBar = () => {
               }`}
               onClick={() => { handleNavClick("placebet");toggleMenu();}}
             >
-              <p>Bet Placed</p>
+            <p>Bet Placed</p>
             </NavLink>
-
             <div
               className={`${Style.NavBar_text} ${
                 activeNav === "game" ? Style.Nav_styled_Link : ""
@@ -78,7 +78,7 @@ const NavBar = () => {
               <div id={Style.dropdown}>
                 <ul>
                   <NavLink to={"/dice"} onClick={() => {handleNavClick("game");toggleMenu();}}>
-                    <li >
+                    <li>
                       <input
                         type="radio"
                         name="dice"
@@ -93,6 +93,7 @@ const NavBar = () => {
                     to={"/sports"}
                     onClick={() => {handleNavClick("game"); toggleMenu()}}
                   >
+
                     <li>
                       <input
                         type="radio"

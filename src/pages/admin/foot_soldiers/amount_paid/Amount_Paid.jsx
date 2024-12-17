@@ -7,11 +7,23 @@ import search from '../../../../assets/svg/Search.svg'
 import filter from '../../../../assets/svg/Complete_filter_img.svg'
 import download from '../../../../assets/svg/download_img.svg'
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFootSolidersPayments } from "../../api_detaills/GlobalStates/footSoldiersPayment";
 
 
 const Amount_Paid = () => {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchFootSolidersPayments());
+  }, [dispatch]);
+        
+  const { footSoldierPaymentsData, footSoldierPaymentsloading, footSoldierPaymentserror } = useSelector((state) => state.footSoldiersPayment);
 
+  console.log(footSoldierPaymentsData);
+  
+
+  let footSoldiersPayments= footSoldierPaymentsData; 
     return (
         <div id={Style.Amount_Paid_mainDiv}>
             <Header
@@ -98,8 +110,8 @@ const Amount_Paid = () => {
                             <th>S/N</th>
                             <th>Ref Number</th>
                             <th>Date</th>
-                            <th>Time</th>
-                            <th>Root Soldier</th>
+                            {/* <th>Time</th> */}
+                            <th>Foot Soldier</th>
                             <th>User Onboarded</th>
                             <th>Amount Paid</th>
                             <th>Payment Type</th>
@@ -107,7 +119,8 @@ const Amount_Paid = () => {
                         </tr>
 
                         <tbody>
-                            <tr>
+                            
+                            {/* <tr>
                                 <td>1</td>
                                 <td>UA 123476689</td>
                                 <td>23 Aug, 2024</td>
@@ -117,43 +130,22 @@ const Amount_Paid = () => {
                                 <td>WHC 500</td>
                                 <td>WH Agent Account</td>
                                 <td><div id={Style.status_td}>Successful</div></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>UA 123476689</td>
-                                <td>23 Aug, 2024</td>
-                                <td>14:55</td>
-                                <td>John Doe</td>
-                                <td>John Doe</td>
-                                <td>WHC 500</td>
-                                <td>WH Agent Account</td>
-                                <td><div id={Style.status_td}>Successful</div></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>UA 123476689</td>
-                                <td>23 Aug, 2024</td>
-                                <td>14:55</td>
-                                <td>John Doe</td>
-                                <td>John Doe</td>
-                                <td>WHC 500</td>
-                                <td>WH Agent Account</td>
-                                <td><div id={Style.status_td}>Successful</div></td>
-                            </tr>
-
-                            <tr>
-                                <td>4</td>
-                                <td>UA 123476689</td>
-                                <td>23 Aug, 2024</td>
-                                <td>14:55</td>
-                                <td>John Doe</td>
-                                <td>John Doe</td>
-                                <td>WHC 500</td>
-                                <td>WH Agent Account</td>
-                                <td><div id={Style.status_td}>Successful</div></td>
-                            </tr>
+                            </tr> */}
+                            {footSoldierPaymentsData.map((payments, index) =>{
+                                return(
+                                <tr>
+                                    <td>{index + 1}</td>
+                                    <td>{payments.refNumber}</td>
+                                    <td>{payments.dateTime}</td>
+                                    <td>{payments.footSoldier}</td>
+                                    <td>{payments.userOnboarded}</td>
+                                    <td>{payments.amountPaid}</td>
+                                    <td>{payments.paymentType}</td>
+                                    <td>{payments.successful}</td>
+                                </tr>
+                                )
+                            })}
+                                    
                         </tbody>
                     </table>
                 </div>

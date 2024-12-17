@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Style from './Foot_Soldiers.module.css'
 import Total_Card from '../../../components/total_Card/Total_Card'
 import Activity from '../../../assets/svg/Activity.svg'
@@ -12,12 +12,24 @@ import amount from '../../../assets/svg/stats_capture.svg'
 import clock from '../../../assets/svg/stats_clock.svg'
 import { Link } from 'react-router-dom'
 import { PopupContextHook } from '../../../WhiteHouse_PopupContext'
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFootSoldiersSummary } from "../api_detaills/GlobalStates/FootSoldierSummary";
+// import { fetchFootballBetList } from '../api_detaills/GlobalStates/FootballBetList'
 
 
 
 const Foot_Soldiers = () => {
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchFootSoldiersSummary());
+    }, [dispatch]);
+
+    const { footSoldiersSummaryData, footSoldiersSummaryloading, footSoldiersSummaryerror } = useSelector((state) => state.FootSoldierSummary);
+
+    console.log(footSoldiersSummaryData);
+        
   const {updateRevenuePopup} = PopupContextHook()
 
   const showRevenue = ()=>{
@@ -31,28 +43,28 @@ const Foot_Soldiers = () => {
             image1: Activity,
             text: "All Soldiers",
             divText: "View all",
-            price: "1,985",
+            price: footSoldiersSummaryData.AllFootSoldiers,
             to: "/allFootSoldiers"
         },
         {
             image1: total_users,
             text: "Users From Soldiers",
             divText: "View All",
-            price: "20K",
+            price: footSoldiersSummaryData.UsersFromFootSoldiers,
             to: "/usersFromSoldiers"
         },
         {
             image1: amount,
             text: "Amount Paid to Soldiers",
             divText: "View all",
-            price: "345,000",
+            price: footSoldiersSummaryData.AmountPaidToSoldiers,
             to: "/amountPaid"
         },
         {
             image1: clock,
             text: "Pending Requests",
             divText: "View All",
-            price: "23,000",
+            price: footSoldiersSummaryData.PendingRequests,
             to: "/pendingRequests"
         },
     ]
@@ -61,52 +73,53 @@ const Foot_Soldiers = () => {
     const foot_soldiers_stats_card = [
         {
             img: rise,
-            figure: "2k",
+            figure: footSoldiersSummaryData.TotalTransactions,
             text: "Transactions",
             to: "/AllTransaction"
 
         },
         {
             img: flag,
-            figure: "14",
+            figure: footSoldiersSummaryData.RegisteredCountries,
             text: "Reg Countries",
             to: "/footSoldiersCountries"
         }
     ]
 
-    const arr = [
+    const arr = footSoldiersSummaryData.RecentlyOnboardedUsers
+    //  [
 
-        {
-            date: "23 Aug,2024",
-            userID: "UA 123476689",
-            footsoldiers: "John Doe",
-            status: "Onboarded"
-        },
-        {
-            date: "23 Aug,2024",
-            userID: "UA 123476689",
-            footsoldiers: "John Doe",
-            status: "Onboarded"
-        },
-        {
-            date: "23 Aug,2024",
-            userID: "UA 123476689",
-            footsoldiers: "John Doe",
-            status: "Onboarded"
-        },
-        {
-            date: "23 Aug,2024",
-            userID: "UA 123476689",
-            footsoldiers: "John Doe",
-            status: "Onboarded"
-        },
-        {
-            date: "23 Aug,2024",
-            userID: "UA 123476689",
-            footsoldiers: "John Doe",
-            status: "Onboarded"
-        },
-    ]
+    //     {
+    //         date: "23 Aug,2024",
+    //         userID: "UA 123476689",
+    //         footsoldiers: "John Doe",
+    //         status: "Onboarded"
+    //     },
+    //     {
+    //         date: "23 Aug,2024",
+    //         userID: "UA 123476689",
+    //         footsoldiers: "John Doe",
+    //         status: "Onboarded"
+    //     },
+    //     {
+    //         date: "23 Aug,2024",
+    //         userID: "UA 123476689",
+    //         footsoldiers: "John Doe",
+    //         status: "Onboarded"
+    //     },
+    //     {
+    //         date: "23 Aug,2024",
+    //         userID: "UA 123476689",
+    //         footsoldiers: "John Doe",
+    //         status: "Onboarded"
+    //     },
+    //     {
+    //         date: "23 Aug,2024",
+    //         userID: "UA 123476689",
+    //         footsoldiers: "John Doe",
+    //         status: "Onboarded"
+    //     },
+    // ]
 
 
     return (
@@ -161,8 +174,8 @@ const Foot_Soldiers = () => {
                                             <tr>
                                                 <td style={{ color: "#000000" }}>{index + 1}</td>
                                                 <td>{obj.date}</td>
-                                                <td>{obj.userID}</td>
-                                                <td>{obj.footsoldiers}</td>
+                                                <td>{obj.userId}</td>
+                                                <td>{obj.footSoldiers}</td>
                                                 <td><button style={{ Width: "5.5rem", height: "1.62rem", backgroundColor: "#31c36433", color: "#31C364", display: "flex", alignItems: "center", justifyContent: "center", border: "none", fontSize: "0.8rem", borderRadius: "0.3rem" }}>{obj.status}</button></td>
                                             </tr>
 
@@ -183,7 +196,7 @@ const Foot_Soldiers = () => {
 
                                     <p id={Style.dateText}>Today <img src={arrow_down} alt="" /></p>
                                 </div>
-                                <p id={Style.priceText}>3,000 WHC</p>
+                                <p id={Style.priceText}>3,000 SC</p>
 
                                 <div className={Style.btnDiv}><button onClick={showRevenue}>Details</button></div>
 
@@ -197,7 +210,7 @@ const Foot_Soldiers = () => {
 
                                     <p id={Style.dateText}>Today <img src={arrow_down} alt="" /></p>
                                 </div>
-                                <p id={Style.priceText}>60,000 WHC</p>
+                                <p id={Style.priceText}>60,000 SC</p>
 
                                 <div className={Style.btnDiv}><button>Details</button></div>
 

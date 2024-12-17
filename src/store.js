@@ -5,6 +5,12 @@ import OnlineUsersReducers from "./pages/admin/api_detaills/GlobalStates/onlineU
 import DiceBetsListReducer from "./pages/admin/api_detaills/GlobalStates/DiceBetsList";
 import LoosingDiceBetsListReducer from "./pages/admin/api_detaills/GlobalStates/LoosingDiceBetsListSlice";
 import WinningDiceBetsListReducer from "./pages/admin/api_detaills/GlobalStates/WinningDiceBetListSlice";
+import FootballSummaryReducer from "./pages/admin/api_detaills/GlobalStates/FootballSummarySlice";
+import FootballBetListReducer from "./pages/admin/api_detaills/GlobalStates/FootballBetList";
+import FooltSoldiersProfileReducer from "./pages/admin/api_detaills/GlobalStates/FooltSoldiersProfileSlice";
+import footSoldiersPaymentReducer from "./pages/admin/api_detaills/GlobalStates/footSoldiersPayment";
+import FootSoldierSummaryReducer from "./pages/admin/api_detaills/GlobalStates/FootSoldierSummary";
+import UserFromFootSoldierReducer from "./pages/admin/api_detaills/GlobalStates/UserFromFootSoldier";
 
 
 const store = configureStore({
@@ -15,6 +21,13 @@ const store = configureStore({
     DiceBetsList: DiceBetsListReducer,
     WinningDiceBetsList: WinningDiceBetsListReducer,
     LoosingDiceBetsList: LoosingDiceBetsListReducer,
+    FootballSummary : FootballSummaryReducer,
+    FootballBetList : FootballBetListReducer,
+    FooltSoldiersProfile : FooltSoldiersProfileReducer,
+    footSoldiersPayment : footSoldiersPaymentReducer,
+    FootSoldierSummary : FootSoldierSummaryReducer,
+    UserFromFootSoldier : UserFromFootSoldierReducer,
+    
 
   },
 });
