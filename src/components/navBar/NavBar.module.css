@@ -10,20 +10,25 @@
 #bigScreensNav {
   display: flex;
 }
+
 .scrollUpIcon{
   display: none;  
 }
+
 #entireNavHide {
   display: flex;
 }
 Nav_Bar_Wrapper p {
   height: 0;
 }
+
 #NavBar_textDiv {
   display: flex;
   column-gap: 1.5rem;
   align-items: center;
+  margin-right: 23px;
 }
+
 .game {
   display: flex;
   align-items: center;
@@ -39,15 +44,19 @@ Nav_Bar_Wrapper p {
   color: #0e093c;
   cursor: pointer;
 }
+
 #NavBar_ContactDiv #NavBar_line {
   width: 2px;
   height: 2.5rem;
   background-color: #0e093c;
 }
+
 .NavBar_text {
   color: #0e093c;
   font-size: 1rem;
 }
+
+
 /* Add this to NavBar.module.css */
 .Nav_styled_Link {
   font-weight: bold;

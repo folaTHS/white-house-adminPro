@@ -11,12 +11,11 @@ const Filter_options = () => {
       <button id={Style.Filter_options_mainButton} onClick={()=>updateFilterPopup(false)}></button>
       {/* <div> */}
         <div id={Style.Filter_options_wrapperDiv}>
-          <div><input type="radio" name="" id="" /> By Users ID</div>
-          <div><input type="radio" name="" id="" /> By Ticket ID</div>
-          <div><input type="radio" name="" id="" /> By Countries</div>
-          <div><input type="radio" name="" id="" /> By Amount</div>
-        </div>
-       
+          <div><input type="radio" name="" id="" /> Users ID</div>
+          <div><input type="radio" name="" id="" /> Ticket ID</div>
+          <div><input type="radio" name="" id="" /> Countries</div>
+          <div><input type="radio" name="" id="" /> Amount</div>
+        </div> 
       {/* </div> */}
     </div>
   )

@@ -15,9 +15,10 @@ import loosers from '../../../assets/svg/loosers.svg'
 import Activity from '../../../assets/svg/Activity.svg'
 import three_users from '../../../assets/svg/three_users.svg'
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDiceSummary } from "../api_detaills/GlobalStates/diceSummarySlice";
-import { useEffect } from 'react';
+import { fetchDiceBetList } from "../api_detaills/GlobalStates/DiceBetsList";
 
 const DiceGame = () => {
   //Bets summary data from redus-tool-kit starts here
@@ -26,21 +27,20 @@ const DiceGame = () => {
   useEffect(() => {
         dispatch(fetchDiceSummary());
       }, [dispatch]);
+  useEffect(() => {
+        dispatch(fetchDiceBetList());
+      }, []);
 
   const { data, loading, error } = useSelector((state) => state.diceSummary);
 
   console.log(data);
  
-  // dispatch( fetchDiceSummary());
+  
+            
+  const { DiceBetsdata, DiceBetsloading, DiceBetserror } = useSelector((state) => state.DiceBetsList);
 
-  // console.log(data);
-  // const totalBet = data.totalBetPlaced;
-  // const totalPlayer = data.totalPlayers;
-  // const totalLosers = data.totalLosers;
-  // const totalWinners = data.totalWinners;
-  // const arrayedData = {totalBet, totalPlayer, totalLosers,totalWinners}
- //Bets summary data from redus-tool-kit ends here
-
+  console.log(DiceBetsdata);
+  
   const navigate = useNavigate()
 
   const customTickFormatter = (tick) => {
@@ -49,7 +49,7 @@ const DiceGame = () => {
  
   const handleTotalBetsClick =()=>{
     navigate(`/totalBetPlaced/${0}`, {
-      state: { source:"Dice Games", extraData: ["Dice02233", "Dice71233", "Dice02232","Dice02232"]}
+      state: { source:"Dice Games", extraData: DiceBetsdata}
     }) 
   }
 
@@ -75,14 +75,14 @@ const DiceGame = () => {
       text: "Winners",
       divText: "View all",
       price: data.totalWinners,
-      to: `/totalBetPlaced/${1}`
+      // to: `/totalBetPlaced/${1}`
     },
     {
       image1: loosers,
       text: "Loosers",
       divText: "View all",
       price: data.totalLosers,
-      to: `/totalBetPlaced/${2}`
+      // to: `/totalBetPlaced/${2}`
     },
   ]
 
@@ -150,7 +150,7 @@ const DiceGame = () => {
       img: flag,
       figure: "14",
       text: "Reg Countries",
-      to: "/"
+      to: "/countries"
     },
    
   ]

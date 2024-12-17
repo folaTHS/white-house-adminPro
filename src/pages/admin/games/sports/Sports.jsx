@@ -15,18 +15,39 @@ import Activity from '../../../../assets/svg/Activity.svg'
 import three_users from '../../../../assets/svg/three_users.svg'
 import sports from '../../../../assets/svg/sport.svg'
 import { useNavigate } from 'react-router-dom';
-
-
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFootballBetSummary } from "../../api_detaills/GlobalStates/FootballSummarySlice";
+import { fetchFootballBetList } from "../../api_detaills/GlobalStates/FootballBetList";
 
 const Sports = () => {
+  const navigate = useNavigate();
+
+   const dispatch = useDispatch();
+    useEffect(() => {
+          dispatch(fetchFootballBetSummary());
+        }, [dispatch]);
+
+    useEffect(() => {
+          dispatch(fetchFootballBetList());
+        }, [dispatch]);
+    
+
+    const { FootballSummary, FootballSummaryLoading, FootballSummaryError } = useSelector((state) => state.FootballSummary);
+    const { footballBetsList, footballBetsListloading, footballBetsListerror } = useSelector((state) => state.FootballBetList);
+  
+    console.log(FootballSummary);
 
   const customTickFormatter = (tick) => {
     return `${tick}k`;
   }
 
-  const navigate = useNavigate()
+  const handleTotalBetsClick =()=>{
+    navigate(`/totalBetPlaced/${0}`, {
+      state: { source : "Sports", extraData: footballBetsList }
+    }) 
+  }
+
+
   let Sports = '';
 
 // useEffect( ()=>{
@@ -35,32 +56,32 @@ const Sports = () => {
       image1: Activity,
       text: "Total Bet Placed",
       divText: "View all",
-      price: "$25,052,985",
+      price: FootballSummary.totalBetPlaced,
       // to: `/totalBetPlaced/${0}, {state: {source: 'sports'}}`
-      to : navigate(`/totalBetPlaced/${0}`, {
-        state: { source : "Sports", extraData: ["BasketBAll", "Football", "Tennis",]}
-      })       
+      // to : navigate(`/totalBetPlaced/${0}`, {
+      //   state: { source : "Sports", extraData: ["BasketBAll", "Football", "Tennis",]}
+      // })       
 
     },
     {
       image1: three_users,
       text: "Total Players",
       divText: "View all",
-      price: "2m"
+      price: FootballSummary.totalPlayers,
     },
     {
       image1: winner,
       text: "Winners",
       divText: "View all",
-      price: "345,000",
-      to: `/totalBetPlaced/${1}`
+      price: FootballSummary.totalWinners,
+      // to: `/totalBetPlaced/${1}`
     },
     {
       image1: loosers,
       text: "Loosers",
       divText: "View all",
-      price: "23,000",
-      to: `/totalBetPlaced/${2}`
+      price: FootballSummary.totalLosers,
+      // to: `/totalBetPlaced/${2}`
     },
   ]
 
@@ -246,7 +267,9 @@ const Sports = () => {
                   text={object.text}
                   divText={object.divText}
                   price={object.price}
-                  to ={object.to}
+                  // to ={object.to}
+                  onClick ={()=>handleTotalBetsClick()}
+                  // view_div ={object.view_div}
                 />
               )
             })
