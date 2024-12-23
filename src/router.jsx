@@ -213,7 +213,7 @@ const router = createBrowserRouter([
                 element: <FootSoldiers_countries />
             },
             {
-                path: "/soldiersDetails",
+                path: "/soldiersDetails/:phone",
                 element: <Soldiers_details/>
             },
             {

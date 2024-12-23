@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom'
 
 
 const Staff_Card = (props) => {
+
+//   const { id } = useParams();
+//   const [profile, setProfile] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
     
     const { img, status, position, name, to, statusColor, verified } = props
 
