@@ -28,7 +28,7 @@ const Total_BetPlaced = () => {
       }, [dispatch]);
 
       
-  const { data, loading, error } = useSelector((state) => state.DiceBetsList);
+  // const { data, loading, error } = useSelector((state) => state.DiceBetsList);
 
   const { winningdata, winningLoading, winningError } = useSelector((state) => state.WinningDiceBetsList);
   // const { losingdata, losingLoading, losingError } = useSelector((state) => state.LoosingDiceBetsList);
@@ -74,7 +74,7 @@ const Total_BetPlaced = () => {
   let paramIndex = JSON.parse(indexParams)
   let Sports = true;
 
-  console.log(data);
+  // console.log(data);
 
   // const arr = extraData
   const arr = extraData

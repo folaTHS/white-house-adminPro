@@ -62,7 +62,6 @@ const DiceGame = () => {
       // to : `/totalBetPlaced/${0}`
       // to: `/totalBetPlaced/${0}`
     },
-
     {
       image1: three_users,
       text: "Total Players",
@@ -289,7 +288,6 @@ const DiceGame = () => {
                   <Bar dataKey="pv" stackId='a' fill='#736EA0'></Bar>
                 </BarChart>
               </ResponsiveContainer>
-
             </div>
 
 
