@@ -9,7 +9,7 @@ import Button from '../../../components/button/Button'
 import { PopupContextHook } from '../../../WhiteHouse_PopupContext'
 import { getEmail } from '../api_detaills/constant/local_storage'
 import { getprofileProvider, updatePicture_Provider, updateProfile_Provider } from '../api_detaills/provider/user_provider'
-
+import { useParams } from 'react-router-dom';
 
 
 
@@ -140,6 +140,22 @@ const Profile = () => {
         updateProfile_Provider(email, body, updateErrorPopup, updateErrorText, updateLoadingPopup, updateProfilePopup)
 
     }
+
+
+    //Conditionally rendering profiles logics based on id
+
+
+  const { id } = useParams<{ id: string }>('');
+  const [dynamicProfile, setDynamicProfile] = useState<any>(null);
+    
+  useEffect(() => {
+    const profileData = profiles.find(p => p.id === parseInt(id || '', 10));
+    setProfile(profileData);
+  }, [id]);
+
+//   if (!profile) {
+//     return <div>Loading...</div>;
+//   }
 
     return (
         <div id={Style.Profile_mainDiv}>

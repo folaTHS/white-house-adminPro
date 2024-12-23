@@ -7,10 +7,13 @@ import person from '../../../assets/svg/person.svg'
 import Header from '../../../components/header/Header'
 import Stats_Card from '../../../components/stats_card/Stats_Card'
 import foot from '../../../assets/svg/foot.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom';
 import { dashboardProvider } from '../api_detaills/provider/user_provider'
 import { PopupContextHook } from '../../../WhiteHouse_PopupContext'
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFootballBetList } from "../api_detaills/GlobalStates/FootballBetList";
+import { fetchDiceBetList } from "../api_detaills/GlobalStates/DiceBetsList";
 
 const Dashboard = () => {
 
@@ -32,6 +35,42 @@ const Dashboard = () => {
     //     }
     //     FetchData()
     // }, [])
+    
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchFootballBetList());
+        dispatch(fetchDiceBetList());
+    }, [dispatch]);
+
+
+  const { DiceBetsdata, DiceBetsloading, DiceBetserror } = useSelector((state) => state.DiceBetsList);
+  const { footballBetsList, footballBetsListloading, footballBetsListerror } = useSelector((state) => state.FootballBetList);
+
+  function interleaveArrays(arr1, arr2) {
+    const maxLength = Math.max(arr1.length, arr2.length);
+    const result = [];
+  
+    for (let i = 0; i < maxLength; i++) {
+      if (i < arr1.length) {
+        result.push(arr1[i]);
+      }
+      if (i < arr2.length) {
+        result.push(arr2[i]);
+      }
+    }
+  
+    return result;
+  }
+  const mixedArray = interleaveArrays(DiceBetsdata, footballBetsList);
+  
+  console.log(mixedArray); // Output: [1, 2, 3, 4, 5, 6, 8, 10]
+  
+    const navigate = useNavigate()
+    const handleTotalBetsClick =()=>{
+        navigate(`/totalBetPlaced/${0}`, {
+          state: { source:"Dashboard", extraData: mixedArray}
+        }) 
+      }
 
 
     const [dashboardCount, setDashboardCount] = useState({})
@@ -164,7 +203,6 @@ const Dashboard = () => {
             figure: totalBetPlaced,
             text: "Total Bets Placed",
             to: `/totalBetPlaced/${0}`
-
         },
         {
             index: 1,
@@ -208,8 +246,10 @@ const Dashboard = () => {
                                         img={obj.img}
                                         figure={obj.figure}
                                         text={obj.text}
-                                        to={obj.to} />
-                                        </div>
+                                        onClick={i === 0 ? () => handleTotalBetsClick() : null}
+                                        to={i !== 0 ? obj.to : undefined} // Use `to` only for non-click items
+                                     />
+                                    </div>
                                 )
                             })
                         }
@@ -227,7 +267,6 @@ const Dashboard = () => {
                                     left: -10,
                                     bottom: 0,
                                 }}
-
                             >
                                 {/* <CartesianGrid strokeDasharray="3 3" /> */}
                                 <XAxis dataKey="name" axisLine={false} tickLine={false} />

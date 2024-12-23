@@ -17,10 +17,9 @@ import List_viewTable from "../../../../components/listView/List_viewTable";
 import Staff_Card from "../../../../components/userStaff_Card/Staff_Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFootSolidersProfile } from "../../api_detaills/GlobalStates/FooltSoldiersProfileSlice";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const All_FootSoldiers = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -30,20 +29,25 @@ const All_FootSoldiers = () => {
 
   // /totalBetPlaced/${0}
 
-  const handleViewMore =()=>{
-    navigate(`@/soldiersDetails/${FootSolidersProfileData.user_id}`,
-    //    {
-    //   state: { source : "Sports", extraData: footballBetsList }
-    // }
-  ) 
-  }
-      
-  const { FootSolidersProfileData, FootSolidersProfileloading, FootSolidersProfileerror } = useSelector((state) => state.FooltSoldiersProfile);
+  const handleViewMore = () => {
+    navigate(
+      `@/soldiersDetails/${FootSolidersProfileData.user_id}`
+      //    {
+      //   state: { source : "Sports", extraData: footballBetsList }
+      // }
+    );
+  };
+
+  const {
+    FootSolidersProfileData,
+    FootSolidersProfileloading,
+    FootSolidersProfileerror,
+  } = useSelector((state) => state.FooltSoldiersProfile);
   console.log(FootSolidersProfileData);
 
   const [isGridView, setIsGridView] = useState(true);
 
-  const all_soldiers_arr = FootSolidersProfileData
+  const all_soldiers_arr = FootSolidersProfileData;
   //  [
   //   {
   //     img: person,
@@ -237,7 +241,20 @@ const All_FootSoldiers = () => {
 
         {isGridView ? (
           <div id={Style.All_Users_Card}>
-           
+            {all_soldiers_arr.map((object) => {
+              let statusColor = object.status === "Online" ? true : false;
+
+              return (
+                <Staff_Card
+                  img={object.img}
+                  status={object.status}
+                  name={object.name}
+                  position={object.position}
+                  // to="/soldiersDetails/" 
+                  to={`/soldiersDetails/${object.phone}`}                  
+                  // to={`/userDetails/${object.user_id}`}
+                  statusColor={statusColor}
+                />
               );
             })}
           </div>
