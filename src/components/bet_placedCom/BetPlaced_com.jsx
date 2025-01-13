@@ -3,6 +3,8 @@ import Style from "../bet_placedCom/BetPlaced_com.module.css";
 import winners_background from "../../assets/svg/winners_background.svg";
 import arrow_down from "../../assets/svg/arrow_down-dark.svg";
 import search from "../../assets/svg/Search.svg";
+import dice from '../../assets/svg/Dice.svg'
+import sports from '../../assets/svg/sport.svg'
 import filter_img from "../../assets/svg/Complete_filter_img.svg";
 import download from "../../assets/svg/download_img.svg";
 import InputField from "../../components/input/InputField";
@@ -51,7 +53,7 @@ const BetPlaced_com = (props) => {
     closedFootballBets,
     sortedArray,
     sortedArrayTwo;
-
+ 
   activeFootbalBets = array.filter((bet) => bet.status === "active");
   console.log(activeFootbalBets);
 
@@ -91,9 +93,11 @@ const BetPlaced_com = (props) => {
   };
   const [betDetailsModal, setBetDetrailsModal] = useState(false)
   
- const HandleViewMoreBtn=()=>{
-    setBetDetrailsModal(!betDetailsModal);
-  } 
+  const HandleViewMoreBtn=(id)=>{
+      setBetDetrailsModal(!betDetailsModal);
+
+      console.log(id)
+    } 
 
   const toggleCalendar = () => setIsCalendarOpen(true);
 
@@ -203,11 +207,12 @@ const BetPlaced_com = (props) => {
                 {source == "Sports" ? <th> Opponent ID</th> : null}
                 <th> {source} </th>
                 {/* <th> {GameTypeColumn} </th> */}
+                
+                {source === "Sports"? <th> Ticket Id </th> : null }
                 <th> Bet Type </th>
-                <th> Ticket ID </th>
-                <th> Match ID </th>
-                <th> Team </th>
-                <th> League </th>
+                {source === "Sports" ? <th>  Match ID </th> : null}
+                {source === "Sports"? <th> Team </th> : null }
+                {source === "Sports"? <th> League </th> : null }
                 <th>Amount Staked</th>
                 <th>Players</th>
                 {toggleIndex == 0 ? null : <th>Status</th>}
@@ -228,11 +233,15 @@ const BetPlaced_com = (props) => {
                       <td>{user.bet_id}</td>
                       <td>{user.game}</td>
                       <td>{user.bet_Type}</td>
-                      {source == "Sports" ? <td></td> : null}
+                      { source === "Sports" ? <td></td> : null}
+                      {/* 
+
                       <td></td>
                       <td></td>
-                      <td></td> 
-                      <td>{user.amount_staked}</td>
+                      <td></td>
+
+                      */}
+                      {source === "Sports" ? <td>{user.amount_staked}</td>: null}
                       <td>
                         <div id={Style.players_imgDiv}>
                           {/* <img src={user.players} alt="" />
@@ -248,7 +257,7 @@ const BetPlaced_com = (props) => {
                       <td>
                         <div id={Style.action_field}>
                           <button
-                            onClick={HandleViewMoreBtn}
+                            onClick={()=>{HandleViewMoreBtn(index)}}
                             style={{
                               backgroundColor: "#eb575733",
                               borderRadius: 10,
@@ -260,12 +269,15 @@ const BetPlaced_com = (props) => {
                           {
                             betDetailsModal?
                             <div id={Style.BetFullDetails}>
-                              <div id={Style.modalOverlay} onClick={HandleViewMoreBtn}></div>
+                              <div id={Style.modalOverlay} onClick={()=>{HandleViewMoreBtn(index)}}></div>
                               <span id={Style.BetFullDetailsBackground}></span>
                               <div id={Style.BetFullDetailsBody}>
                                 <div id={Style.RowOne}>
                                   <div id={Style.HeroHighlights}>
-                                    <h2 id={Style.SportBetType}>{user.game } Bet Analysis</h2>
+                                    <div >
+                                      <img src={ source === 'Dice Games'? dice : source ==="Sports"? sports: null} id={source === 'Sports'? Style.sport:  Style.dice}/>
+                                      <h2 id={Style.SportBetType}>{user.game } Bet Analysis</h2>
+                                    </div>
                                     <h3 id={Style.SportBetType}>{user.bet_Type ? user.bet_Type : 'no Bet Type data'}</h3>
                                     <h3 id={Style.winBetFigures}>
                                       <h4 id={Style.amountStaked}> Stake: WHC {!user.amount_staked? '0.00000': user.amount_staked }</h4>
@@ -274,7 +286,7 @@ const BetPlaced_com = (props) => {
                                   </div>  
                                   <div id={Style.WinnerCard}>
                                     <div id={Style.WinnerTexts}>
-                                      <h2 id={Style.Winner}> WINNER </h2>
+                                      <h2 id={Style.Winner}> WINNER </h2> 
                                       <h2 id={Style.Winner}> {user.bet_Type ? user.bet_Type : 'John Doe'} </h2>
                                     </div>
                                     <div id={Style.WinnerProfilePicture}>
@@ -283,11 +295,11 @@ const BetPlaced_com = (props) => {
                                     </div>                                      
                                   </div>
                                 </div>
-                                <br />
-                                <br />
-                                <br />
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br/>
                                 <div id={Style.RowTwo}>
-                                  <div id={Style.analysisTable}>
                                   <div id={Style.WinnerCard}>
                                     <div id={Style.WinnerTexts}>
                                       <h2 id={Style.Winner}> OPPONENT </h2>
@@ -300,14 +312,22 @@ const BetPlaced_com = (props) => {
                                       <img src={WinnerImg} id={Style.WinnerImg} alt="" />
                                     </div>                                      
                                   </div>
-                                  </div>
+                                  <div id={Style.HeroHighlights}>
+                                    <div >
+                                      {/* <img src={ source === 'Dice Games'? dice: null} id={Style.dice}/> */}
+                                      <h2 id={Style.SportBetType}>{user.game } Bet Analysis</h2>
+                                    </div>
+                                    <h3 id={Style.SportBetType}>{user.bet_Type ? user.bet_Type : 'no Bet Type data'}</h3>
+                                    <h3 id={Style.winBetFigures}>
+                                      <h4 id={Style.amountStaked}> Stake: WHC {!user.amount_staked? '0.00000': user.amount_staked }</h4>
+                                      <h4 id={Style.amountWon}> Win:  WHC {!user.win? '0.00000': user.win }</h4>
+                                    </h3>
+                                  </div> 
                                 </div>
                               </div>
                             </div>
-
                               :
                             <>
-
                             </>
                           }
                         </div>
@@ -321,7 +341,6 @@ const BetPlaced_com = (props) => {
               <tbody> 
                 {sortedArrayTwo.map((user, index) => {
                   // let lost = user.status == "Lost" ? true : false
-
                   return (
                     // <tr key={index}>
                     //     <td>{index + 1}</td>
@@ -395,7 +414,7 @@ const BetPlaced_com = (props) => {
                       <td>{user.BetID}</td>
                       <td>{user.game}</td>
                       <td>{user.bet_Type}</td>
-                      <td>{user.amount_staked}</td>
+                      <td>{user.amount_staked}</td> 
                       <td>
                         <div id={Style.players_imgDiv}>
                           {/* <img src={user.players} alt="" />

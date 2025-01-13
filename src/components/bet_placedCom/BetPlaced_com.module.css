@@ -162,14 +162,13 @@
     overflow:  scroll;
   }
   #BetFullDetailsBody{
-    /* border: 2px solid black; */
-    /* display:none; */
     position: absolute;
     top:-35%;
-    left: 15%;
-    width: 70%;
+    left: 20%;
+    width: 60%;
     height: 100%;
-    background-color: rgba(241, 241, 241, 0.87);
+    background-color: rgba(20, 18, 53, 0.541);
+    padding: 20px;
     border-radius: 30px;
   }
   #modalOverlay {
@@ -180,7 +179,7 @@
     right: 0;
     bottom: 0;
     position: fixed;
-    background-color: rgba(102, 102, 102, 0.356);
+    background-color: rgba(36, 28, 28, 0.63);
   }
 
   #RowOne{
@@ -188,12 +187,30 @@
     justify-content: space-between;
     margin-top: 10px;
   }
+  #RowTwo{
+    display: flex;
+    justify-content: space-between;
+  }
   #HeroHighlights{
     margin: 20px;
+    color: #fff;
+  }
+  #dice{
+    width: 190px;
+    position: absolute;
+    left: 450px;
+    top: 450px;
+  }
+  #sport{
+    width: 100px;
+    position: absolute;
+    left: 520px;
+    top: 460px;
   }
   #WinnerCard{
     background-color: #fff;
     display: flex;
+    /*justify-content: space-between;*/
     margin-top: 10px;
     margin-right: 20px;
     width: 45%;
@@ -210,7 +227,7 @@
   }
   
   #WinnerImg{
-    margin-left: 75% ;
+    margin-left: -5% ;
     margin-top: 15% ;
     border-radius: 25px;
   }

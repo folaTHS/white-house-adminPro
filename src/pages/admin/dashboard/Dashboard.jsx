@@ -8,7 +8,8 @@ import Header from '../../../components/header/Header'
 import Stats_Card from '../../../components/stats_card/Stats_Card'
 import foot from '../../../assets/svg/foot.svg'
 import { Link, useNavigate } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom';
+import RevenuePerformanceMap from '../../../components/chart/PerfomanceMap'
+//import { useNavigate } from 'react-router-dom';
 import { dashboardProvider } from '../api_detaills/provider/user_provider'
 import { PopupContextHook } from '../../../WhiteHouse_PopupContext'
 import { useDispatch, useSelector } from "react-redux";
@@ -234,9 +235,11 @@ const Dashboard = () => {
                 className={Style.Header_Div}
                 headerText={"Welcome, Admin"}
                 headerInfo={"Here’s an overview of White House"}
-                back1 ={false} />
+                back1 ={false} 
+            />
 
             <div id={Style.Dashboard_WrapperDiv}>
+                
                 <div id={Style.Dashboard_CardGraph_Wrapper}>
                     <div id={Style.Dashboard_Card_wrapper}>
                        {
@@ -248,36 +251,17 @@ const Dashboard = () => {
                                         text={obj.text}
                                         onClick={i === 0 ? () => handleTotalBetsClick() : null}
                                         to={i !== 0 ? obj.to : undefined} // Use `to` only for non-click items
-                                     />
+                                    />
                                     </div>
                                 )
                             })
                         }
                     </div>
                     <div id={Style.Dashboard_lineChart}>
-                        <p id={Style.Dashboard_RevenueText}>Revenue</p>
-                        <ResponsiveContainer width="100%" height="80%">
-                            <AreaChart
-                                width={500}
-                                height={300}
-                                data={line_data}
-                                margin={{
-                                    top: 0,
-                                    right: 0,
-                                    left: -10,
-                                    bottom: 0,
-                                }}
-                            >
-                                {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                                <XAxis dataKey="name" axisLine={false} tickLine={false} />
-                                <YAxis axisLine={false} tickLine={false} tickFormatter={customTickFormatter} />
-                                <Tooltip />
-                                <Area type="normal" dataKey="pv" dot={true} stroke="#332D5B" fill="#332d5b80" />
-                            </AreaChart>
-                        </ResponsiveContainer>
+                        {/* <p id={Style.Dashboard_RevenueText}>Revenue</p> */}
+                        <RevenuePerformanceMap/>                     
                     </div>
                 </div>
-
 
                 <div id={Style.BarChart_Div}>
                     <div id={Style.Dashboard_lineChart_Two}>
@@ -306,9 +290,9 @@ const Dashboard = () => {
                                 <Bar dataKey="pv" fill="#332D5B" />
                             </BarChart>
                         </ResponsiveContainer>
-                    </div>
+                    </div>  
 
-                    <div id={Style.Chart_mainDiv}>
+                    {/* <div id={Style.Chart_mainDiv}>
                         <div id={Style.PayoutsText}>Bet Placed</div>
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart width={150} height={40} data={line_data} margin={{
@@ -317,8 +301,6 @@ const Dashboard = () => {
                                 left: -20,
                                 bottom: 10,
                             }}>
-
-
                                 <XAxis dataKey="name"
                                     axisLine={false} tickLine={false} fontSize={"0.8rem"}
                                 />
@@ -330,8 +312,7 @@ const Dashboard = () => {
                                 <Bar dataKey="amt" fill="#736EA0" />
                             </BarChart>
                         </ResponsiveContainer>
-
-                    </div>
+                    </div> */}
 
                 </div>
 
