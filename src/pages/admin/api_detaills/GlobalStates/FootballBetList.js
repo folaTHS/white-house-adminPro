@@ -45,6 +45,22 @@ const FootballBetListsSlice = createSlice({
           status: "closed",
           createdAt: "2024-12-10T14:42:59.000Z",
           updatedAt: "2024-12-11T11:57:41.000Z"
+        },
+        {
+          id: 44,
+          user_id: 17,
+          opponent_id: null,
+          ticket_id: "98XLL7I2A1",
+          game: "football",
+          players_in_game: null,
+          amount: "50000",
+          leagueid: "1005",
+          matchid: "4107396",
+          team: "away",
+          type: "win",
+          status: "closed",
+          createdAt: "2024-12-10T14:42:59.000Z",
+          updatedAt: "2024-12-11T11:57:41.000Z"
         }
   ],
 

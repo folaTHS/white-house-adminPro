@@ -6,7 +6,7 @@ import InputField from '../../../../components/input/InputField'
 import search from '../../../../assets/svg/Search.svg'
 import filter from '../../../../assets/svg/Complete_filter_img.svg'
 import download from '../../../../assets/svg/download_img.svg'
-
+import RevenueBarChat from '../../../../components/chart/CircularGraph'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFootSolidersPayments } from "../../api_detaills/GlobalStates/footSoldiersPayment";
 
@@ -21,8 +21,12 @@ const Amount_Paid = () => {
   const { footSoldierPaymentsData, footSoldierPaymentsloading, footSoldierPaymentserror } = useSelector((state) => state.footSoldiersPayment);
 
   console.log(footSoldierPaymentsData);
-  
-
+    const footSoldiersDailyRevenueTarget= 5000000
+    const footSoldiersWeeklyRevenueTarget = 50000000
+    const footSoldiersMonthlyRevenueTarget = 50000000
+    const footSoldiersYearlyRevenueTarget = 5000000000
+const footSoldiersDailyRevenue = [500, 150000, 30050, 40001, 50, 50000, 200000]
+const footSoldiersYearlyRevenue = [500, 150000, 500000, 100000000 , 5000, 30050, 40001, 50, 50000, 200000]
   let footSoldiersPayments= footSoldierPaymentsData; 
     return (
         <div id={Style.Amount_Paid_mainDiv}>
@@ -32,18 +36,20 @@ const Amount_Paid = () => {
 
             <div id={Style.Amount_Paid_wrapperDiv}>
                 <div id={Style.Revenue_wrapperDiv}>
+                                   
                     <div className={Style.Revenue_earningDiv}>
 
                         <p className={Style.earningText}>Daily Payments</p>
                         <p className={Style.priceText}>$23,000</p>
 
-                        <div id={Style.Revenue_progressDiv}>
+                        {/* <div id={Style.Revenue_progressDiv}>
                             <div className={Style.Revenue_progressBar}>
                                 
                                 <div id={Style.progressFill}></div>
                             </div>
                             <p id={Style.Revenue_percentText}>45%</p>
-                        </div>
+                        </div> */}
+                        <RevenueBarChat revenues={footSoldiersDailyRevenue} target={footSoldiersDailyRevenueTarget} interval='day' />
                         <p className={Style.Revenue_infoText}>70% more earning than last month, keep
                             watching to find out more</p>
                     </div>
@@ -53,23 +59,25 @@ const Amount_Paid = () => {
                         <p className={Style.earningText}>Weekly Payments</p>
                         <p className={Style.priceText}>$23,000</p>
 
-                        <div id={Style.Revenue_progressDiv}>
+                        {/* <div id={Style.Revenue_progressDiv}>
                             <div className={Style.Revenue_progressBar}></div>
                             <p id={Style.Revenue_percentText}>45%</p>
-                        </div>
+                        </div> */}
+                        <RevenueBarChat revenues={footSoldiersDailyRevenue} target={footSoldiersWeeklyRevenueTarget} interval='week' />
                         <p className={Style.Revenue_infoText}>70% more earning than last month, keep
                             watching to find out more</p>
                     </div>
 
                     <div className={Style.Revenue_earningDiv}>
-
                         <p className={Style.earningText}>Monthly Payments</p>
                         <p className={Style.priceText}>$23,000</p>
 
-                        <div id={Style.Revenue_progressDiv}>
+                        {/* <div id={Style.Revenue_progressDiv}>
                             <div className={Style.Revenue_progressBar}></div>
                             <p id={Style.Revenue_percentText}>45%</p>
-                        </div>
+                        </div> */}
+                        <RevenueBarChat revenues={footSoldiersDailyRevenue} target={footSoldiersMonthlyRevenueTarget} interval='month' />
+
                         <p className={Style.Revenue_infoText}>70% more earning than last month, keep
                             watching to find out more</p>
                     </div>
@@ -79,12 +87,16 @@ const Amount_Paid = () => {
                         <p className={Style.earningText}>Yearly Payments</p>
                         <p className={Style.priceText}>$23,000</p>
 
-                        <div id={Style.Revenue_progressDiv}>
+                        {/* <div id={Style.Revenue_progressDiv}>
                             <div className={Style.Revenue_progressBar}></div>
                             <p id={Style.Revenue_percentText}>45%</p>
-                        </div>
-                        <p className={Style.Revenue_infoText}>70% more earning than last month, keep
-                            watching to find out more</p>
+                        </div> */}
+
+                        <RevenueBarChat revenues={footSoldiersYearlyRevenue} target={footSoldiersYearlyRevenueTarget} interval='year' />
+                        
+                        <p className={Style.Revenue_infoText}>
+                            70% more earning than last month, keep watching to find out more
+                        </p>
                     </div>
                 </div>
 

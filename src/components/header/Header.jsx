@@ -20,7 +20,6 @@ const Header = (props) => {
         <>
             <div id={Style.HeaderDiv}>
                 <div >
-
                     <div id={Style.headerText}>{headerText}</div>
                     <p>{headerInfo}</p>
                 </div>
@@ -30,7 +29,6 @@ const Header = (props) => {
                     <img id={Style.gamePad_img} src={image3} alt="" />
                 </div>
             </div>
-
             {back1 == true ? 
              <img id={Style.back_img} onClick={goBack} src={back} alt="" />
              : ""}
