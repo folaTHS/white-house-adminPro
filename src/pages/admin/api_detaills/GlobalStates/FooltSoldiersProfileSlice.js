@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import NigerianUsers from "../constant/url_path"
 // const API_URL = "http://white-house-api.onrender.com/api/v1/admin/dice-bet-list";
-
 // Async thunk for fetching dice summary data
 export const fetchFootSolidersProfile = createAsyncThunk(
   "FootSolidersProfile/fetch",
@@ -16,8 +15,7 @@ export const fetchFootSolidersProfile = createAsyncThunk(
       // console.log(data);
      
       // console.log(data.responseBody);
-      return footSoldierProfiles.responseBody; // Extract the relevant data
-
+      return footSoldierProfiles.responseBody; // Extract the relevant dat
     } catch (error) {
       console.log(error.message);      
       return rejectWithValue(error.message);
