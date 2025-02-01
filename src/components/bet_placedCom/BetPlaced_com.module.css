@@ -22,6 +22,15 @@
     box-sizing: border-box;
     border-radius: 0.5rem;
   }
+  #ToggleRow{
+    /* display:none; */
+    /* background-color: #0e093c; */
+    /* border: 2px solid black; */
+    padding-top: 10px;
+    border-radius: 20px;
+    height: 60px;
+    background-color: #8886861f;
+  }
   .Transaction_listDiv_button {
     border: none;
     color: #666666;
@@ -62,6 +71,9 @@
   #searchDiv {
     display: flex;
     align-items: center;
+    background-color: #ffffffa7;
+    border: none;
+    border-radius: 20px;
   }
   #searchDiv input {
     margin-top: -1rem;
@@ -75,17 +87,53 @@
     height: 2.3rem;
     margin-right: 0.4rem;
   }
-  #BetText {
+  #BetText{
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    margin:0px 20px ;
+    /* justify-content: center; */
+    align-items: center;
+    /* border: 2px solid black; */
     color: #003e79;
     font-size: 1.2rem;
-    padding: 2.5rem 0 0.81rem 3.5rem;
+    padding-top:10px ;
+    /* padding: 0rem 0 0.81rem 3.5rem; */
     box-sizing: border-box;
+  }
+  #paginationByNumberDiv{
+    display: flex;
+    list-style: none;
+    /* border: 2px solid black; */
+    width: 150px;
+    padding: 0;
+  }
+  #pageNumbers{
+    /* border: 2px solid black; */
+    width: 20px;
+    text-align: center;
+    /* margin-right: 30px; */
+  }
+  #Btn{
+    width: 100px;
+    height: 30px;
+    color: black;
+    background-color: #8886861f;
+    /* background-color: #0b438d; */
+    border-radius: 50px;
+    border: none;
+  }
+  .NavigationBtns{
+    width: 10px;
+  }
+  .RightNavigationBtns{
+    width: 13px;
   }
   #Total_BetPlaced_TableWrapperDiv {
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     min-height: 10rem;
   }
   #winners_background {
@@ -118,6 +166,9 @@
     color: #666666;
     font-size: 0.9rem;
     border-bottom: 1px solid #c4c4c4;
+  }
+  #tableRows{
+    background-color: #ffffffa7;
   }
   #Total_BetPlaced_TableWrapperDiv tr:last-child {
     border-bottom: none;
@@ -156,9 +207,9 @@
   }
 
   #BetTables{
-    width: 200px;
-    width: 1110px;
-    height: 400px;
+    /* width: 200px; */
+    /* width: 1110px; */
+    height: 450px;
     overflow:  scroll;
   }
   #BetFullDetailsBody{
@@ -217,9 +268,7 @@
     height: 210px;
     border-radius: 30px;
   }
-  #WinnerTexts{
-    
-  }
+  /* #WinnerTexts{} */
   #Winner{
     margin-left: 15px;
     font-weight:600;

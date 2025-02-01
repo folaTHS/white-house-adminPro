@@ -7,6 +7,7 @@ import filter from '../../../../assets/svg/Complete_filter_img.svg'
 import download from '../../../../assets/svg/download_img.svg'
 import Header from '../../../../components/header/Header'
 import Date_Picker from '../../../../components/date_picker/Date_Picker'
+import { motion } from 'framer-motion';
 
 
 
@@ -82,7 +83,20 @@ const All_Transaction = () => {
         },
     ]
 
+    const pageTransition = {
+        initial: { opacity: 0, y: 50 },
+        animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+        exit: { opacity: 0, y: -50, transition: { duration: 0.3 } }
+    };
     return (
+        
+        <motion.div
+            variants={pageTransition}
+            inital='initial'
+            animate='animate'
+            exit='exit'
+        >
+
         <div id={Style.All_Transaction_mainDiv} >
             <Header
                 headerText={"Transactions"}
@@ -164,6 +178,8 @@ const All_Transaction = () => {
                 </div>
             </div>
         </div>
+        
+        </motion.div>
     )
 }
 

@@ -21,6 +21,7 @@ import Revenue from "./pages/admin/revenue/Revenue";
 import WhiteHouse_PopupContext from "./WhiteHouse_PopupContext";
 import Queries from "./pages/admin/queries/Queries";
 import Customer_Support from "./pages/admin/staff/customer_Support/Customer_Support";
+import Foot_Soldiers_Home from "./pages/admin/staff/footSoldier/FootSoldier";
 import Top_Agents from "./pages/admin/staff/top_agents/Top_Agents";
 import Total_Top_Agents from "./pages/admin/staff/top_agents/total_Top_Agents/Total_Top_Agents";
 import Sports from "./pages/admin/games/sports/Sports";
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
                 element: <Customer_Support />
             },
             {
+                path: "/FootSoldiersHome",
+                element: <Foot_Soldiers_Home />
+            },
+            {
                 path: "/allStaffs",
                 element: <All_Staff />
             },
@@ -128,7 +133,7 @@ const router = createBrowserRouter([
                 element: <Complain_Details />
             },
             {
-                path: "/staffDetails",
+                path: "/staffDetails/:email",
                 element: <Staff_Details />
             },
             
@@ -150,7 +155,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/department",
-                element: <Department />
+                element: <Department/>
             },
             {
                 path: "/userFriends/:friendListString",

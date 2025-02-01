@@ -47,7 +47,6 @@ const NavBar = () => {
           <div id={Style.NavBar_textDiv}>
           <img src={scrollUp} className={Style.scrollUpIcon} alt="" />
             <p id={hamburger ? Style.logo :  Style.logo }  className="logo">Logo</p>
-
             <NavLink
               to={"/dashboard"}
               className={`${Style.NavBar_text} ${
@@ -55,7 +54,6 @@ const NavBar = () => {
               }`}
               onClick={() => {handleNavClick("dashboard") ; toggleMenu();}}
             >
-            
             <p>Dashboard</p>
             </NavLink>
             <NavLink
@@ -149,32 +147,45 @@ const NavBar = () => {
               }`}
             >
               {" "}
-              Customer Care
+              Admin's Corner
               {dropdownOpen && (
                 <div id={Style.CustomerCare_details_mainDiv}>
                   <div id={Style.CustomerCare_details_wrapperDiv}>
-                    <p>See details from the customer care unit</p>
+                    <p>See who interacts with customers! </p>
                     <div id={Style.btnDiv}>
                       <NavLink
                         to={"/customerCare"}
+                        id={Style.adminCornerNavs}
                         onClick={() => {handleNavClick("customerCare"); toggleMenu();}}
                       >
-                        <button>Yes</button>
+                        <button>C.C </button>
                       </NavLink>
-                      <button onClick={() => toggleDropdown(false)}>
+                      <NavLink
+                        // to={"/FootSoldiersHome"}
+                        to={"/footSoldiers"}
+                        onClick={() => {handleNavClick("customerCare"); toggleMenu();}}
+                      >
+                        <button>Foot Soldiers </button>
+                      </NavLink>
+                      {/* <button onClick={() => toggleDropdown(false)}>
                         {" "}
                         Cancel
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
               )}
             </p>
 
-            <p>Mgt</p>
-            <p>
+            
+            <NavLink to={"/department"}
+              onClick={() => {handleNavClick("department");}} 
+            >
+              <p> Management</p>
+            </NavLink>
+            {/* <p>
               English <img src={arrowDown} alt="" />
-            </p>
+            </p> */}
 
             <div id={Style.NavBar_lastlineDiv}>
               <div id={Style.NavBar_line}></div>

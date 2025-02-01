@@ -3,6 +3,8 @@ import Style from '../department/Department.module.css'
 import Header from '../../../../components/header/Header'
 import Total_Card from '../../../../components/total_Card/Total_Card'
 import workers from '../../../../assets/images/workers.png'
+import CCTeam from '../../../../assets/images/maleC-C.jpg'
+import TechSuppTeam from '../../../../assets/images/maleC-C.jpg'
 import { Link } from 'react-router-dom'
 
 
@@ -59,7 +61,7 @@ const Department = () => {
                 </div>
                 <div id={Style.Department_details_wrapperDiv}>
                     <div id={Style.Department_detailsDiv}>
-                        <img src={workers} alt="" />
+                        <img src={CCTeam} alt="" />
                         <p className={Style.Department_HeaderText}>Customer Support</p>
                         <div id={Style.Department_TextDiv}>
                             <p>Staff</p>
@@ -79,7 +81,7 @@ const Department = () => {
                         <button>View Details</button>
                     </div>
                     <div id={Style.Department_detailsDiv}>
-                        <img src={workers} alt="" />
+                        <img src={TechSuppTeam} alt="" />
                         <p className={Style.Department_HeaderText}>Technical Support</p>
                         <div id={Style.Department_TextDiv}>
                             <p>Staff</p>
@@ -107,7 +109,7 @@ const Department = () => {
                     </div>
                     <div id={Style.Department_detailsDiv}>
                         <img src={workers} alt="" />
-                        <p className={Style.Department_HeaderText}>Dispute Resolution</p>
+                        <p className={Style.Department_HeaderText}> Dispute Resolution </p>
                         <div id={Style.Department_TextDiv}>
                             <p>Staff</p>
                             <p className={Style.Department_staffNumber}>40</p>
@@ -118,7 +120,7 @@ const Department = () => {
                         <img src={workers} alt="" />
                         <p className={Style.Department_HeaderText}>VIP Support</p>
                         <div id={Style.Department_TextDiv}>
-                            <p>Staff</p>
+                            <p>Staff</p>b
                             <p className={Style.Department_staffNumber}>40</p>
                         </div>
                         <button>View Details</button>

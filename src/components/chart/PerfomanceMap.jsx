@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Tooltip , Marker,  Popup} from "react-leaflet";
+import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import Style from './Map.module.css'
-
+import Redpin from '../../assets/images/redPin.png'
+import Yellowpin from '../../assets/images/yellowPin.png'
+import Bluepin from '../../assets/images/bluePin.png'
+import Blackpin from '../../assets/images/pin-red.png'
+import ThickRedPin from '../../assets/images/red64.png'
+import ThickGreenPin from '../../assets/images/green64.png'
+import ThickBluePin from '../../assets/images/blue64.png'
+// import pinSvg from '.'
 
 const RevenuePerformanceMap= () => {
 
@@ -11,6 +19,12 @@ const RevenuePerformanceMap= () => {
       bad: 20000,
       average: 40000,
     };
+    // const revenueIcon = new L.Icon({
+    //   iconUrl: revenueIconImg,
+    //   iconSize: [32, 32],
+    //   iconAnchor: [16, 32],
+    //   popupAnchor: [0, -32],
+    // });
     
     const RevenueLocationData = [
       { name: "New York", lat: 40.7128, lng: -74.0060, revenue: 50000 },
@@ -79,8 +93,7 @@ const RevenuePerformanceMap= () => {
       { name: "Lima", lat: -12.0464, lng: -77.0428, revenue: 64000 },
       { name: "Santiago", lat: -33.4489, lng: -70.6693, revenue: 67000 },
     ];
-    
-    
+     
     const SportBetsLocationData = [
       { name: "Lagos", lat: 20.7128, lng: -74.0060, revenue: 50000 },
       { name: "Johannesburg", lat: 17.7749, lng: -122.4194, revenue: 30000 },
@@ -143,7 +156,6 @@ const RevenuePerformanceMap= () => {
       { name: "Copenhagen", lat: 55.6761, lng: 12.5683, revenue: 39000 },
       { name: "Warsaw", lat: 52.2297, lng: 21.0122, revenue: 41000 },
     ];
-    
     
     const DiceBetsLocationData = [
       { name: "Lagos", lat: 20.7128, lng: -74.0060, revenue: 50000 },
@@ -210,8 +222,6 @@ const RevenuePerformanceMap= () => {
       { name: "Lima", lat: -12.0464, lng: -77.0428, revenue: 35000 },
       { name: "Santiago", lat: -33.4489, lng: -70.6693, revenue: 38000 },
     ];
-
-    
     
     
      const getMarkerColorRevenue = (revenue) => {
@@ -219,12 +229,28 @@ const RevenuePerformanceMap= () => {
       if (revenue < performanceThresholds.average) return "yellow";
       return "green";
     };
+    
 
      const getMarkerColorBets = (bets) => {
-      if (bets < performanceThresholds.bad) return "red";
+      if (bets < performanceThresholds.bad) return 'red' ;
       if (bets < performanceThresholds.average) return "yellow";
       return "green";
     };
+// Create a colored marker based on revenue
+  const createColoredIcon = (color) => {
+  return L.icon({
+    iconUrl: color === 'red' ? ThickRedPin: color==='green' ? ThickGreenPin: ThickBluePin ,
+    color:color,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    shadowSize: [30, 25],
+  });
+};
+
+  // L.marker([lat, lng], { bounceOnAdd: true }).addTo(map);
+
     const [activeButton, setActiveButton] = useState(1);
     const ToggleButtons = () => {
       }
@@ -239,52 +265,66 @@ const RevenuePerformanceMap= () => {
 
   return (
     <>
-    <MapContainer style={{ height:"100vh", width: "100%" }} center={[37.7749, -95.7129]} zoom={4}>
+    <MapContainer 
+      style={{ height:"100vh", width: "100%" }} 
+      center={[20, 0]} 
+      zoom={4}
+      minZoom={1}          // Minimum zoom level to prevent zooming out too far
+      // maxZoom={24}         // Optional: Maximum zoom level
+      worldCopyJump={false}  // Prevents map from repeating
+      maxBounds={[[90, -180], [-90, 180]]}  // Locks the map within the world bounds
+      zoomControl={false}
+      scrollWheelZoom={true}  // Optional: Disable scroll zoom for better UX
+     > 
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       {
         mapData === 'revenue' ? RevenueLocationData.map((loc) => (
-        <CircleMarker
+        <Marker
           key={loc.name}
-          center={[loc.lat, loc.lng]}
+          position={[loc.lat, loc.lng]}
           radius={10} // Adjust marker size as needed
-          pathOptions={{
-            color: getMarkerColorRevenue(loc.revenue),
-            fillColor: getMarkerColorRevenue(loc.revenue),
-            fillOpacity: 0.2,
-          }
-        }
+        //   pathOptions={{
+        //     color: getMarkerColorRevenue(loc.revenue),
+        //     fillColor: getMarkerColorRevenue(loc.revenue),
+        //     fillOpacity: 0.2,
+        //   }
+        // }
+          // color={getMarkerColorRevenue(loc.revenue)}
+          // icon={getMarkerColorRevenue(loc.revenue)}
+          icon={createColoredIcon(getMarkerColorRevenue(loc.revenue))}
         >
           <Tooltip>
             <strong>{loc.name}</strong>
             <br />
             Revenue: ${loc.revenue.toLocaleString()}
           </Tooltip>
-        </CircleMarker>
+        </Marker>
       )): mapData=== 'SportBet' ? SportBetsLocationData.map((loc) => (
-        <CircleMarker
+        <Marker
           key={loc.name}
-          center={[loc.lat, loc.lng]}
+          position={[loc.lat, loc.lng]}
           radius={10} // Adjust marker size as needed
           pathOptions={{
             color: getMarkerColorBets(loc.revenue),
             fillColor: getMarkerColorBets(loc.revenue),
-            fillOpacity: 0.2,
+            fillOpacity: 0.6,
           }
         }
+        icon={createColoredIcon(getMarkerColorBets(loc.revenue))}
         >
           <Tooltip>
             <strong>{loc.name}</strong>
             <br />
             Revenue: ${loc.revenue.toLocaleString()}
           </Tooltip>
-        </CircleMarker>
+        </Marker>
       )) : mapData=== 'DiceBet' ? DiceBetsLocationData.map((loc) => (
-        <CircleMarker
+        <Marker
           key={loc.name}
-          center={[loc.lat, loc.lng]}
+          position={[loc.lat, loc.lng]}
           radius={10} // Adjust marker size as needed
           pathOptions={{
             color: getMarkerColorBets(loc.revenue),
@@ -292,21 +332,22 @@ const RevenuePerformanceMap= () => {
             fillOpacity: 0.2,
           }
         }
+        icon={createColoredIcon(getMarkerColorBets(loc.revenue))}
         >
           <Tooltip>
             <strong>{loc.name}</strong>
             <br />
             Revenue: ${loc.revenue.toLocaleString()}
           </Tooltip>
-        </CircleMarker>
+        </Marker>
       )) : null
       } 
     </MapContainer>
     <div id={Style.mapLegend}>
       <div id={Style.colorCodes}>
-        <div id={Style.colorText} > <div id={Style.redBox}></div> Poor  </div>
-        <div id={Style.colorText} > <div id={Style.greenBox}></div> Good  </div>
-        <div id={Style.colorText} > <div id={Style.yellowBox}></div> fair  </div>
+        <div id={Style.colorText} ><img id={Style.pinIcons} src={ThickRedPin} alt="" />  Poor  </div>
+        <div id={Style.colorText} > <img id={Style.pinIcons} src={ThickGreenPin} alt="" />  Good  </div>
+      <div id={Style.colorText} > <img id={Style.pinIcons} src={ThickBluePin} alt="" />  fair  </div>
       </div>
       <div id={Style.toggleContainer}>
         {/* <button onClick={()=>tooggleMap(1)}>Reveues</button>
