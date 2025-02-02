@@ -1,11 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Header from '../../../../../components/header/Header'
 import person_img from '../../../../../assets/images/person_img.png'
 import Style from '../Top_Agents.module.css'
+import { fetchCCWeeklyPerformance } from "../../../api_detaills/GlobalStates/CCWeeklyPerformance.js";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Total_Top_Agents = () => {
 
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchCCWeeklyPerformance());
+    }, [dispatch]);
+
+    const { CCPerformanceData, CCPerformanceLoading, CCPerformanceError } = useSelector((state) => state.CCPerformanceWeekly);
 
 
     const arr = [
@@ -72,18 +80,18 @@ const Total_Top_Agents = () => {
 
                         <tbody>
                             {
-                                arr.map((user)=>{
-                                    return <tr>
-                                <td>{user.SN}</td>
-                                <td><p><img src={person_img} alt="" />{user.name}</p></td>
-                                <td className={Style.tableData}>{user.call}</td>
-                                <td className={Style.tableData}>{user.message}</td>
-                                <td className={Style.tableData}>{user.mail}</td>
-                                <td className={Style.tableData}>{user.tollcall}</td>
-                                <td><button style={{ backgroundColor: "#0E093C", border: "none", color: "#FFFFFF", fontSize: "0.7rem", width: "5.18rem", borderRadius: "8px", height: "1.37rem" }}>{user.action}</button></td>
-                            </tr>
-     
-                                    
+                                CCPerformanceData.map((user, i )=>{
+                                 return (
+                                 <tr key={i}>
+                                    <td>{i+1}</td>
+                                    <td><p><img src={person_img} alt=""/>{user.agentName}</p></td>
+                                    <td className={Style.tableData}>{user.queries[1].count}</td>
+                                    <td className={Style.tableData}>{user.queries[0].count}</td>
+                                    <td className={Style.tableData}>-</td>
+                                    <td className={Style.tableData}>{user.queries[2].count}</td>
+                                    <td><button style={{ backgroundColor: "#0E093C", border: "none", color: "#FFFFFF", fontSize: "0.7rem", width: "5.18rem", borderRadius: "8px", height: "1.37rem" }}>View more.</button></td>
+                                </tr>
+                                 )                                    
                                 })
                             }
                         </tbody>

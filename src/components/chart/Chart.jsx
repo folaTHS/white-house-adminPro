@@ -14,7 +14,6 @@ const Chart = ({ data, line_data}) => {
 
 
   return (
-
     <>
       <div>
         <div id={Style.Chart_mainDiv}>
@@ -40,7 +39,6 @@ const Chart = ({ data, line_data}) => {
               <Bar dataKey="rank" stroke='none' stackId='a' fill='#003E79'></Bar>
             </BarChart>
           </ResponsiveContainer>
-
         </div>
 
 

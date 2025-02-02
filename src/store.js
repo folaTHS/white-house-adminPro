@@ -11,6 +11,14 @@ import FooltSoldiersProfileReducer from "./pages/admin/api_detaills/GlobalStates
 import footSoldiersPaymentReducer from "./pages/admin/api_detaills/GlobalStates/footSoldiersPayment";
 import FootSoldierSummaryReducer from "./pages/admin/api_detaills/GlobalStates/FootSoldierSummary";
 import UserFromFootSoldierReducer from "./pages/admin/api_detaills/GlobalStates/UserFromFootSoldier";
+import CCPerformanceReducer from "./pages/admin/api_detaills/GlobalStates/CCWeeklyPerformance";
+// import TopPerformingCC from './pages/admin/api_detaills/GlobalStates/CCWeeklyPerformance'
+import QueriesReducer from "./pages/admin/api_detaills/GlobalStates/QueriesReducer";
+import AllStaffsReducer from "./pages/admin/api_detaills/GlobalStates/AllStaffs";
+import StaffsProfileReducer from "./pages/admin/api_detaills/GlobalStates/AllStaffsProfile";
+
+
+
 
 
 const store = configureStore({
@@ -27,6 +35,11 @@ const store = configureStore({
     footSoldiersPayment : footSoldiersPaymentReducer,
     FootSoldierSummary : FootSoldierSummaryReducer,
     UserFromFootSoldier : UserFromFootSoldierReducer,
+    CCPerformanceWeekly : CCPerformanceReducer,
+    Queries : QueriesReducer,
+    AllStaffsList : AllStaffsReducer,
+    StaffsProfile : StaffsProfileReducer,
+    // TopPerformingCCList : TopPerformingCC,
     
 
   },

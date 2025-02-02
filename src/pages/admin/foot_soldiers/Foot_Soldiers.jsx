@@ -135,7 +135,7 @@ const Foot_Soldiers = () => {
 
                 <div id={Style.Foot_Soldiers_cardDiv}>
                     {
-                        soldiers_card.map((obj) => {
+                        soldiers_card.map((obj, index) => {
 
                             return (
                                 <Total_Card
@@ -143,7 +143,12 @@ const Foot_Soldiers = () => {
                                     text={obj.text}
                                     divText={obj.divText}
                                     price={obj.price}
-                                    to={obj.to} />
+                                    to={obj.to} 
+                                    isPurple={index == 0 ? "true" : null}
+                                    isGreen={index == 1 ? "true" : null}
+                                    isRed={index == 2 ? "true" : null}
+                                    isBlack={index == 3 ? "true" : null}              
+                                />
                             )
                         })
                     }

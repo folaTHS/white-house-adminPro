@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import React, { useEffect, useState } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const getElapsedPercentage = (start, end) => {
   const totalDuration = end.getTime() - start.getTime();
@@ -12,21 +12,25 @@ const getStartEndDates = (interval) => {
   const now = new Date();
   let start, end;
 
-  if (interval === 'day') {
+  if (interval === "day") {
     start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     end = new Date(start);
     end.setDate(start.getDate() + 1); // End at midnight
-  } else if (interval === 'week') {
+  } else if (interval === "week") {
     const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
-    start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dayOfWeek);
+    start = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - dayOfWeek
+    );
     end = new Date(start);
     end.setDate(start.getDate() + 7); // End at the start of the next week
-  } else if (interval === 'month') {
+  } else if (interval === "month") {
     start = new Date(now.getFullYear(), now.getMonth(), 1);
     end = new Date(now.getFullYear(), now.getMonth() + 1, 1); // Start of the next month
-  } else if (interval === 'year') {
+  } else if (interval === "year") {
     start = new Date(now.getFullYear(), now.getFullYear(), 1);
-    end = new Date(now.getFullYear(), now.getFullYear() -1, 1); // Start of the next month
+    end = new Date(now.getFullYear(), now.getFullYear() - 1, 1); // Start of the next month
   }
 
   return { start, end };
@@ -59,9 +63,9 @@ const CircularGraph = ({ revenues, target, interval }) => {
         value={progress}
         text={`${Math.floor(progress)}%`}
         styles={buildStyles({
-          textColor: '#000',
-          pathColor: progress === 100 ? '#4caf50' : '#00f', // Green if target met
-          trailColor: '#ddd',
+          textColor: "#000",
+          pathColor: progress === 100 ? "#4caf50" : "#00f", // Green if target met
+          trailColor: "#ddd",
         })}
       />
     </div>

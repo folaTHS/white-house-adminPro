@@ -19,7 +19,15 @@
     align-items: center;
     margin-bottom: 2.5rem;
 }
+#statCards{
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.statCards:hover {
+  border-radius:20px;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 /* #Dashboard_Card_wrapper {
     width: 100%;
     height: 15.3rem;
@@ -87,7 +95,7 @@
     color: #003E79;
 }
 
-#Dashboard_lineChart_Two #Graph_BoxText {
+#Dashboard_lineChart_Two #Graph_BomxText {
   width: 3.87rem;
   height: 2rem;
   border: 1px solid #0E093C;

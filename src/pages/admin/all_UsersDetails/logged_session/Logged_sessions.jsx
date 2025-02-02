@@ -9,9 +9,6 @@ import download from '../../../../assets/svg/download_img.svg'
 import arrow_down from '../../../../assets/svg/arrow_down-dark.svg'
 import Date_Picker from '../../../../components/date_picker/Date_Picker'
 
-
-
-
 const Logged_sessions = () => {
 
     
