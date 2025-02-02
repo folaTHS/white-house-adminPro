@@ -157,15 +157,22 @@ const PlaceBet = () => {
                     <p id={Style.PlaceBet_summaryText}>Today's Summary</p>
                     <div id={Style.Total_Card_mapDiv}>
                         {
-                            total_Card1.map((object) => {
+                            total_Card1.map((object, index) => {
                                 return (
-                                    <Total_Card
-                                        image1={object.image1}
-                                        text={object.text}
-                                        divText={object.divText}
-                                        price={object.price}
-                                        to={object.to}
-                                    />
+                                    <div id={Style.statCards}> 
+                                        <Total_Card
+                                            image1={object.image1}
+                                            text={object.text}
+                                            divText={object.divText}
+                                            price={object.price}
+                                            to={object.to}
+                                            isPurple={index == 0 ? "true" : null}
+                                    isGreen={index == 1 ? "true" : null}
+                                    isRed={index == 2 ? "true" : null}
+                                    isBlack={index == 3 ? "true" : null}              
+                                    
+                                        />
+                                    </div>
                                 )
                             })
                         }

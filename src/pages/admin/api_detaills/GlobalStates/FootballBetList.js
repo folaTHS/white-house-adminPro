@@ -12,12 +12,12 @@ export const fetchFootballBetList = createAsyncThunk(
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const footballBetsList = await response.json();
       console.log(footballBetsList);
-     
+
       // console.log(data.responseBody);
       return footballBetsList.responseBody; // Extract the relevant data
-
     } catch (error) {      
       console.log(error.message); 
       return rejectWithValue(error.message);

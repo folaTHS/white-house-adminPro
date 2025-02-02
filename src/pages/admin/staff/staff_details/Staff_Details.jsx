@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Style from './Staff_Details.module.css'
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
@@ -9,9 +9,25 @@ import rise from '../../../../assets/svg/rise.svg'
 import users from '../../../../assets/svg/users.svg'
 import './Staff_Details.css'
 import Stats_Card from '../../../../components/stats_card/Stats_Card';
+import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStaffDetails } from "../../api_detaills/GlobalStates/AllStaffsProfile";
+
 
 
 const Staff_Details = () => {
+    const { email } = useParams()
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const currentEmail = email;
+        // console.log(currentEmail);        
+        dispatch(fetchStaffDetails(currentEmail));
+    }, []);
+    
+    const { StaffProfileData, StaffProfileDataLoading, StaffProfileDataError } = useSelector((state) => state.StaffsProfile);
+    // console.log(StaffProfileData)
 
     const data = [
         {
@@ -110,7 +126,7 @@ const Staff_Details = () => {
                 headerInfo={"Here’s an overview of all Staff"} />
 
             <div id={Style.Staff_Details_wrapperDiv}>
-                <p id={Style.Staff_headerText}>Staff Detail</p>
+                <p id={Style.Staff_headerText}>Staff Detail </p>
                 <div id={Style.Staff_Details_tableDiv}>
                     <table>
                         <tr id={Style.headerTable}>
@@ -125,28 +141,33 @@ const Staff_Details = () => {
                         </tr>
 
                         <tr>
-                            <td><img src={person} alt="" /></td>
-                            <td>SA 123476689</td>
-                            <td>johndoe@gmail.com</td>
-                            <td>+2344816273888</td>
-                            <td>Nigeria</td>
+                            <td><img src={ StaffProfileData[0].photo} alt="" /></td>
+                            <td>{ StaffProfileData[0].fullname}</td>
+                            <td>{ StaffProfileData[0].email}</td>
+                            <td>{ StaffProfileData[0].phone_number}</td>
+                            <td>{ StaffProfileData[0].country}</td>``
                             <td>
                                 <div id={Style.BankDetails_Div}>
-                                    <div>
+                                    {/* <div>
                                         <p>Bank</p>
                                         <p className={Style.BankDetails_BoldText}>Access Bank</p>
-                                    </div>
-                                    <div>
+                                    </div> */}
+
+                                    {/* <div>
                                         <p>Account Number</p>
                                         <p className={Style.BankDetails_BoldText}>0123456789</p>
-                                    </div><div>
+                                    </div>
+                                    <div>
                                         <p>Account Name</p>
                                         <p className={Style.BankDetails_BoldText}>John Doe</p>
+                                    </div> */}
+                                    <div>
+                                        { StaffProfileData[0].bankDetails}
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <div id={Style.statusText}>Online</div>
+                                <div id={Style.statusText}>{ StaffProfileData[0].status}</div>
                             </td>
 
                             <td><button style={{ backgroundColor: "#075070", border: "none", color: "#FFFFFF", fontSize: "0.7rem", borderRadius: "8px", height: "1.37rem" }}>Suspend Action</button></td>

@@ -7,7 +7,14 @@
     padding-top: 0.5rem;
     box-sizing: border-box;
     border-radius: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+#Total_Card_Wrapper:hover {
+    border-radius:20px;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
 #Total_Card_firstLine_Div{
     height: 2.87rem;
     display: flex;
@@ -37,7 +44,7 @@
     padding: 0.5rem;
     box-sizing: border-box;
     height: 2rem;
-    border: 1px solid #0E093C;
+    /* border: 1px solid #0E093C; */
     border-radius: 0.43rem;
     font-size: 0.8rem;
     display: flex;

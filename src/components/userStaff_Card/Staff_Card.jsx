@@ -11,7 +11,7 @@ const Staff_Card = (props) => {
 //   const [loading, setLoading] = useState(true);
 
     
-    const { img, status, position, name, to, statusColor, verified } = props
+    const { img, status, position, name, to, statusColor, verified, isBlack, isPurple, isGreen, isRed  } = props
 
     return (
 
@@ -32,7 +32,7 @@ const Staff_Card = (props) => {
                 <div id={Style.Staff_Card_textDiv}>
                     <p className={Style.Staff_Card_nameText}>{name}</p>
                     <p className={Style.Staff_Card_careRep}>{position}</p>
-                    <p className={Style.Staff_Card_onlineDiv}> <div className={Style.Staff_Card_online_signalDiv} style={{ backgroundColor: statusColor ? "#59C150" : "#999999" }}></div>{status}</p>
+                    <p className={Style.Staff_Card_onlineDiv}> <div className={Style.Staff_Card_online_signalDiv} style={{backgroundColor: isBlack ? 'rgba(4, 135, 155, 0.4)' : isPurple?  'rgba(11,67,141, 0.15)': isGreen? 'rgba(49,195,100, 0.15)': isRed?'rgba(237,113,13,0.15)': "#FFFFFF", cursor: 'pointer' }}></div>{status}</p>
                     <div>
                     {
                         window.innerWidth < 480 ? verified ? <img id={Style.VerifiedImg} style={{width:30}} src={verified} alt="" /> :'':''

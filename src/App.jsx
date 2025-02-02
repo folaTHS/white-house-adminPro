@@ -6,15 +6,18 @@ import Error from './popUps/error/Error'
 // import { BetsApiProvider } from './pages/admin/api_detaills/GlobalStates/BetsContext'
 import { Provider } from "react-redux";
 import store from "./store"
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
 
 
   return (
     <>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <AnimatePresence mode="wait">
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </AnimatePresence>
     </>
   )
 }
