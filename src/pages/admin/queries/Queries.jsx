@@ -49,6 +49,7 @@ const Reports = () => {
   const userQueryList = queryDetailsData.queries[0];
 
   console.log(queryingUserDetails);
+  console.log(QueryList)
   // console.log(queryCustomerCareRepDetails);
   // console.log(userQueryList);
 
@@ -171,47 +172,48 @@ const Reports = () => {
     "Status",
     "Action",
   ];
-  useEffect(() => {
-    let filteredRows = QueryList;
 
-    if (searchText) {
-      filteredRows = filteredRows.filter((row) =>
-        Object.values(row).some((value) =>
-          value.toString().toLowerCase().includes(searchText.toLowerCase())
-        )
-      );
-    }
+  // useEffect(() => {
+  //   let filteredRows = QueryList;
 
-    if (filterValue !== "all") {
-      filteredRows = filteredRows.filter((row) => row.status === filterValue);
-    }
+  //   if (searchText) {
+  //     filteredRows = filteredRows.filter((row) =>
+  //       Object.values(row).some((value) =>
+  //         value.toString().toLowerCase().includes(searchText.toLowerCase())
+  //       )
+  //     );
+  //   }
 
-    if (sortConfig.key) {
-      filteredRows.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key])
-          return sortConfig.direction === "asc" ? -1 : 1;
-        if (a[sortConfig.key] > b[sortConfig.key])
-          return sortConfig.direction === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
+  //   if (filterValue !== "all") {
+  //     filteredRows = filteredRows.filter((row) => row.status === filterValue);
+  //   }
 
-    setFilteredData(filteredRows);
-  }, [searchText, filterValue, sortConfig, QueryList]);
+  //   if (sortConfig.key) {
+  //     filteredRows.sort((a, b) => {
+  //       if (a[sortConfig.key] < b[sortConfig.key])
+  //         return sortConfig.direction === "asc" ? -1 : 1;
+  //       if (a[sortConfig.key] > b[sortConfig.key])
+  //         return sortConfig.direction === "asc" ? 1 : -1;
+  //       return 0;
+  //     });
+  //   }
 
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-  const paginatedData = filteredData.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
+  //   setFilteredData(filteredRows);
+  // }, [searchText, filterValue, sortConfig, QueryList]);
 
-  const handleSort = (key) => {
-    setSortConfig((prev) => ({
-      key,
-      direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
-    }));
-  };
-  const [selectedQuery, setSelectedQuery] = useState(null);
+  // const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  // const paginatedData = filteredData.slice(
+  //   (currentPage - 1) * rowsPerPage,
+  //   currentPage * rowsPerPage
+  // );
+
+  // const handleSort = (key) => {
+  //   setSortConfig((prev) => ({
+  //     key,
+  //     direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
+  //   }));
+  // };
+  // const [selectedQuery, setSelectedQuery] = useState(null);
 
   const HandleViewMoreBtn = (a) => {
     // setSelectedQuery(a);
@@ -223,7 +225,7 @@ const Reports = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [new_status, setnew_status] = useState("");
-  const [loading, setLoading ]= useState(true);
+  const [loading, setLoading] = useState(true);
 
   const handleSendResolution = () => {
     let ticketId = userQueryList.ticket_id;
@@ -241,58 +243,84 @@ const Reports = () => {
       .catch((error) => console.error("Submission failed:", error));
   };
 
-  // const HandleViewMoreBtn = async (ticket_id) => {
-  //   // if (!query) {
-  //   //   setQueryModal(false);
-  //   //   return;
-  //   // }
+  useEffect(() => {
+    setTimeout(
+      () => (QuerySummaryData ? setLoading(false) : setLoading(true)),
+      3000
+    );
+  }, []);
 
-  //   // setQueryModal(!ticket_id);
+  // new table logics starts here
 
-  //   try {
+  const [activeTab, setActiveTab] = useState("All");
 
-  //     const token = localStorage.getItem("token");
-  //     if (!token) {
-  //       throw new Error("No access token found");
-  //     }
-  //     const response = await fetch(`https://stake-cut-api.onrender.com/api/v1/admin/query/get-query-details/${ticket_id}`, {
-  //       method: "GET",
-  //       headers: {
-  //           // "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`
-  //       }
-  //   });
+  const QueriesPerPage = 5; // Change this to adjust the number of querys per page
 
-  //     const data = await response.json();
+  const [searchTerm, setSearchTerm] = useState("");
 
-  //     setSelectedQuery(data); // Store fetched data in state
-  //     setQueryModal(true);    // Open modal
+  const filteredQuery = QueryList.filter(
+    (query) =>
+    // (query.status.toLowerCase() === activeTab)
+    //   &&
+    (
+      query.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+      query.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+      query.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    );
 
-  //     console.log(selectedQuery);
+  // Pagination Logic
 
-  //   } catch (error) {
-  //     console.error("Error fetching query details:", error);
-  //   }
-  // };
+  const indexOfLastClient = currentPage * QueriesPerPage;
+  const indexOfFirstClient = indexOfLastClient - QueriesPerPage;
+  const currentquery = filteredQuery.slice(
+    indexOfFirstClient,
+    indexOfLastClient
+  );
+  const totalPages = Math.ceil(filteredQuery.length / QueriesPerPage);
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxPageNumbersToShow = 20; // Adjust this for more/less visible numbers
 
-   useEffect(()=>{
-        setTimeout(()=> QuerySummaryData ? setLoading(false): setLoading(true), 3000)
-      }, [])
+    if (totalPages <= maxPageNumbersToShow) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
 
-  return (
-    
-   loading ? <LoadingScreen/> : 
+    if (currentPage <= 3) {
+      pages.push(1, 2, 3, "...", totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      pages.push(1, "...", totalPages - 2, totalPages - 1, totalPages);
+    } else {
+      pages.push(
+        1,
+        "...",
+        currentPage - 1,
+        currentPage,
+        currentPage + 1,
+        "...",
+        totalPages
+      );
+    }
+    return pages;
+  };
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // new table logics ends here
+
+  return loading ? (
+    <LoadingScreen />
+  ) : (
     <div id={Style.Reports_mainDiv}>
       <Header
-        // headerText={"Welcome, Admin"}
-        // headerInfo={"Here’s an overview of White House"}
+      // headerText={"Welcome, Admin"}
+      // headerInfo={"Here’s an overview of White House"}
       />
 
       <div id={Style.Reports_WrapperDiv}>
         <p className={Style.ReportsText}>Queries Summary</p>
 
-
-        
         <div id={Style.Query_header_filterDiv}>
           {toggleIndex == 100 ? (
             <p className={Style.ReportsText}>All Queries</p>
@@ -314,14 +342,7 @@ const Reports = () => {
 
           <div id={Style.Input_filterDiv}>
             <div id={Style.searchDiv}>
-              <img id={Style.searchLogo} src={search} alt="" />
-              {/* <InputField /> */}
-              <input
-                id={Style.searchBox}
-                type="text"
-                // placeholder="Search..."
-                onChange={(e) => setSearchText(e.target.value)}
-              />
+              {/* <img id={Style.searchLogo} src={search} alt="" /> */}
               <select
                 id={Style.filterBox}
                 onChange={(e) => setFilterValue(e.target.value)}
@@ -330,7 +351,7 @@ const Reports = () => {
                 <option value="resolved">Resolved</option>
                 <option value="in-progress">In Progress</option>
                 <option value="pending">Pending</option>
-              </select>   
+              </select>
             </div>
           </div>
         </div>
@@ -339,7 +360,11 @@ const Reports = () => {
           <table>
             <div id={Style.headerTable}>
               {headers.map((key) => (
-                <div id={Style.colums} key={key} onClick={() => handleSort(key)}>
+                <div
+                  id={Style.colums}
+                  key={key}
+                  onClick={() => handleSort(key)}
+                >
                   {key}{" "}
                   {sortConfig.key === key
                     ? sortConfig.direction === "asc"
@@ -351,7 +376,7 @@ const Reports = () => {
             </div>
             {toggleIndex == 100 ? (
               <tbody>
-                {paginatedData.map((obj, index) => {
+                {currentquery.map((obj, index) => {
                   let color = obj.status === "Pending" ? true : false;
 
                   return (
@@ -400,7 +425,9 @@ const Reports = () => {
                               <span
                                 id={Style.modalOverlay}
                                 onClick={() => {
-                                  resolveScreen ? setQueryModal(true) : setQueryModal(!queryModal);
+                                  resolveScreen
+                                    ? setQueryModal(true)
+                                    : setQueryModal(!queryModal);
                                 }}
                               ></span>
                               <div id={Style.queryDetailsContainer}>
@@ -443,13 +470,13 @@ const Reports = () => {
                                           <span id={Style.onlineStatus}></span>
                                           <p>{queryingUserDetails.status}</p>
                                         </div>
-                                        <Link to={`/userDetails/${queryingUserDetails.phone}`}>
-                                          <button id={Style.viewProfileBtn}
-                                          >
-                                          View User Profile{" "}
-                                        </button>
-                                        </Link>
-                                          {" "}
+                                        <Link
+                                          to={`/userDetails/${queryingUserDetails.phone}`}
+                                        >
+                                          <button id={Style.viewProfileBtn}>
+                                            View User Profile{" "}
+                                          </button>
+                                        </Link>{" "}
                                       </div>
                                     </div>
                                   </div>
@@ -641,7 +668,7 @@ const Reports = () => {
                                       key={option}
                                       onClick={() => setnew_status(option)}
                                       style={{
-                                        margin:'10px',
+                                        margin: "10px",
                                         fontWeight:
                                           status === option ? "bold" : "normal",
                                       }}
@@ -687,16 +714,37 @@ const Reports = () => {
                     </>
                   );
                 })}
-                <div>
-                  {Array.from({ length: totalPages }, (_, i) => (
+                <div className="flex space-x-2 p-4 justify-center">
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border rounded"
+                  >
+                    &larr;
+                  </button>
+                  {getPageNumbers().map((page, index) => (
                     <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
+                      className={`px-3 py-1 border rounded ${
+                        page === currentPage ? "bg-gray-300" : ""
+                      }`}
+                      disabled={page === "..."}
                     >
-                      {i + 1}
+                      {page}
                     </button>
                   ))}
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1  border rounded"
+                  >
+                    &rarr;
+                  </button>
                 </div>
               </tbody>
             ) : (
@@ -704,7 +752,7 @@ const Reports = () => {
             )}
             {toggleIndex === 0 ? (
               <tbody>
-                {paginatedData.map((obj, index) => {
+                {currentquery.map((obj, index) => {
                   let color = obj.status === "Pending" ? true : false;
 
                   return (
@@ -982,16 +1030,37 @@ const Reports = () => {
                     </>
                   );
                 })}
-                <div>
-                  {Array.from({ length: totalPages }, (_, i) => (
+                <div className="flex space-x-2 p-4 justify-center">
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border rounded"
+                  >
+                    &larr;
+                  </button>
+                  {getPageNumbers().map((page, index) => (
                     <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
+                      className={`px-3 py-1 border rounded ${
+                        page === currentPage ? "bg-gray-300" : ""
+                      }`}
+                      disabled={page === "..."}
                     >
-                      {i + 1}
+                      {page}
                     </button>
                   ))}
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1  border rounded"
+                  >
+                    &rarr;
+                  </button>
                 </div>
               </tbody>
             ) : (
@@ -999,7 +1068,7 @@ const Reports = () => {
             )}
             {toggleIndex === 1 ? (
               <tbody>
-                {paginatedData.map((obj, index) => {
+                {currentquery.map((obj, index) => {
                   let color = obj.status === "Pending" ? true : false;
 
                   return (
@@ -1047,7 +1116,7 @@ const Reports = () => {
                               <span
                                 id={Style.modalOverlay}
                                 onClick={() => {
-                                  HandleViewMoreBtn(obj);
+                                  HandleViewMoreBtn(obj.ticket_id);
                                 }}
                               ></span>
                               <div id={Style.queryDetailsContainer}>
@@ -1277,16 +1346,37 @@ const Reports = () => {
                     </>
                   );
                 })}
-                <div>
-                  {Array.from({ length: totalPages }, (_, i) => (
+                <div className="flex space-x-2 p-4 justify-center">
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border rounded"
+                  >
+                    &larr;
+                  </button>
+                  {getPageNumbers().map((page, index) => (
                     <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
+                      className={`px-3 py-1 border rounded ${
+                        page === currentPage ? "bg-gray-300" : ""
+                      }`}
+                      disabled={page === "..."}
                     >
-                      {i + 1}
+                      {page}
                     </button>
                   ))}
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1  border rounded"
+                  >
+                    &rarr;
+                  </button>
                 </div>
               </tbody>
             ) : (
@@ -1294,7 +1384,7 @@ const Reports = () => {
             )}
             {toggleIndex === 2 ? (
               <tbody>
-                {paginatedData.map((obj, index) => {
+               {currentquery.map((obj, index) => {
                   let color = obj.status === "Pending" ? true : false;
 
                   return (
@@ -1342,7 +1432,7 @@ const Reports = () => {
                               <span
                                 id={Style.modalOverlay}
                                 onClick={() => {
-                                  HandleViewMoreBtn(obj);
+                                  HandleViewMoreBtn(obj.ticket_id);
                                 }}
                               ></span>
                               <div id={Style.queryDetailsContainer}>
@@ -1572,16 +1662,37 @@ const Reports = () => {
                     </>
                   );
                 })}
-                <div>
-                  {Array.from({ length: totalPages }, (_, i) => (
+                <div className="flex space-x-2 p-4 justify-center">
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border rounded"
+                  >
+                    &larr;
+                  </button>
+                  {getPageNumbers().map((page, index) => (
                     <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
+                      className={`px-3 py-1 border rounded ${
+                        page === currentPage ? "bg-gray-300" : ""
+                      }`}
+                      disabled={page === "..."}
                     >
-                      {i + 1}
+                      {page}
                     </button>
                   ))}
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1  border rounded"
+                  >
+                    &rarr;
+                  </button>
                 </div>
               </tbody>
             ) : (
@@ -1589,7 +1700,7 @@ const Reports = () => {
             )}
             {toggleIndex === 3 ? (
               <tbody>
-                {paginatedData.map((obj, index) => {
+               {currentquery.map((obj, index) => {
                   let color = obj.status === "Pending" ? true : false;
 
                   return (
@@ -1637,7 +1748,7 @@ const Reports = () => {
                               <span
                                 id={Style.modalOverlay}
                                 onClick={() => {
-                                  HandleViewMoreBtn(obj);
+                                  HandleViewMoreBtn(obj.ticket_id);
                                 }}
                               ></span>
                               <div id={Style.queryDetailsContainer}>
@@ -1867,16 +1978,37 @@ const Reports = () => {
                     </>
                   );
                 })}
-                <div>
-                  {Array.from({ length: totalPages }, (_, i) => (
+                <div className="flex space-x-2 p-4 justify-center">
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border rounded"
+                  >
+                    &larr;
+                  </button>
+                  {getPageNumbers().map((page, index) => (
                     <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
+                      className={`px-3 py-1 border rounded ${
+                        page === currentPage ? "bg-gray-300" : ""
+                      }`}
+                      disabled={page === "..."}
                     >
-                      {i + 1}
+                      {page}
                     </button>
                   ))}
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1  border rounded"
+                  >
+                    &rarr;
+                  </button>
                 </div>
               </tbody>
             ) : (
@@ -1884,7 +2016,7 @@ const Reports = () => {
             )}
             {toggleIndex === 4 ? (
               <tbody>
-                {paginatedData.map((obj, index) => {
+               {currentquery.map((obj, index) => {
                   let color = obj.status === "Pending" ? true : false;
 
                   return (
@@ -1932,7 +2064,7 @@ const Reports = () => {
                               <span
                                 id={Style.modalOverlay}
                                 onClick={() => {
-                                  HandleViewMoreBtn(obj);
+                                  HandleViewMoreBtn(obj.ticket_id);
                                 }}
                               ></span>
                               <div id={Style.queryDetailsContainer}>
@@ -2162,16 +2294,37 @@ const Reports = () => {
                     </>
                   );
                 })}
-                <div>
-                  {Array.from({ length: totalPages }, (_, i) => (
+                <div className="flex space-x-2 p-4 justify-center">
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border rounded"
+                  >
+                    &larr;
+                  </button>
+                  {getPageNumbers().map((page, index) => (
                     <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={currentPage === i + 1 ? "active" : ""}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
+                      className={`px-3 py-1 border rounded ${
+                        page === currentPage ? "bg-gray-300" : ""
+                      }`}
+                      disabled={page === "..."}
                     >
-                      {i + 1}
+                      {page}
                     </button>
                   ))}
+                  <button
+                    style={{ backgroundColor: "rgba(238, 238, 238, 1)" }}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1  border rounded"
+                  >
+                    &rarr;
+                  </button>
                 </div>
               </tbody>
             ) : (
@@ -2179,7 +2332,6 @@ const Reports = () => {
             )}
           </table>
         </div>
-
 
         <div id={Style.Total_Stats_CardWrapper}>
           <div id={Style.Reports_mapDiv}>
@@ -2229,7 +2381,6 @@ const Reports = () => {
             })}
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import Style from "./NavBar.module.css";
 import arrowDown from "../../assets/svg/arrow_down.svg";
 import mail from "../../assets/svg/transparent_mail.svg";
 import user from "../../assets/svg/transparent_contact.svg";
-import logo from "../../assets/svg/logo.svg";
+import logo from "../../assets/images/LOGO512.png";
 import alphaBet_logo from "../../assets/svg/Alpha_Bet_Black_Logo.svg";
 import mail_two from "../../assets/svg/staff_mail.svg";
 import person from "../../assets/svg/staff_person.svg";
@@ -47,15 +47,7 @@ const NavBar = () => {
 
         <div id={hamburger ? Style.entireNav : Style.entireNavHide}>
           <div id={Style.NavBar_textDiv}>
-          <NavLink
-              to={"/dashboard"}
-              className={`${Style.NavBar_text} ${
-                activeNav === "dashboard" ? Style.Nav_styled_Link : ""
-              }`}
-              onClick={() => {handleNavClick("dashboard") ; toggleMenu();}}
-            >
-          <img src={logo} alt="" />
-          </NavLink>
+            <img src={logo} alt=""  style={{width:"60px", marginRight:"-50px"}}/>
             {/* <p id={hamburger ? Style.logo :  Style.logo }  className="logo">Logo</p> */}
             <NavLink
               to={"/dashboard"}

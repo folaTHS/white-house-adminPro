@@ -19,10 +19,16 @@ import Hulk from "../../assets/images/HulkAvatar.png";
 import peaceLadyAvatar from "../../assets/images/peaceLadyAvatar.png";
 import coolBoiAvatar from "../../assets/images/coolBoyAvatar.png";
 import crownAvatar from "../../assets/images/WinnerCrown.png";
-import location from "../../assets/images/location.png";
+import locationIcon from "../../assets/images/location.png";
+import { useDispatch, useSelector } from "react-redux";
+import {fetchFootballBetDetails} from "../../pages/admin/api_detaills/GlobalStates/FootballBetDetails"
+
 
 const BetPlaced_com = (props) => {
+
+  const dispatch = useDispatch();
   const location = useLocation();
+
   const { source, extraData } = location.state || {}; // Destructuring the state
   //   const { source } = location.state || {};
 
@@ -103,11 +109,17 @@ const BetPlaced_com = (props) => {
   const [betDetailsModal, setBetDetailsModal] = useState(false);
   const [selectedBet, setSelectedBet] = useState(null);
 
-  const HandleViewMoreBtn = (bet) => {
-    setSelectedBet(bet);
+
+
+  const { betDetailsData } = useSelector((state) => state.FootballBetDetailsReducer);
+
+  const HandleViewMoreBtn = (betId) => {
+    // setSelectedBet(bet);
+    {source ==="Sports"? dispatch(fetchFootballBetDetails(betId)):  null};
     setBetDetailsModal(!betDetailsModal);
-    // console.log(id);
+    console.log(betId);
   };
+
   let playersData = [
     {
       name: "Samuel Daniel (Host)",
@@ -413,25 +425,24 @@ const BetPlaced_com = (props) => {
                   return (
                     <tr id={Style.tableRows} key={index}>
                       <td>{index + 1}</td>
-                      <td>{user.bet_id}</td>
+                      <td>{user.betId}</td>
                       {source === "Sports" ? (
                         <td>
-                          {" "}
-                          {!user.bet_type
+                          {!user.betType
                             ? "bet type not found"
-                            : user.bet_type}{" "}
+                            : user.betType}
                         </td>
                       ) : source === "Dice Games" ? (
                         <td>
-                          {!user.bet_type
+                          {!user.betType
                             ? "bet type not found"
-                            : user.bet_type}
+                            : user.betType}
                         </td>
                       ) : source === "Dashboard" ? (
                         <td>
-                          {!user.bet_type
+                          {!user.betType
                             ? "bet type not found"
-                            : user.bet_type}
+                            : user.betType}
                         </td>
                       ) : null}
                       {source === "Sports" ? null : source === "Dice Games" ? (
@@ -449,14 +460,14 @@ const BetPlaced_com = (props) => {
                       ) : null}
                       {source === "Sports" ? (
                         <td>
-                          {!user.match_id
+                          {!user.matchId
                             ? "match ID not found"
-                            : user.match_id}{" "}
+                            : user.matchId}{" "}
                         </td>
                       ) : null}
                       {source === "Sports" ? (
                         <td>
-                          {!user.createdAt ? "Date not found" : createdAt}{" "}
+                          {!user.Date ? "Date not found" : user.Date}{" "}
                         </td>
                       ) : source === "Dice Games" ? (
                         <td>No Date</td>
@@ -464,19 +475,19 @@ const BetPlaced_com = (props) => {
                         <td>No Date</td>
                       ) : source === "Dashboard" ? (
                         <td>
-                          {!user.createdAt ? "Date not found" : createdAt}{" "}
+                          {!user.Date ? "Date not found" : user.Date}{" "}
                         </td>
                       ) : null}
 
                       {source === "Sports" ? (
                         <td>
-                          {!user.createdAt ? "Date not found" : createdAt}
+                          {!user.time ? "Date not found" : user.time}
                         </td>
                       ) : source === "Dice Games" ? (
                         <td>No Time</td>
                       ) : source === "Dashboard" ? (
                         <td>
-                          {!user.createdAt ? "Date not found" : createdAt}
+                          {!user.time ? "Date not found" : user.time}
                         </td>
                       ) : null}
 
@@ -487,7 +498,7 @@ const BetPlaced_com = (props) => {
                         <div id={Style.action_field}>
                           <button
                             onClick={() => {
-                              HandleViewMoreBtn(user);
+                              HandleViewMoreBtn(user.betId);
                             }}
                             // style={{
                             //   backgroundColor: "#eb575733",
@@ -512,27 +523,13 @@ const BetPlaced_com = (props) => {
                                 <div id={Style.RowOne}>
                                   <div id={Style.HeroHighlights}>
                                     <div id={Style.modalHeading}>
-                                      <img
-                                        src={
-                                          source === "Dice Games"
-                                            ? dice
-                                            : source === "Sports"
-                                            ? sports
-                                            : null
-                                        }
-                                        id={
-                                          source === "Sports"
-                                            ? Style.sport
-                                            : Style.dice
-                                        }
-                                      />
-                                      <div id={Style.headerTextsDiv}>
+                                     <div id={Style.headerTextsDiv}>
                                         <h3 id={Style.HeroText}>
                                           Game Details
                                         </h3>
                                         <p id={Style.heroSummary}>
                                           Complete information for{" "}
-                                          {selectedBet.bet_id}
+                                          {user.betId}
                                         </p>
                                       </div>
                                     </div>
@@ -549,15 +546,12 @@ const BetPlaced_com = (props) => {
                                           src={crownAvatar}
                                           alt=""
                                         />
-                                        <h3 id={Style.playersFullname}>
-                                          {" "}
-                                          Samuel Daniel{" "}
-                                        </h3>
+                                        <h3 id={Style.playersFullname}>{betDetailsData.players.user.username} </h3>
                                         <div id={Style.locationDiv}>
                                           {/* <img src={location} alt="" srcset="" /> */}
                                           <img
                                             id={Style.locationsvg}
-                                            src={location}
+                                            src={locationIcon}
                                             alt=""
                                           />
                                           <p id={Style.playerslocation}>
@@ -565,28 +559,8 @@ const BetPlaced_com = (props) => {
                                             Lagos, Nigeria{" "}
                                           </p>
                                         </div>
-                                      </div>
-
-                                      <div id={Style.profileCard}>
-                                        <img
-                                          className={Style.profileAvatar}
-                                          src={peaceLadyAvatar}
-                                          alt=""
-                                        />
-                                        <h3 id={Style.playersFullname}>
-                                          {" "}
-                                          Samuel Daniel{" "}
-                                        </h3>
-                                        <div id={Style.locationDiv}>
-                                          <img
-                                            id={Style.locationsvg}
-                                            src={location}
-                                            alt=""
-                                          />
-                                          <p id={Style.playerslocation}>
-                                            {" "}
-                                            Lagos, Nigeria{" "}
-                                          </p>
+                                        <div>
+                                          <p style={{marginTop:"-9px"}}><span style={{fontWeight:"600"}}>Bet Type:</span> Away(win)</p>
                                         </div>
                                       </div>
 
@@ -596,22 +570,22 @@ const BetPlaced_com = (props) => {
                                           src={coolBoiAvatar}
                                           alt=""
                                         />
-                                        <h3 id={Style.playersFullname}>
-                                          {" "}
-                                          Samuel Daniel{" "}
-                                        </h3>
-                                        <div id={Style.locationDiv}>
-                                          <img
-                                            id={Style.locationsvg}
-                                            src={location}
-                                            alt=""
-                                          />
-                                          <p id={Style.playerslocation}>
-                                            {" "}
-                                            Lagos, Nigeria{" "}
-                                          </p>
+                                        <div className={Style.playerInfoDiv}>
+                                          <h3 id={Style.playersFullname}>{betDetailsData.players.opponent.username}</h3>
+                                          <div id={Style.locationDiv}>
+                                            <img
+                                              id={Style.locationsvg}
+                                              src={locationIcon}
+                                              alt=""
+                                            />
+                                            <p id={Style.playerslocation}>
+                                              {" "}
+                                              Lagos, Nigeria{" "}
+                                            </p>
+                                          </div>
+                                          <p style={{marginTop:"-9px"}}> <span style={{fontWeight:"600"}}>Bet Type:</span> Home(win)</p>
                                         </div>
-                                      </div>
+                                        </div>
                                     </div>
                                   </div>
                                 </div>
@@ -633,75 +607,19 @@ const BetPlaced_com = (props) => {
                                         <div>Final Score</div>
                                       </tr>
                                       <tr id={Style.tablerow}>
-                                        <div> Top Score</div>
-                                        <div> finished</div>
-                                        <div> 200</div>
-                                        <div> 2 </div>
-                                        <div> Daniel</div>
-                                        <div>12:04</div>
-                                        <div>25-05-12</div>
-                                        <div>12</div>
+                                        <div> {betDetailsData.gameSummary.betType}</div>
+                                        <div> {betDetailsData.gameSummary.gameStatus}</div>
+                                        <div> {betDetailsData.gameSummary.staked}</div>
+                                        <div> {betDetailsData.gameSummary.players} </div>
+                                        <div>{betDetailsData.players.opponent.username}</div>
+                                        <div>{betDetailsData.gameSummary.time}</div>
+                                        <div>{betDetailsData.gameSummary.Date}</div>
+                                        <div> no data</div>
                                       </tr>
                                     </table>
                                   </div>
                                 </div>
-                                <div id={Style.SummarySection}>
-                                  <h3 id={Style.summaryHeader}> Winner </h3>
-                                  <div id={Style.tableDiv}>
-                                    <table>
-                                      <tr id={Style.tableHeader}>
-                                        <div>Bet Type</div>
-                                        <div>Game Status</div>
-                                        <div>Staked</div>
-                                        <div>Players</div>
-                                        <div>Winner</div>
-                                        <div>Time</div>
-                                        <div>Date</div>
-                                        <div>Final Score</div>
-                                      </tr>
-                                      <tr id={Style.tablerow}>
-                                        <div> Top Score</div>
-                                        <div> finished</div>
-                                        <div> 200</div>
-                                        <div> 2 </div>
-                                        <div> Daniel</div>
-                                        <div>12:04</div>
-                                        <div>25-05-12</div>
-                                        <div>12</div>
-                                      </tr>
-                                    </table>
-                                  </div>
-                                </div>
-                                <div id={Style.SummarySection}>
-                                  <h3 id={Style.summaryHeader}>
-                                    {" "}
-                                    Other Players{" "}
-                                  </h3>
-                                  <div id={Style.tableDiv}>
-                                    <table>
-                                      <tr id={Style.tableHeader}>
-                                        <div>Bet Type</div>
-                                        <div>Game Status</div>
-                                        <div>Staked</div>
-                                        <div>Players</div>
-                                        <div>Winner</div>
-                                        <div>Time</div>
-                                        <div>Date</div>
-                                        <div>Final Score</div>
-                                      </tr>
-                                      <tr id={Style.tablerow}>
-                                        <div> Top Score</div>
-                                        <div> finished</div>
-                                        <div> 200</div>
-                                        <div> 2 </div>
-                                        <div> Daniel</div>
-                                        <div>12:04</div>
-                                        <div>25-05-12</div>
-                                        <div>12</div>
-                                      </tr>
-                                    </table>
-                                  </div>
-                                </div>
+                                
                               </div>
                             </div>
                           ) : (

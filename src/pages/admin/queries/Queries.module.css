@@ -119,7 +119,7 @@
 }
 #searchLogo{
 margin-top:5px;
-margin-right:8px;
+/* margin-right:8px; */
 }
 #filterBox{
   width:180px;
@@ -132,9 +132,9 @@ margin-right:8px;
 #searchBox{
   margin-top: 20px;
   max-height:30px;
-  align-content: left;
+  /* padding-right: 40%; */
+  max-width: 200px;
   border: none;
-  text-align: left;
 }
 
 #Personal_Info_tr {
@@ -226,8 +226,8 @@ td {
   right: 0;
   bottom: 0;
   position: fixed;
-  background-color: rgba(175, 170, 170, 0.507);
-}  
+  background-color: rgba(19, 17, 17, 0.199);
+  }  
 @keyframes scaleIn {
   0% {
     transform: scale(0.5); /* Start smaller */
@@ -374,9 +374,6 @@ td {
   background-color: #f1f1f1;
   text-align: center;
   align-content: center;
-}
-#TableRows{
-  /*border:2px solid black;*/
 }
 
 
