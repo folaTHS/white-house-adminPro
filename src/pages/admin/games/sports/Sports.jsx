@@ -41,12 +41,13 @@ import DoughnutChart from "../../../../components/chart/DoughnutChart";
 import LoadingScreen from "../../../../components/loader/LoadingSreen";
 import arrowRight from "../../../../assets/images/rightArrowFrame.png"
 import Nigeria from "../../../../assets/images/NaijaFlagpng.png"
+import logo from "../../../../assets/images/S_icon.png"
 import Ghana from "../../../../assets/images/ghana.png"
 import Kenya from "../../../../assets/images/kenya.png"
 import SA from "../../../../assets/images/south-africa.png"
 import UK from "../../../../assets/images/united-kingdom.png"
 import rwanda from "../../../../assets/images/rwandaFlag.png"
-
+import { motion } from "framer-motion";
 
 
 const Sports = () => {
@@ -384,7 +385,31 @@ const Sports = () => {
       }, [])
 
   return (
-   loading ? <LoadingScreen/> : 
+      <>
+        {loading ? (
+          <div className={Style.loadingContainer}>
+            <motion.img
+              src={logo}
+              alt="Loading Object"
+              className="speeding-object"
+              initial={{
+                // x: "-100vw",
+                scale: 0.5,
+              }} // Starts small off-screen
+              animate={{
+                // x: ["-100vw", "50vw", "100vw"], // Moves from left -> center -> right
+                scale: [0.5, 1.2, 0.5], // Scales up in center, back down on exit
+              }}
+              transition={{
+                times: [0, 0.5, 1],
+                duration: 2,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatDelay: 0.5,
+              }}
+            />
+          </div>
+        ) : null}
     <div id={Style.DiceGame_mainDiv}>
       <Header
         headerText={"Sports"}
@@ -502,6 +527,7 @@ const Sports = () => {
       </div>
       </div>
     </div>
+    </>
   );
 };
 

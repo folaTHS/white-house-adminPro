@@ -35,6 +35,8 @@ import NanoTable from "../../../components/NanoTable/NanoTable";
 import LoadingScreen from "../../../components/loader/LoadingSreen";
 // import NanoTableTwo from '../../../components/NanoTable/NanoTable'
 import { PieChart, Pie, Cell } from "recharts";
+import logo from "../../../assets/images/S_icon.png";
+import { motion } from "framer-motion";
 
 const DiceGame = () => {
   const [dataLoading, setLoading] = useState(true);
@@ -229,120 +231,144 @@ const DiceGame = () => {
   const countries = ["🇳🇬", "🇰🇪", "🇺🇸", "🇬🇧", "🇮🇳", "🇨🇦"];
 
   useEffect(() => {
-    setTimeout(() => (data ? setLoading(false) : setLoading(true)), 3000);
+    setTimeout(() => (data ? setLoading(false) : setLoading(true)), 4000);
   }, []);
 
-  return dataLoading ? (
-    <LoadingScreen />
-  ) : (
-    <div id={Style.DiceGame_mainDiv}>
-      <Header
-        headerText={"Dice"}
-        headerInfo={"Here’s more information on Dice Games"}
-        image={dice}
-      />
-
-      <div id={Style.DiceGame_wrapperDiv}>
-        <p className={Style.PlaceBet_headerText}>Today's Summary</p>
-
-        <div id={Style.DiceGame_Card_mapDiv}>
-          {total_Card2.map((object, i) => {
-            return (
-              <Total_Card
-                image1={object.image1}
-                text={object.text}
-                divText={object.divText}
-                price={object.price}
-                // to = {object.to}
-                onClick={handleTotalBetsClick}
-                view_div={object.view_div}
-                // { ...i==0 ? isPurple = 'true': i==1? isGreen ='true': isRed ='true' }
-                isPurple={i == 0 ? "true" : null}
-                isGreen={i == 1 ? "true" : null}
-                isRed={i == 2 ? "true" : null}
-                isBlack={i == 3 ? "true" : null}
-                divTextColor={Style.divTextColor}
-              />
-            );
-          })}
+  return (
+    <>
+      {dataLoading ? (
+        <div className={Style.loadingContainer}>
+          <motion.img
+            src={logo}
+            alt="Loading Object"
+            className="speeding-object"
+            initial={{
+              // x: "-100vw",
+              scale: 0.5,
+            }} // Starts small off-screen
+            animate={{
+              // x: ["-100vw", "50vw", "100vw"], // Moves from left -> center -> right
+              scale: [0.5, 1.2, 0.5], // Scales up in center, back down on exit
+            }}
+            transition={{
+              times: [0, 0.5, 1],
+              duration: 2,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatDelay: 0.5,
+            }}
+          />
         </div>
-      </div>
-      {/* <p className={Style.PlaceBet_headerText_Two}>Overview</p> */}
-      <div className={Style.gridContainer}>
-        <div style={{ width: "800px" }}>
-          {/* Total Revenue */}
-          <div className={Style.card}>
-            <h2 className={Style.cardTitle}>Total Revenue</h2>
-            <div className={Style.chartContainer}>
-              <div id={Style.doughnutChart} style={{ color: "black" }}>
-                <DoughnutChart
-                  totalRevenue={32678}
-                  goalRevenue={50000}
-                  dailyRevenue={3000}
-                  monthlyEarnings={23000}
+      ) : null}
+      <div id={Style.DiceGame_mainDiv}>
+        <Header
+          headerText={"Dice"}
+          headerInfo={"Here’s more information on Dice Games"}
+          image={dice}
+        />
+
+        <div id={Style.DiceGame_wrapperDiv}>
+          <p className={Style.PlaceBet_headerText}>Today's Summary</p>
+
+          <div id={Style.DiceGame_Card_mapDiv}>
+            {total_Card2.map((object, i) => {
+              return (
+                <Total_Card
+                  image1={object.image1}
+                  text={object.text}
+                  divText={object.divText}
+                  price={object.price}
+                  // to = {object.to}
+                  onClick={handleTotalBetsClick}
+                  view_div={object.view_div}
+                  // { ...i==0 ? isPurple = 'true': i==1? isGreen ='true': isRed ='true' }
+                  isPurple={i == 0 ? "true" : null}
+                  isGreen={i == 1 ? "true" : null}
+                  isRed={i == 2 ? "true" : null}
+                  isBlack={i == 3 ? "true" : null}
+                  divTextColor={Style.divTextColor}
                 />
+              );
+            })}
+          </div>
+        </div>
+        {/* <p className={Style.PlaceBet_headerText_Two}>Overview</p> */}
+        <div className={Style.gridContainer}>
+          <div style={{ width: "800px" }}>
+            {/* Total Revenue */}
+            <div className={Style.card}>
+              <h2 className={Style.cardTitle}>Total Revenue</h2>
+              <div className={Style.chartContainer}>
+                <div id={Style.doughnutChart} style={{ color: "black" }}>
+                  <DoughnutChart
+                    totalRevenue={32678}
+                    goalRevenue={50000}
+                    dailyRevenue={3000}
+                    monthlyEarnings={23000}
+                  />
+                </div>
+              </div>
+              <p className={Style.revenueAmount}>$32,678</p>
+            </div>
+
+            {/* Weekly Revenue Chart */}
+            <div
+              className={Style.card}
+              style={{ paddingLeft: "5rem", paddingRight: "5rem" }}
+            >
+              <h2 className={Style.cardTitle}>Weekly Revenue Report</h2>
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={weeklyRevenueData}>
+                  <XAxis dataKey="day" stroke="#94A3B8" />
+                  <YAxis stroke="#94A3B8" />
+                  <Tooltip />
+                  <Line
+                    type="monotone"
+                    dataKey="revenue"
+                    stroke="#1E3A8A"
+                    strokeWidth={2}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+              <p className={Style.increaseText}>+12.5% Increase</p>
+            </div>
+          </div>
+          <div style={{ width: "350px" }}>
+            {/* New Users */}
+            <div
+              className={Style.card}
+              style={{ height: "350px", marginBottom: "10px" }}
+            >
+              <h2 className={Style.cardTitle}>New Users</h2>
+              <ul>
+                {newUsers.map((user, index) => (
+                  <li key={index} className={Style.userItem}>
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className={Style.userAvatar}
+                    />
+                    <span className={Style.userName}>{user.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Registered Countries */}
+            <div className={Style.cardCentered}>
+              <h2 className={Style.cardTitle}>Registered Countries</h2>
+              <div className={Style.flagContainer}>
+                {countries.map((flag, index) => (
+                  <span key={index} className={Style.flag}>
+                    {flag}
+                  </span>
+                ))}
               </div>
             </div>
-            <p className={Style.revenueAmount}>$32,678</p>
-          </div>
-
-          {/* Weekly Revenue Chart */}
-          <div
-            className={Style.card}
-            style={{ paddingLeft: "5rem", paddingRight: "5rem" }}
-          >
-            <h2 className={Style.cardTitle}>Weekly Revenue Report</h2>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={weeklyRevenueData}>
-                <XAxis dataKey="day" stroke="#94A3B8" />
-                <YAxis stroke="#94A3B8" />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="revenue"
-                  stroke="#1E3A8A"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-            <p className={Style.increaseText}>+12.5% Increase</p>
-          </div>
-        </div>
-        <div style={{ width: "350px" }}>
-          {/* New Users */}
-          <div
-            className={Style.card}
-            style={{ height: "350px", marginBottom: "10px" }}
-          >
-            <h2 className={Style.cardTitle}>New Users</h2>
-            <ul>
-              {newUsers.map((user, index) => (
-                <li key={index} className={Style.userItem}>
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className={Style.userAvatar}
-                  />
-                  <span className={Style.userName}>{user.name}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Registered Countries */}
-          <div className={Style.cardCentered}>
-            <h2 className={Style.cardTitle}>Registered Countries</h2>
-            <div className={Style.flagContainer}>
-              {countries.map((flag, index) => (
-                <span key={index} className={Style.flag}>
-                  {flag}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

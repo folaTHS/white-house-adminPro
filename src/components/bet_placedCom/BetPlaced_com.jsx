@@ -39,8 +39,8 @@ const BetPlaced_com = (props) => {
     return storedArr ? JSON.parse(storedArr) : initialArr || [];
   });
 
-  console.log(arr);
-  console.log(extraData);
+  // console.log(arr);
+  // console.log(extraData);
 
   // Save `arr` to localStorage whenever it changes
   useEffect(() => {
@@ -70,20 +70,19 @@ const BetPlaced_com = (props) => {
     dashboardDiceData;
 
   activeFootbalBets = array.filter((bet) => bet.status === "active");
-  console.log(activeFootbalBets);
+  // console.log(activeFootbalBets);
 
   source === "Dashboard"
     ? (dashboardFootballData = extraData.filter(
         (bet) => bet.sports === "football"
       ))
     : null;
-
   source === "Dashboard"
-    ? (dashboardDiceData = extraData.filter((bet) => !bet.sports))
+    ? (dashboardDiceData = extraData.filter((bet) => bet.sports))
     : null;
 
   closedFootballBets = array.filter((bet) => bet.status === "closed");
-  console.log(closedFootballBets);
+  // console.log(closedFootballBets);
 
   const toggle = (index) => setToggleIndex(index);
 
@@ -113,11 +112,12 @@ const BetPlaced_com = (props) => {
 
   const { betDetailsData } = useSelector((state) => state.FootballBetDetailsReducer);
 
+  console.log(betDetailsData)
   const HandleViewMoreBtn = (betId) => {
-    // setSelectedBet(bet);
+    // setSelectedBet(bet);                                      
     {source ==="Sports"? dispatch(fetchFootballBetDetails(betId)):  null};
     setBetDetailsModal(!betDetailsModal);
-    console.log(betId);
+    // console.log(betId);
   };
 
   let playersData = [
@@ -202,6 +202,7 @@ const BetPlaced_com = (props) => {
         //   )
         // );
   // **1. Filtering Logic**
+  
   const filteredData = 
   source === "Dashboard" && toggleIndex == 0 || searchQuery
     ? extraData.filter((row) =>
@@ -233,8 +234,8 @@ const BetPlaced_com = (props) => {
         )
       );
 
-      
-        
+
+
   // **2. Sorting Logic**
   const sortedData = [...filteredData].sort((a, b) => {
     if (!sortColumn) return 0; // No sorting initially
@@ -258,10 +259,11 @@ const BetPlaced_com = (props) => {
     setSortOrder(sortColumn === column && sortOrder === "asc" ? "desc" : "asc");
     setSortColumn(column);
   };
-
+  console.log(paginatedData);
+  
   return (
     <div>
-      <div>
+      {/* <div>
         {toggleIndex === 1 && (
           <img
             id={Style.winners_background}
@@ -269,7 +271,7 @@ const BetPlaced_com = (props) => {
             alt="Winners Background"
           />
         )}
-      </div>
+      </div> */}
 
       <div id={Style.Total_BetPlaced_TableWrapperDiv}>
         <div id={Style.ToggleRow}>
@@ -293,7 +295,7 @@ const BetPlaced_com = (props) => {
                     : Style.Transaction_listDiv_button
                 }
               >
-                {source === "Dashboard" ? "Football Bets" : "  Winning Bets"}
+                {source === "Dashboard" ? "" : "  Winning Bets"}
               </button>
               <button
                 onClick={() => toggle(2)}
@@ -303,7 +305,7 @@ const BetPlaced_com = (props) => {
                     : Style.Transaction_listDiv_button
                 }
               >
-                {source === "Dashboard" ? "Dice Bets" : "  Losing Bets"}
+                {source === "Dashboard" ? "" : "  Losing Bets"}
               </button>
             </div>
 
@@ -360,11 +362,11 @@ const BetPlaced_com = (props) => {
             >
               Previous
             </button>
-            <div id={Style.pageNumbers}>1</div>
-            <div id={Style.pageNumbers}>2</div>
-            <div id={Style.pageNumbers}>3</div>
-            <div id={Style.pageNumbers}>4</div>
-            <div id={Style.pageNumbers}> 5</div>
+              <div id={Style.pageNumbers}>1</div>
+              <div id={Style.pageNumbers}>2</div>
+              <div id={Style.pageNumbers}>3</div>
+              <div id={Style.pageNumbers}>4</div>
+              <div id={Style.pageNumbers}> 5</div>
             <button
               id={Style.paginationBtn}
               onClick={() => setCurrentPage(currentPage + 1)}
@@ -520,6 +522,7 @@ const BetPlaced_com = (props) => {
 
                               <span id={Style.BetFullDetailsBackground}></span>
                               <div id={Style.BetFullDetailsBody}>
+                                <button onClick={()=>setBetDetailsModal(false)} id={Style.betModalClose} style={{fontWeight:"bold" }}> &times;</button>
                                 <div id={Style.RowOne}>
                                   <div id={Style.HeroHighlights}>
                                     <div id={Style.modalHeading}>
@@ -534,6 +537,7 @@ const BetPlaced_com = (props) => {
                                       </div>
                                     </div>
                                     <div id={Style.avatarSection}>
+                                      {/* User Card */}
                                       <div id={Style.profileCard}>
                                         <div></div>
                                         <img
@@ -541,11 +545,14 @@ const BetPlaced_com = (props) => {
                                           src={Hulk}
                                           alt=""
                                         />
-                                        <img
-                                          id={Style.CrownAvatar}
-                                          src={crownAvatar}
-                                          alt=""
-                                        />
+                                        {/* {betDetailsData.players.user.isWinner &&( */}
+                                            <img
+                                            id={Style.CrownAvatar}
+                                            src={crownAvatar}
+                                            alt=""
+                                          />
+                                        {/* )} */}
+                                      
                                         <h3 id={Style.playersFullname}>{betDetailsData.players.user.username} </h3>
                                         <div id={Style.locationDiv}>
                                           {/* <img src={location} alt="" srcset="" /> */}
@@ -563,29 +570,41 @@ const BetPlaced_com = (props) => {
                                           <p style={{marginTop:"-9px"}}><span style={{fontWeight:"600"}}>Bet Type:</span> Away(win)</p>
                                         </div>
                                       </div>
-
-                                      <div id={Style.profileCard}>
-                                        <img
-                                          className={Style.profileAvatar}
-                                          src={coolBoiAvatar}
-                                          alt=""
-                                        />
-                                        <div className={Style.playerInfoDiv}>
-                                          <h3 id={Style.playersFullname}>{betDetailsData.players.opponent.username}</h3>
-                                          <div id={Style.locationDiv}>
+                                          {/* Opponent Card */}
+                                          {betDetailsData.players.opponent &&(
+                                            <div id={Style.profileCard}>
                                             <img
-                                              id={Style.locationsvg}
-                                              src={locationIcon}
+                                              className={Style.profileAvatar}
+                                              src={coolBoiAvatar}
                                               alt=""
                                             />
-                                            <p id={Style.playerslocation}>
-                                              {" "}
-                                              Lagos, Nigeria{" "}
-                                            </p>
-                                          </div>
-                                          <p style={{marginTop:"-9px"}}> <span style={{fontWeight:"600"}}>Bet Type:</span> Home(win)</p>
-                                        </div>
-                                        </div>
+                                            {betDetailsData.players.opponent.isWinner &&(
+                                              <img
+                                              id={Style.CrownAvatar}
+                                              src={crownAvatar}
+                                              alt=""
+                                            />
+                                          )
+
+                                            }
+                                            <div className={Style.playerInfoDiv}>
+                                              <h3 id={Style.playersFullname}>{betDetailsData.players.opponent.username}</h3>
+                                              <div id={Style.locationDiv}>
+                                                <img
+                                                  id={Style.locationsvg}
+                                                  src={locationIcon}
+                                                  alt=""
+                                                />
+                                                <p id={Style.playerslocation}>
+                                                  {" "}
+                                                  Lagos, Nigeria{" "}
+                                                </p>
+                                              </div>
+                                              <p style={{marginTop:"-9px"}}> <span style={{fontWeight:"600"}}>Bet Type:</span> Home(win)</p>
+                                            </div>
+                                            </div>
+                                            )
+                                          }
                                     </div>
                                   </div>
                                 </div>
@@ -600,21 +619,15 @@ const BetPlaced_com = (props) => {
                                         <div>Bet Type</div>
                                         <div>Game Status</div>
                                         <div>Staked</div>
-                                        <div>Players</div>
-                                        <div>Winner</div>
                                         <div>Time</div>
                                         <div>Date</div>
-                                        <div>Final Score</div>
                                       </tr>
                                       <tr id={Style.tablerow}>
                                         <div> {betDetailsData.gameSummary.betType}</div>
                                         <div> {betDetailsData.gameSummary.gameStatus}</div>
                                         <div> {betDetailsData.gameSummary.staked}</div>
-                                        <div> {betDetailsData.gameSummary.players} </div>
-                                        <div>{betDetailsData.players.opponent.username}</div>
-                                        <div>{betDetailsData.gameSummary.time}</div>
-                                        <div>{betDetailsData.gameSummary.Date}</div>
-                                        <div> no data</div>
+                                        <div> {betDetailsData.gameSummary.time}</div>
+                                        <div> {betDetailsData.gameSummary.Date}</div>
                                       </tr>
                                     </table>
                                   </div>
@@ -634,9 +647,10 @@ const BetPlaced_com = (props) => {
                   );
                 })}
               </tbody>
-            ) : toggleIndex == 1 ? (
+            ) :
+             toggleIndex == 1 ? (
               <tbody>
-                {paginatedData.map((user, index) => {
+                {source ==="Dashboard"? dashboardFootballData: paginatedData.map((user, index) => {
                   let lost = user.status == "Lost" ? true : false;
 
                   return (
@@ -945,7 +959,8 @@ const BetPlaced_com = (props) => {
                   );
                 })}
               </tbody>
-            ) : toggleIndex == 2 ? (
+            ) : 
+            toggleIndex == 2 ? (
               <tbody>
                 {paginatedData.map((user, index) => {
                   let lost = user.status == "Lost" ? true : false;
@@ -1072,7 +1087,7 @@ const BetPlaced_com = (props) => {
                                         </h3>
                                         <p id={Style.heroSummary}>
                                           Complete information for{" "}
-                                          {selectedBet.bet_id}
+                                          {/* {selectedBet.bet_id} */}
                                         </p>
                                       </div>
                                     </div>

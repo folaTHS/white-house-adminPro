@@ -1,3 +1,25 @@
+/*  loading-container */
+.loadingContainer {
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(17, 10, 10, 0.397); /* Dark background */
+}
+
+.speeding-object {
+  width: 100px; /* Adjust based on your image */
+  height: auto;
+}
+/*  loading-container ends here*/ 
+
+
+
 #Reports_mainDiv {
   width: 100%;
   min-height: 100vh;
@@ -262,7 +284,7 @@ td {
   font-size:x-large;
 }
 #querydetailsBtn:hover{
-  background-color: rgba(187, 1, 1, 0.527);
+    background-color: #007bff;
 }
 #queryModalBody{
   /* border:2px solid black; */
@@ -517,7 +539,7 @@ td {
   cursor: pointer;
 }
 #closeBtn:hover{
-  background-color: rgba(187, 1, 1, 0.527);
+  background-color: #007bff;
 }
 
 /* Issue Type */

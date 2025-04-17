@@ -246,7 +246,7 @@
     position: absolute;
     top:10%;
     left: 15%;
-    width: 505;
+    width: 730px;
     /* height: 110%; */
     /* background-color: rgba(231, 231, 233, 0.445); */
     padding: 20px;
@@ -263,7 +263,21 @@
     position: fixed;
     background-color: rgba(19, 17, 17, 0.199);
   }
-
+  #betModalClose{
+    position: inherit;
+    left: 700px;
+    height: 25px;
+    width: 25px;
+    justify-content: center;
+    align-content: center;
+    border: none;
+    border-radius: 5px;
+  }
+  #betModalClose:hover{
+    background-color: blue;
+    color: white;
+  }
+  
   #modalHeading{
     /* border: 2px solid white; */
     width:600px;
