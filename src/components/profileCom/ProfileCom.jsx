@@ -6,7 +6,7 @@ import { BsRobot, BsQuestionCircle } from 'react-icons/bs';
 import { FiLogOut } from 'react-icons/fi';
 import {logout} from "../../pages/admin/api_detaills/GlobalStates/authSlice"
 import { useDispatch } from "react-redux";
-import adminPicture from "../../assets/images/HumanSeven.png"
+import adminPicture from "../../assets/images/HumanSix.png"
 
 const ProfileCom = () => {
 
