@@ -24,17 +24,13 @@ export const getAllUsersService = async () => {
 
 export const getUserDetailsService = async (phone) => {
   const response = await authAxios.get(`${getUserDetails}/${phone}`);
-
   // console.log(response);
-
   return response;
 };
 
 export const getSuspendedUsersService = async () => {
   console.log("Player Initiated");
-
   const response = await authAxios.get(getSuspendedUsers);
-
   console.log(response.responseBody);
 
   return response;
@@ -57,17 +53,16 @@ export const getRegCountriesService = async () => {
 };
 
 export const getprofileService = async (email) => {
-  const response = await axios.get(`${profile}/${email}`);
+  const response = await authAxios.get(`${profile}/${email}`);
 
-  // console.log(response);
-
+  console.log(response);
   return response;
 };
 
 export const updateProfile_Service = async (email, body) => {
-  const response = await axios.put(`${updateProfile}/${email}`, body);
+  const response = await authAxios.put(`${updateProfile}/${email}`, body);
 
-  // console.log(response);
+  console.log(response);
 
   return response;
 };
@@ -81,7 +76,7 @@ export const dashboard_Service = async () => {
 };
 
 export const updatePicture_Service = async (email, body) => {
-  const response = await axios.put(`${updatePicture}/${email}`, body);
+  const response = await authAxios.put(`${updatePicture}/${email}`, body);
 
   // console.log(response);
 
@@ -89,7 +84,7 @@ export const updatePicture_Service = async (email, body) => {
 };
 
 export const TransactionSummaryService = async () => {
-  const response = await axios.get(transactionSummary);
+  const response = await authAxios.get(transactionSummary);
 
   // console.log(response);
 

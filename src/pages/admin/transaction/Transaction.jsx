@@ -23,11 +23,23 @@ import Date_Picker from "../../../components/date_picker/Date_Picker";
 import { PopupContextHook } from "../../../WhiteHouse_PopupContext";
 import App_Pagination from "../../../components/app_Pagination/App_Pagination";
 import { transactionSummaryProvider } from "../api_detaills/provider/user_provider";
+import LoadingScreen from "../../../components/loader/LoadingSreen";
+import logo from "../../../assets/images/S_icon.png";
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTransactions } from "../api_detaills/GlobalStates/Transactions";
+import Unauthorized from "../../../components/errorPopup/unauthorised/Unauthorized";
+
+
 
 const Transaction = () => {
+
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPage2, setCurrentPage2] = useState(1);
   const [postsPerPage] = useState(10);
+  const [loading, setLoading] = useState(true);
+  const [apiErrorPopup,setErrorPopup] = useState(true)
 
   const { updateErrorText, updateErrorPopup } = PopupContextHook();
 
@@ -62,7 +74,8 @@ const Transaction = () => {
   }, []);
 
   const { totalCoinPurchase, totalCoinWithdrawal } = transactions;
-
+  console.log(transactions);
+  
   // Pagination logic
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -73,6 +86,7 @@ const Transaction = () => {
     indexOfFirstPost2,
     indexOfLastPost2
   );
+  
   const coinPurchaseHistory = transactions.coinPurchaseHistory.slice(
     indexOfFirstPost,
     indexOfLastPost
@@ -107,13 +121,13 @@ const Transaction = () => {
   };
 
   const stats_card6 = [
-    {
-      image1: betCoin,
-      price: "23,000",
-      text: "Bet transactions",
-      to: "",
-      divText: "View All",
-    },
+    // {
+    //   image1: betCoin,
+    //   price: "23,000",
+    //   text: "Bet transactions",
+    //   to: "",
+    //   divText: "View All",
+    // },
     {
       image1: total_users,
       price: totalCoinPurchase,
@@ -254,33 +268,83 @@ const Transaction = () => {
     },
   ];
 
-  // useEffect(() => {
-  //     let d = arr.filter((a) => a.status === "Won")
-  //     console.log(d);
 
-  //     setDev(d)
-  // }, [])
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
 
-  // const filteredData_two = coin_arr.filter(item =>
-  //     item.RefNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     item.amount.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     item.coinRd.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     item.status.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+   const { TransactionsData, TransactionsDataLoading, TransactionsDataError } = useSelector(
+      (state) => state.TransactionReducer
+    );
+    console.log(TransactionsDataError);
+    
 
+  useEffect(() => {
+    setTimeout(
+      () => (coinPurchaseHistory && coinWithdrawHistory ? setLoading(false) : setLoading(true)),
+      3000
+    );
+  }, []);
   return (
-    <div id={Style.Transaction_mainDiv}>
+    <>
+      {loading ? (
+        <div className={Style.loadingContainer}>
+          <motion.img
+            src={logo}
+            alt="Loading Object"
+            className="speeding-object"
+            initial={{
+              // x: "-100vw",
+              scale: 0.5,
+            }} // Starts small off-screen
+            animate={{
+              // x: ["-100vw", "50vw", "100vw"], // Moves from left -> center -> right
+              scale: [0.5, 1.2, 0.5], // Scales up in center, back down on exit
+            }}
+            transition={{
+              times: [0, 0.5, 1],
+              duration: 2,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatDelay: 0.5,
+            }}
+          />
+        </div>
+      ) : null}
+     
+      <div id={Style.Transaction_mainDiv}>
       <Header
         headerText={"Transactions"}
         headerInfo={"Here is a list of all transactions"}
       />
-
+     {
+        apiErrorPopup && TransactionsDataError?.includes('401')?
+          <Unauthorized
+          animationLink="https://lottie.host/75c1ee26-7356-43d6-983b-f0c3e9ad86ad/H1VFgjJyzy.lottie" 
+          errorResponse={TransactionsDataError} 
+          extraErrorDetails="log in for valid token"
+          actionText="Sign Out"
+          errorAction={()=>SignOut()}
+          closePopup={()=> setErrorPopup(false)}
+          />
+        :// {/* This is  404 animation */}
+            apiErrorPopup && TransactionsDataError?.includes('Failed to fetch')?
+            <Unauthorized
+              animationLink="https://lottie.host/75c1ee26-7356-43d6-983b-f0c3e9ad86ad/H1VFgjJyzy.lottie" 
+              errorResponse={TransactionsDataError} 
+              extraErrorDetails=" Not Found"
+              closePopup={()=> setErrorPopup(false)}
+              // actionText=""
+              // errorAction={()=>SignOut()}
+              />
+            : 
+        <></>
+      }
       <div id={Style.Transaction_wrapperDiv}>
         {/* cards */}
         <div id={Style.Transaction_mapDiv}> 
           {stats_card6.map((obj, index) => {
             let isBlack = index == cardToggleIndex ? true : false;
-
             return (
               <div id={ window.innerWidth < 480 ? Style.Cards : Style.footSoldiersCard}>
                 <Total_Card
@@ -298,7 +362,7 @@ const Transaction = () => {
           })}
         </div>
 
-        {cardToggleIndex !== 0 && (
+        {cardToggleIndex >= 0 && (
           <div id={Style.transaction_header_inputfield_Div}>
             <div id={Style.TransactionText}>
               Transaction Lists <span>(1,355)</span>
@@ -338,14 +402,14 @@ const Transaction = () => {
         <div id={Style.Transaction_tableWrapperDiv}>
           {toggleIndex === 0 && cardToggleIndex === 0 ? (
             <div id={ window.innerWidth < 480 ? Style.betPlaceContainerDiv : null }>
-                <BetPlaced_com arr={arr} initialIndex={0} />
+                {/* <BetPlaced_com arr={arr} initialIndex={0} /> */}
             </div>
           ) : (
             ""
           )}
 
           <div id={Style.transactionListTable}>
-            {cardToggleIndex == 1 && (
+            {cardToggleIndex == 0 && (
               <div id={Style.CoinPurchaseTableContainer}>
                 <table id={Style.CoinPurchasedTable}>
                   <thead>
@@ -468,7 +532,7 @@ const Transaction = () => {
           </div>  
 
           <div id={Style.transactionListTable}>
-          {cardToggleIndex == 2 && (
+          {cardToggleIndex == 1 && (
             <table>
               <thead>
                 <tr id={Style.headerTable_tr}>
@@ -587,7 +651,7 @@ const Transaction = () => {
           </div>
         </div>
 
-        {cardToggleIndex == 1 && (
+        {cardToggleIndex == 0 && (
           <div id={window.innerWidth < 480 ? Style.paginationDiv : null}>
             <App_Pagination
               postsPerPage={postsPerPage}
@@ -598,18 +662,19 @@ const Transaction = () => {
           </div>
         )}
 
-        {cardToggleIndex == 2 && (
+        {cardToggleIndex == 1 && (
         <div id={window.innerWidth < 480 ? Style.paginationDiv : null}>
           <App_Pagination
             postsPerPage={postsPerPage}
             totalPosts={transactions.coinWithdrawHistory.length}
             paginate={paginate2}
-            currentPage={currentPage2}
+            currentPage={currentPage2} 
           />
-          </div>
+        </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

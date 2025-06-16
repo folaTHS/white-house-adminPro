@@ -6,13 +6,34 @@ export const setToken = (token) => {
 // Function to get the token from local storage
 export const getToken = () => {
   return localStorage.getItem('token');
+
 };
 
 export const setEmail = (email) => {
-    localStorage.setItem('caEmail', email);
+   localStorage.setItem('caEmail', email);
 };
-
 
 export const getEmail = () => {
-    return localStorage.getItem('caEmail');
+   return localStorage.getItem('user');
 };
+
+export const setRefreshToken = (token) => {
+  localStorage.setItem("refreshToken", token);
+};
+
+export const getRefreshToken = () => {
+  return localStorage.getItem("refreshToken");
+};
+
+export const clearTokens = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+};
+
+
+
+
+
+
+
+
