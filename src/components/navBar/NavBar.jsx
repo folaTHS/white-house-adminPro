@@ -3,14 +3,21 @@ import Style from "./NavBar.module.css";
 import arrowDown from "../../assets/svg/arrow_down.svg";
 import mail from "../../assets/svg/transparent_mail.svg";
 import user from "../../assets/svg/transparent_contact.svg";
+import logo from "../../assets/images/LOGO512.png";
 import alphaBet_logo from "../../assets/svg/Alpha_Bet_Black_Logo.svg";
 import mail_two from "../../assets/svg/staff_mail.svg";
 import person from "../../assets/svg/staff_person.svg";
 import scrollUp from '../../assets/images/scroll-up.png'
 import { NavLink, useLocation } from "react-router-dom";
+import exit from "../../assets/images/exit.png"
+import { useDispatch } from "react-redux";
+import ProfileCom from "../profileCom/ProfileCom";
+import { getEmail } from '../../pages/admin/api_detaills/constant/local_storage'
 
 const NavBar = () => {
-  const [activeLink8, setActiveLink8] = useState(false);
+  const dispatch = useDispatch();
+
+  const [showLogOutBtn, setShowLogOutBtn] = useState(false);
   const [activeNav, setActiveNav] = useState("");
   const location = useLocation();
 
@@ -31,23 +38,19 @@ const NavBar = () => {
       sethamburger(!hamburger);
     }
   };
-
+  // Retrieve email from local storage
+      const user = getEmail()
+   const jsonUser = JSON.parse(user);
+    const email = jsonUser.email; 
 
   return (
     <div>
-      <div id={Style.Nav_Bar_Wrapper}>
-        <button className={Style.menuToggle} onClick={toggleMenu}>
-          ☰
-        </button>
-        <div id={Style.WelcomeText}>
-          <h4>Welcome, Admin</h4>
-          <p>Here is an overview of the dashboard </p>
-        </div>
+      <div id={Style.Nav_Bar_Wrapper}>     
 
-        <div id={hamburger ? Style.entireNav : Style.entireNavHide}>
+        {/* <div id={hamburger ? Style.entireNav : Style.entireNavHide}> */}
           <div id={Style.NavBar_textDiv}>
-          {/* <img src={scrollUp} className={Style.scrollUpIcon} alt="" /> */}
-            <p id={hamburger ? Style.logo :  Style.logo }  className="logo">Logo</p>
+            <img src={logo} alt=""  style={{width:"5%", marginRight:"-30px"}}/>
+            {/* <p id={hamburger ? Style.logo :  Style.logo }  className="logo">Logo</p> */}
             <NavLink
               to={"/dashboard"}
               className={`${Style.NavBar_text} ${
@@ -57,7 +60,7 @@ const NavBar = () => {
             >
             <p>Dashboard</p>
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to={"/placebet"}
               className={`${Style.NavBar_text} ${
                 activeNav === "placebet" ? Style.Nav_styled_Link : ""
@@ -65,7 +68,7 @@ const NavBar = () => {
               onClick={() => { handleNavClick("placebet");toggleMenu();}}
             >
             <p>Bet Placed</p>
-            </NavLink>
+            </NavLink> */}
             <div
               className={`${Style.NavBar_text} ${
                 activeNav === "game" ? Style.Nav_styled_Link : ""
@@ -108,15 +111,25 @@ const NavBar = () => {
               </div>
             </div>
 
-            <NavLink
+            {/* <NavLink
               to={"/allusers"}
               className={`${Style.NavBar_text}  ${
-                location.pathname === "/allusers" ? Style.Nav_styled_Link : ""
+                activeNav === "/allUsers" ? Style.Nav_styled_Link : ""
               }`}
-              onClick ={()=>toggleMenu()}
+              onClick ={()=>{handleNavClick("allusers");toggleMenu()}}
             >
               <p>Users</p>
+            </NavLink> */}
+            <NavLink
+              to={"/allusers"}
+              className={`${Style.NavBar_text} ${
+                activeNav === "/allusers" ? Style.Nav_styled_Link : ""
+              }`}
+              onClick={() => {handleNavClick("allusers") ; toggleMenu();}}
+            >
+            <p>User</p>
             </NavLink>
+
 
             <NavLink
               id="transactions"
@@ -183,7 +196,7 @@ const NavBar = () => {
               <p> Management</p>
             </NavLink>
           </div>
-          <div id={Style.NavBar_ContactDiv}>
+          <div id={Style.NavBar_profile}>
           <img src={scrollUp} className={Style.scrollUpIcon} alt="" />
           
             {/* <p>
@@ -194,40 +207,39 @@ const NavBar = () => {
               {/* <div id={Style.NavBar_line}></div> */}
               <img src={mail} alt="" />
 
-              <NavLink
+              {/* <NavLink
                 to={"/profile"}
                 onClick={() => handleNavClick("profile")}
-              >
-                <div id={Style.profile_img}>
-                  {activeNav === "profile" ? (
-                    <img src={person} alt="" />
-                  ) : (
-                    <img src={user} alt="" />
-                  )}
-                  profile
-                </div>
-              </NavLink>
+              > */}
+                
+              {/* </NavLink> */}
 
-              <NavLink
-                to={""}
-                className={`${
-                  activeLink8 ? Style.Nav_styled_Link : Style.NavBar_text
-                }`}
-              >
-                <p id={Style.NavBar_businessName}>
-                  WhiteHouse Limited <img src={arrowDown} alt="" />
-                </p>
-                <div id={Style.Business_name_dropdown}>
-                  <ul>
-                    <NavLink to={"/allAccounts"}>
-                      <li id={Style.Alphabet}>AlphaBet Limited</li>
-                    </NavLink>
-                  </ul>
+              <div  >
+                <div style={{display:"flex"}} onClick={()=>setShowLogOutBtn(!showLogOutBtn)}>
+                  <div id={Style.profile_img} >
+                      {activeNav === "profile" ? (
+                        <img src={person} alt="" />
+                      ) : (
+                        <img src={user} alt="" />
+                      )}
+                  </div>
+                  <p>
+                    {email}
+                  </p>
                 </div>
-              </NavLink>
+                {showLogOutBtn&&
+                  ( 
+                    <div id={Style.editProfileBanner}>
+                      <div id={Style.profileBox} > 
+                        <ProfileCom/>
+                      </div>
+                    </div>
+                  )       
+                }                  
+              </div>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

@@ -1,0 +1,17 @@
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ebe5e51a; /* Dark background */
+  }
+  
+  .speeding-object {
+    width: 100px; /* Adjust based on your image */
+    height: auto;
+  }
+  
