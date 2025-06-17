@@ -75,7 +75,12 @@ const Sports = () => {
 
   const handleTotalBetsClick = () => {
     navigate(`/totalBetPlaced/${0}`, {
-      state: { source: "Sports", extraData: footballBetsList },
+      state: {
+         source: "Sports", 
+         extraData: footballBetsList,
+        //  initialPage: currentPage,
+        //  initialLimit: postPerPage 
+        },
     });
   };
 

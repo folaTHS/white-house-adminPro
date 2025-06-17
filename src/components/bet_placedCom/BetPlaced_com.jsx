@@ -87,16 +87,27 @@ const BetPlaced_com = (props) => {
     const { footballBetsList, footballBetsListloading, footballBetsListerror } =
       useSelector((state) => state.FootballBetList);
       
+      console.log(footballBetsList);
+      
     // console.log(footballBetsList);
+  // When source is "Sports", use Redux data directly
 
-  source === "Dashboard"
-    ? (dashboardFootballData = extraData?.filter(
-        (bet) => bet.sports === "football"
-      ))
-    : null;
-  source === "Dashboard"
-    ? (dashboardDiceData = extraData?.filter((bet) => bet.sports))
-    : null;
+  const listData = source === "Sports" 
+  ? footballBetsList :
+   source === "Dashboard"
+    ?  extraData:
+        extraData || arr || [];
+        console.log(listData);
+        
+  // console.log(extraData.allFootballBets)
+  // source === "Dashboard"
+  //   ? (dashboardFootballData = extraData?.filter(
+  //       (bet) => bet.sports === "football"
+  //     ))
+  //   : null;
+  // source === "Dashboard"
+  //   ? (dashboardDiceData = extraData?.filter((bet) => bet.sports))
+  //   : null;
 
   closedFootballBets = array?.filter((bet) => bet.status === "closed");
   // console.log(closedFootballBets);
@@ -221,14 +232,17 @@ const BetPlaced_com = (props) => {
         // );
   // **1. Filtering Logic**
   
-  const filteredData = 
+  const filteredData = listData;
+  console.log(filteredData);
+  
   source === "Dashboard" && toggleIndex == 0 || searchQuery
-    ? extraData?.filter((row) =>
+    ? listData.allFootballBets?.filter((row) =>
         Object.values(row).some((value) =>
           value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
       )
-    : source === "Dashboard" && toggleIndex === 1
+    :    
+    source === "Dashboard" && toggleIndex === 1
     ? dashboardFootballData?.filter((row) =>
         Object.values(row).some((value) =>
           value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
@@ -240,13 +254,22 @@ const BetPlaced_com = (props) => {
           value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
       )
-    : source === "Placed Bets"
+    :
+    source === "Placed Bets"
     ? extraData?.filter((row) =>
         Object.values(row).some((value) =>
           value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
       )
-    : array?.filter((row) =>
+    : 
+    source === "sports"
+    ? listData.allFootballBets?.filter((row) =>
+        Object.values(row).some((value) =>
+          value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      )
+    : 
+    array?.filter((row) =>
         Object.values(row).some((value) =>
           value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
@@ -255,8 +278,8 @@ const BetPlaced_com = (props) => {
       //implementing type safety to enusre when the conditions in the filteredData above all comes empty 
       // filtered will just return an empty arraty insteasd of an undefine.
       // and paasing the result into a variable filteredDataSafe below:
-      const filteredDataSafe = Array.isArray(filteredData) ? filteredData : [];
-
+      const filteredDataSafe = Array.isArray(filteredData.allFootballBets) ? filteredData.allFootballBets : [];
+      
 
   // **2. Sorting Logic**
   const sortedData = [...filteredDataSafe].sort((a, b) => {
@@ -268,6 +291,8 @@ const BetPlaced_com = (props) => {
     if (aValue > bValue) return sortOrder === "asc" ? 1 : -1;
     return 0;
   });
+  console.log(sortedData);
+  
 
   // **3. Pagination Logic**
   const totalPages = Math.ceil(sortedData.length / pageSize);
